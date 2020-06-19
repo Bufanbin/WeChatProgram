@@ -1,0 +1,235 @@
+<view class="app" hidden="{{!show}}">
+    <view class="order-detail" style="{{orderInfo.status!=0&&orderInfo.status!=13&&orderInfo.status!=19&&orderInfo.status!=28?'height:100%;':''}}">
+        <view class="tostore-suc" wx:if="{{bindObj==2}}">支付成功!</view>
+        <view class="detailHead" catchtap="test">
+            <text class="detailHead-title">订单详情</text>
+            <text class="detailHead-type" style="color:#f74747;" wx:if="{{orderInfo.status==0 || orderInfo.status==19||orderInfo.status==28}}">待付款</text>
+            <text class="detailHead-type" wx:if="{{orderInfo.status==1 || orderInfo.status==20 || orderInfo.status==29}}">待发货</text>
+            <text class="detailHead-type" wx:if="{{orderInfo.status==2 || orderInfo.status==21 || orderInfo.status==30}}">卖家已发货 <text style="color:#da2e6f;">{{orderInfo.time}}</text></text>
+            <text class="detailHead-type" wx:if="{{orderInfo.status==3||orderInfo.status==4 || orderInfo.status==22 || orderInfo.status==23 || orderInfo.status==31 || orderInfo.status==32}}">交易成功</text>
+            <text class="detailHead-type" style="color:#f74747;" wx:if="{{orderInfo.status==5 || orderInfo.status==24 || orderInfo.status==33}}">关闭交易</text>
+            <text class="detailHead-type" style="color:#f74747;" wx:if="{{orderInfo.status==6 ||orderInfo.status == 7 || orderInfo.status==34}}">
+        <block wx:if="{{orderInfo.refund == 1}}">待退款</block>
+        <block wx:else>已退款</block>
+      </text>
+            <text class="detailHead-type" wx:if="{{orderInfo.status==8}}">待商家确认</text>
+            <text class="detailHead-type" wx:if="{{orderInfo.status==9}}">商家已确认</text>
+            <text class="detailHead-type" wx:if="{{orderInfo.status==10||orderInfo.status==12}}">交易成功</text>
+            <text class="detailHead-type" style="color:#f74747;" wx:if="{{orderInfo.status==13}}">待付款</text>
+            <text class="detailHead-type" wx:if="{{orderInfo.status==14}}">待收货</text>
+            <text class="detailHead-type" wx:if="{{orderInfo.status==15||orderInfo.status==16}}">交易成功</text>
+            <text class="detailHead-type" style="color:#0aabff;" wx:if="{{orderInfo.status==37}}">待自提</text>
+        </view>
+        <block wx:if="{{orderInfo.myself == 0}}">
+            <block wx:if="{{orderInfo.status==2||orderInfo.status==3||orderInfo.status==4||orderInfo.status==21||orderInfo.status==22||orderInfo.status==23||orderInfo.status==30||orderInfo.status==31||orderInfo.status==32}}">
+                <view class="express-info" style="font-size: 30rpx;">
+                    <text class="icon-car ico-moon"></text>
+                    <text class="express-com" selectable="true">快递公司：{{orderInfo.express}}</text>
+                    <text selectable="true">快递单号：{{orderInfo.expressnum}}</text>
+                </view>
+            </block>
+            <block wx:if="{{orderInfo.consignee!=''&&orderInfo.telphone!=''&&orderInfo.address!=''}}">
+                <view class="select-add">
+                    <text class="receiver" selectable="true">收货人：{{orderInfo.consignee}}</text>
+                    <block wx:if="{{orderInfo.status!=8&&orderInfo.status!=9&&orderInfo.status!=10&&orderInfo.status!=12}}">
+                        <text class="phonenum" selectable="true">{{orderInfo.telphone}}</text>
+                        <text class="ico-moon icon-adress">收货地址：<text style="color: #868686;" selectable="true">{{orderInfo.address}}</text></text>
+                    </block>
+                    <block wx:else>
+                        <text class="receiver" style="top:95rpx;" selectable='true'>电话：{{orderInfo.telphone}}</text>
+                    </block>
+                </view>
+            </block>
+        </block>
+        <view>
+            <view class="newsp_shop_name newsp_order_shop">
+                <text class="newsp_shop_title">商家名称：</text>
+                <text>{{storename||'暂未设置店铺名称'}}</text>
+            </view>
+            <block wx:for="{{orderList}}" wx:key="{{item}}">
+                <view class="order-item" style="{{index==0?'padding-top:0;':''}}">
+                    <view class="order-item-info" catchtap="goToGoodDetail" data-id="{{item.good_id}}" data-isself="{{item.isself}}" data-sonid="{{item.sonid}}">
+                        <image lazy-load="true" src="{{item.picpath}}"></image>
+                        <view class="order-goods-info">
+                            <text class="order-goods-name">{{item.goodname}}</text>
+                            <block wx:if="{{bindObj==1}}">
+                                <text class="order-goods-spec">预约时间:{{item.ordertime}}</text>
+                                <text class="order-goods-spec">预约时长:{{item.timelong}}</text>
+                            </block>
+                            <block wx:else>
+                                <text class="order-goods-spec">{{item.specstr}}</text>
+                            </block>
+                            <text class="order-goods-price">￥{{item.price}}</text>
+                            <text class="order-goods-num">×{{item.nums}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <view class="takeout-order-box" style="display: block;overflow:hidden;border-top:1rpx solid #eee;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">配送方式</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;">{{orderInfo.myself==0?'快递配送':'到店自提'}}</text>
+                </view>
+            </view>
+            <view class="takeout-order-box" style="display: block;line-height: 45rpx;overflow:hidden;border-bottom:1rpx solid #eee;padding:31rpx 25rpx;">
+                <text class="order-sp" style="float: left;">备注：</text>
+                <view style="text-align: left;float:left;width: 86%;">
+                    <text wx:if="{{remark}}" style="display: block;width: 97%;;float: left;">{{remark}}</text>
+                    <text wx:else style='float: left;'>无</text>
+                </view>
+            </view>
+        </view>
+        <block wx:if="{{orderInfo.status>7&&orderInfo.status!=9&&orderInfo.status!=10&&orderInfo.status!=12&&orderInfo.myself!=1}}">
+            <view class="takeout-order-box" style="display: block;overflow:hidden;border-top:1rpx solid #eee;margin-top:80rpx;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">配送方式</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;">{{freight}}</text>
+                </view>
+            </view>
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">商品金额</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;color:#ff6d6d;">￥{{goodsprice}}</text>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{orderInfo.status==8||orderInfo.status==9||orderInfo.status==10||orderInfo.status==12}}">
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;border-top:1rpx solid #eee;margin-top:80rpx;">
+                <text class="order-sp" style="float: left;">商品金额</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;color:#ff6d6d;">￥{{goodsprice}}</text>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{orderInfo.status <= 7 && orderInfo.myself!=1}}">
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">商品金额</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;color:#ff6d6d;">￥{{goodsprice}}</text>
+                </view>
+            </view>
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">运费</text>
+                <view style="text-align: left;float:left;width: 90%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;">{{freight}}</text>
+                </view>
+            </view>
+        </block>
+        <view wx:if="{{bindObj==0 || bindObj==6}}">
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">会员抵扣</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;color:#ff6d6d;">{{memreduce==0?'无':'-￥'+memreduce}}</text>
+                </view>
+            </view>
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">优惠券</text>
+                <view style="text-align: left;float:left;width: 85%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;color:#ff6d6d;">{{reduce==0?'暂无优惠券':'-￥'+reduce}}</text>
+                </view>
+            </view>
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">积分抵扣</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;color:#ff6d6d;">{{exmoney==0?'无':'-￥'+exmoney}}</text>
+                </view>
+            </view>
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                <text class="order-sp" style="float: left;{{orderInfo.payway==1?'':'opacity: 0;'}}">货到付款</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;float: left;text-align:right;color:#ff6d6d;"><text style='color:#515151;'>共{{orderInfo.nums}}件商品 总计：</text>￥{{needmoney}}</text>
+                </view>
+            </view>
+            <block wx:if="{{bindObj==0 && orderInfo.talk_money>0}}">
+                <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                    <text class="order-sp" style="float: left;">商家议价</text>
+                    <view style="text-align: left;float:left;width: 80%;">
+                        <text style="display: block;width: 97%;;float: left;text-align:right;color:#ff6d6d;">￥{{orderInfo.talk_money}}</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:if="{{orderInfo.myself==1}}">
+                <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                    <text class="order-sp" style="float: left;" selectable="true">提货人姓名：{{orderInfo.consignee}}</text>
+                </view>
+                <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                    <text class="order-sp" style="float: left;" selectable="true">提货人电话：{{orderInfo.telphone}}</text>
+                </view>
+                <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                    <text class="order-sp ellipsis" style="float: left;width:96%;" selectable="true">店铺地址：{{storeinfo.address+storeinfo.detailaddress}}</text>
+                </view>
+                <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                    <text class="order-sp" style="float: left;">店铺电话：{{storeinfo.telphone}}</text>
+                </view>
+                <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                    <text class="order-sp" style="float: left;">营业时间：{{storeinfo.timetype==0?storeinfo.starttime+'-'+storeinfo.endtime:'24小时营业'}}</text>
+                </view>
+                <block wx:if="{{orderInfo.status==37}}">
+                    <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                        <text class="order-sp" style="float: left;">核销码：{{orderInfo.writeoff_code}}</text>
+                    </view>
+                </block>
+            </block>
+        </view>
+        <block wx:if="{{bindObj==7 && orderInfo.talk_money>0}}">
+            <view class="takeout-order-box" style="display: block;overflow:hidden;line-height:80rpx;">
+                <text class="order-sp" style="float: left;">商家议价</text>
+                <view style="text-align: left;float:left;width: 80%;">
+                    <text style="display: block;width: 97%;;float: left;text-align:right;color:#ff6d6d;">￥{{orderInfo.talk_money}}</text>
+                </view>
+            </view>
+        </block>
+        <view class="orderInfo">
+            <text selectable="true">订单号：{{orderInfo.order_id}}</text>
+            <block wx:if="{{orderInfo.status==8||orderInfo.status==9||orderInfo.status==10||orderInfo.status==12}}">
+                <text>取餐号：{{orderInfo.mealnum}}</text>
+                <text wx:if="{{tostore_status!=1}}">取餐时间：{{orderInfo.mealtime}}</text>
+            </block>
+            <text>下单时间：{{orderInfo.addtime}}</text>
+            <text wx:if="{{(orderInfo.status==1 || orderInfo.status==2 || orderInfo.status==3 || orderInfo.status==4 || orderInfo.status==8||orderInfo.status==9||orderInfo.status==10||orderInfo.status==12||orderInfo.status==14||orderInfo.status==15||orderInfo.status==16||orderInfo.status==20||orderInfo.status==21||orderInfo.status==22||orderInfo.status==23 || orderInfo.status==37) && orderInfo.payway==0}}">支付时间：{{orderInfo.successtime}}</text>
+            <block wx:if="{{orderInfo.myself==0}}">
+                <text wx:if="{{orderInfo.status==3 || orderInfo.status==2 || orderInfo.status==4||orderInfo.status==21||orderInfo.status==22||orderInfo.status==23}}">发货时间：{{orderInfo.delivertime}}</text>
+            </block>
+            <text wx:if="{{orderInfo.status==3 || orderInfo.status==4||orderInfo.status==15||orderInfo.status==16||orderInfo.status==22||orderInfo.status==23}}">{{orderInfo.myself==0?'收货时间':'核销时间'}}：{{orderInfo.submittime}}</text>
+        </view>
+        <block wx:if="{{orderInfo.status==2}}">
+            <view class="confirm">
+                <button class="confirm-btn" catchtap="confirmGet">确认收货</button>
+                <block wx:if="{{orderInfo.payway=='0'}}">
+                    <button class="confirm-btn" style="background:#1a91c6;" catchtap="refund">退款</button>
+                </block>
+            </view>
+        </block>
+        <block wx:if="{{orderInfo.status==9||orderInfo.status==21}}">
+            <view class="confirm">
+                <button class="confirm-btn" catchtap="confirmGet">确认收货</button>
+            </view>
+        </block>
+    </view>
+    <block wx:if="{{orderInfo.status == 0||orderInfo.status == 13 || orderInfo.status==19 || orderInfo.status==28}}">
+        <view class="result-show">
+            <block wx:if="{{orderInfo.myself==0&&orderInfo.status!=0}}">
+                <view class="cart-balance" style="width:58.6%;">
+                    <view class="express">配送方式：{{freight}}</view>
+                    <view class="order-total-fee">
+                        <text style="margin-right:15rpx;">共{{orderInfo.nums}}件商品</text>
+                        <text>总计：<text style="color:#ff6060;">￥{{(bindObj==0 && orderInfo.talk_money>0)?orderInfo.talk_money:orderInfo.totalprice}}</text></text>
+                    </view>
+                </view>
+            </block>
+            <view class="statement" style="width:{{orderInfo.myself==0&&orderInfo.status!=0?'20.7%':'50%'}};background:#1a91c6;font-size: 32rpx;" catchtap="paynow">立即付款</view>
+            <view class="statement" style="width:{{orderInfo.myself==0&&orderInfo.status!=0?'20.7%':'50%'}};background:#ec6941;font-size: 32rpx;" catchtap="cancelOrder">取消订单</view>
+        </view>
+    </block>
+    <view class="delete-page" hidden="{{!delPageShow}}">
+        <view class="delete-box">
+            <view class="ico-moon icon-cross delete-page-close" catchtap="cancelReceive"></view>
+            <text>是否确认收货</text>
+            <view class="delete-btn">
+                <button catchtap="sureReceive">确认</button>
+                <button class="cancel" catchtap="cancelReceive">取消</button>
+            </view>
+        </view>
+    </view>
+    <view class="backhome" catchtap="backhome">回到\n首页</view>
+</view>

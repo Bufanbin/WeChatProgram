@@ -1,0 +1,119 @@
+<view class="app" hidden="{{!loaded}}">
+    <view class="order-detail">
+        <block wx:if="{{new_sendway==2}}">
+            <view class='group_sel_gettype'>
+                <radio-group>
+                    <radio catchtap='sel_gettype' data-val="1" checked="{{selget==1}}" class='kd_btn'></radio>快递配送
+                    <radio catchtap='sel_gettype' data-val="2" checked="{{selget==2}}" class='dd_btn'></radio>到店自提
+                </radio-group>
+            </view>
+        </block>
+        <block wx:if="{{needaddress && selget == 1}}">
+            <block wx:if="{{address!=null && address!=''}}">
+                <view class="select-add" catchtap="selectAddress">
+                    <text class="receiver">收货人：{{address.consignee}}</text>
+                    <text class="phonenum">{{address.telphone}}</text>
+                    <text wx:if="{{address.isdefault == 1}}" class="default">默认</text>
+                    <text class="ico-moon icon-adress" style="font-size: 28rpx;color: #828282;">收货地址：{{address.province+address.city+address.county+address.street}}</text>
+                    <text class="icon-rightarrow ico-moon right-arrow"></text>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="empty-address" catchtap="selectAddress">
+                    请填写地址
+                    <text class="ico-moon icon-rightarrow"></text>
+                </view>
+            </block>
+        </block>
+        <block wx:if="{{new_sendway==2 || selget==1}}">
+            <view class="addr_border"></view>
+        </block>
+        <block wx:for="{{orderList}}" wx:key="{{item}}">
+            <view class="order-item" style="{{index==0?'padding-top:0;':''}}">
+                <view class="newsp_shop_name newsp_order_shop">
+                    <text>{{item.storename||'暂未设置店铺名称'}}</text>
+                </view>
+                <view class="order-item-info">
+                    <image lazy-load="true" src="{{item.picpath}}"></image>
+                    <view class="order-goods-info">
+                        <view class="order-goods-name clearfix">
+                            <view class="goodname-left {{item.limits_num>0?'goodname-len':''}}">{{item.goodname}}</view>
+                            <block wx:if="{{item.limits_num>0}}">
+                                <view class="goodname-right">（限购{{item.limits_num}}件）</view>
+                            </block>
+                        </view>
+                        <view class="order-goods-spec clearfix">
+                            <text style="float: left;">{{item.specstr}}</text>
+                            <text class="order-goods-num">×{{item.nums}}</text>
+                        </view>
+                        <text class="order-goods-price" style="color:#000;">￥{{item.price}}</text>
+                    </view>
+                </view>
+                <view class="takeout-order-box" catchtap="goToRemark" style="display: block;line-height: 65rpx;" data-idx='{{index}}'>
+                    <text class="order-sp" style="float: left;">备注</text>
+                    <view style="text-align: right;float: right;max-width: 75%;">
+                        <text class="ico-moon icon-rightarrow takeout-right" style="margin-top:4rpx;"></text>
+                        <text wx:if="{{item.remark}}" style="display: block;max-width: 90%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;margin-right:50rpx;">{{item.remark}}</text>
+                        <text wx:else style='color: #A1A1A1;float: right;margin-right:50rpx;'>其他要求</text>
+                    </view>
+                </view>
+                <block wx:if="{{selget==2}}">
+                    <view class="takeout-order-box" style="display: block;line-height: 65rpx;">
+                        <text class="order-sp" style="float: left;">提件人姓名：</text>
+                        <input bindblur="getname" value='{{uname}}' placeholder='请输入姓名' class='get_userinfo'></input>
+                    </view>
+                    <view class="takeout-order-box" style="display: block;line-height: 65rpx;">
+                        <text class="order-sp" style="float: left;">提件人电话：</text>
+                        <input bindblur="getphone" value='{{uphone}}' placeholder='请输入电话' class='get_userinfo'></input>
+                    </view>
+                    <view class="takeout-order-box" style="display: block;line-height: 65rpx;">
+                        <text class="order-sp" style="float: left;">店铺地址：</text>
+                        <view style="text-align: left;float: left;width: 75%;">
+                            <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.address+storeinfo.detailaddress}}</text>
+                        </view>
+                    </view>
+                    <view class="takeout-order-box" style="display: block;line-height: 65rpx;">
+                        <text class="order-sp" style="float: left;">店铺电话：</text>
+                        <view style="text-align: left;float: left;width: 75%;">
+                            <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.telphone}}</text>
+                        </view>
+                    </view>
+                    <view class="takeout-order-box" style="display: block;line-height: 65rpx;">
+                        <text class="order-sp" style="float: left;">营业时间：</text>
+                        <view style="text-align: left;float: left;width: 75%;">
+                            <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.timetype==0?storeinfo.starttime+'-'+storeinfo.endtime:'24小时营业'}}</text>
+                        </view>
+                    </view>
+                </block>
+                <view class="order-item-subtotal">
+                    <text>小计：<text style="color:#ff6060;font-size: 36rpx;">￥{{item.totalmoney}}</text></text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="result-show">
+        <view class="cart-balance">
+            <view class="express" wx:if="{{selget==1}}">配送方式：{{freight}}</view>
+            <view class="order-total-fee {{selget==2?'getself':''}}">
+                <text style="margin-right:15rpx;">共{{total}}件商品</text>
+                <text>总计：<text style="color:#ff6060;">￥{{balance}}</text></text>
+            </view>
+        </view>
+        <block wx:if="{{((address!=null && address!='') || !needaddress)||selget==2}}">
+            <view class="statement" catchtap="submitOrder">提交订单</view>
+        </block>
+        <block wx:else>
+            <view class="statement" style="background:#959595;" catchtap="noAddress">提交订单</view>
+        </block>
+    </view>
+    <view class="backhome" catchtap="backhome">
+        <view>回到</view>
+        <view>首页</view>
+    </view>
+</view>
+<view class="remapp" hidden='{{!showRemark}}'>
+    <view class="remark-box">
+        <textarea class="remark-textarea" maxlength="100" placeholder="输入你想要的备注，最多100字" placeholder-class="remark-place" bindinput="enterEval" value="{{remark}}" />
+        <view class="confirbtn" catchtap="confirmRemark">完成</view>
+    </view>
+</view>

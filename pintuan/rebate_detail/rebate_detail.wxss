@@ -1,0 +1,8 @@
+.rebate {
+    padding: 30rpx 25rpx;
+}
+.rebate > view {
+    color: #494949;
+    font-size: 26rpx;
+    line-height: 50rpx;
+}

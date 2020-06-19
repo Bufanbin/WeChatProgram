@@ -1,0 +1,124 @@
+page {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #f0f0f0;
+}
+.disOrder_top {
+    width: 100%;
+    background: #fff;
+    color: #888;
+    font-size: 0;
+    overflow: hidden;
+    text-align: center;
+}
+.disOrder_top > view {
+    display: inline-block;
+    vertical-align: top;
+    width: 33.33%;
+    text-align: center;
+    height: 110rpx;
+    padding-top: 20rpx;
+    border-bottom: 2rpx solid #fff;
+    box-sizing: border-box;
+    font-size: 30rpx;
+}
+.disOrder_top >view.select {
+    color: #f02437;
+    border-bottom: 2rpx solid #f02437;
+}
+.order_type {
+    background: #fff;
+    width: 100%;
+    overflow: hidden;
+    font-size: 26rpx;
+    color: #c2c2c2;
+    text-align: center;
+    position: relative;
+    margin-top: 20rpx;
+    height: 85rpx;
+}
+.order_type > view {
+    float: left;
+    width: 25%;
+    height: 90rpx;
+    line-height: 90rpx;
+}
+.order_type >view.select {
+    color: #000;
+}
+.subscript {
+    width: 0;
+    height: 0;
+    border: 15rpx solid transparent;
+    border-bottom: 15rpx solid #f0f0f0;
+    position: absolute;
+    bottom: 0;
+    left: calc(12.5% - 15rpx);
+}
+.orderlist_box {
+    color: #353535;
+    font-size: 24rpx;
+    text-align: left;
+    width: 100%;
+    height: calc(100% - 220rpx);
+}
+.orderitem_box {
+    margin: 20rpx 15rpx 0;
+    width: 720rpx;
+    height: 235rpx;
+    background: #fff;
+}
+.goodspic {
+    width: 165rpx;
+    height: 165rpx;
+    float: left;
+    margin-left: 15rpx;
+    margin-top: 30rpx;
+}
+.order_info {
+    float: left;
+    margin-left: 20rpx;
+    margin-top: 25rpx;
+    width: 500rpx;
+}
+.order_line {
+    margin-bottom: 15rpx;
+    overflow: hidden;
+    line-height: 24rpx;
+}
+.order_line:first-child {
+    line-height: 28rpx;
+}
+.goods_name {
+    font-size: 26rpx;
+    width: 375rpx;
+    float: left;
+    color: #000;
+}
+.text_hide {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.goods_type {
+    float: right;
+}
+.color1, .color0, .color2 {
+    color: #09bb07;
+}
+.color3 {
+    color: #2756dd;
+}
+.color4 {
+    color: #f02437;
+}
+.order_line text {
+    color: #888;
+}
+.order_block {
+    float: left;
+    width: 45%;
+    margin-right: 5%;
+}

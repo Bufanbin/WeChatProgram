@@ -1,0 +1,129 @@
+<view class="app" hidden="{{!pageshow}}">
+    <block wx:if="{{carts && carts.length > 0}}">
+        <view class="shop-cart-heat">
+            <view class="seleceAll">
+                <block wx:if="{{selectedAllStatus}}">
+                    <icon type="success_circle" size="18" catchtap="bindSelectAll" />
+                </block>
+                <block wx:else>
+                    <icon type="circle" size="18" catchtap="bindSelectAll" />
+                </block>
+            </view>
+            <text class="deletebtn" catchtap="bindDelete">删除</text>
+            <text class="editbtn" catchtap="bindEdit">
+        <block wx:if="{{edit}}">完成</block>
+        <block wx:else>编辑</block>
+      </text>
+        </view>
+        <view class="shop-cart-list">
+            <block wx:for="{{carts}}" wx:for-item="sitem" wx:for-index="sindex" wx:key="{{sitem}}">
+                <view class="newsp_shop_name">
+                    <text class="newsp_shop_title">商家名称：</text>
+                    <text>{{sitem.storeName||'暂未设置店铺名称'}}</text>
+                </view>
+                <block wx:for="{{sitem.list}}" wx:key="{{item}}">
+                    <view class="shop-cart-item" catchtap="{{item.overdue==1||item.is_end==2||item.is_end==3? '':'goToDetail'}}" data-goodid="{{item.good_id}}" data-type="{{item.type}}" data-sonid="{{item.sonid}}" data-isself="{{item.isself}}" data-timestr="{{item.startime}}"
+                        data-childid="{{item.child_id}}">
+                        <view class="newsp_shop_info">
+                            <text class="overdued" wx:if="{{item.overdue==1}}">已过期</text>
+                            <text class="overdued" wx:elif="{{(item.overdue==1 || item.is_end==2 || item.is_end==3)&&(item.type==4 || item.type==5)}}">已失效</text>
+                            <view class="seleceOne" wx:else>
+                                <block wx:if="{{item.status}}">
+                                    <icon type="success_circle" size="18" catchtap="bindCheckbox" data-sindex="{{sindex}}" data-index="{{index}}" data-type="{{item.type}}" />
+                                </block>
+                                <block wx:else>
+                                    <icon type="circle" size="18" catchtap="bindCheckbox" data-sindex="{{sindex}}" data-index="{{index}}" data-type="{{item.type}}" />
+                                </block>
+                            </view>
+                            <view class="shop-goods-img">
+                                <image lazy-load="true" src="{{item.picpath}}"></image>
+                                <block wx:if="{{item.type==4 || item.type==5}}">
+                                    <view class="shop_goods_icon">
+                                        <text class="icon-naozhong ico-moon"></text>
+                                    </view>
+                                </block>
+                                <block wx:if="{{item.type==6 || item.type==7}}">
+                                    <view class="shop_goods_icon">
+                                        <text class="icon-fenxiao ico-moon"></text>
+                                    </view>
+                                </block>
+                            </view>
+                            <block wx:if="{{!edit}}">
+                                <view class="shop-goods-info">
+                                    <text class="goods-name">{{item.goodname}}</text>
+                                    <block wx:if="{{item.type == 0 || item.type == 1 || item.type == 2 || item.type==6 || item.type==7}}">
+                                        <text class="goods-spec">{{item.specstr}}</text>
+                                        <text class="goods-price">￥{{item.price||0}}</text>
+                                        <text class="goods-num">×{{item.nums||0}}</text>
+                                    </block>
+                                    <block wx:elif="{{item.type==4 || item.type==5}}">
+                                        <block wx:if="{{item.is_end==2||item.is_end==3}}">
+                                            <block wx:if="{{item.is_end==2}}">
+                                                <text class="goods-spec">活动已结束</text>
+                                            </block>
+                                            <block wx:else>
+                                                <text class="goods-spec">已经卖完了</text>
+                                            </block>
+                                            <text class="goods-dismiss">失效</text>
+                                            <text class="goods-del-miss" catchtap="bindDeleteOne" data-sindex="{{sindex}}" data-index="{{index}}">删除</text>
+                                        </block>
+                                        <block wx:else>
+                                            <text class="goods-spec">{{item.specstr}}</text>
+                                            <text class="goods-price">￥{{item.price||0}}</text>
+                                            <text class="goods-num">×{{item.nums||0}}</text>
+                                        </block>
+                                    </block>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view class="shop-goods-info">
+                                    <view class="edit-operate">
+                                        <button catchtap="bindMinus" data-sindex="{{sindex}}" data-index="{{index}}">-</button>
+                                        <input type="number" value="{{item.nums}}" bindchange="bindManual" data-sindex="{{sindex}}" data-index="{{index}}" catchtap="emptyevent" />
+                                        <button catchtap="bindPlus" data-sindex="{{sindex}}" data-index="{{index}}">+</button>
+                                    </view>
+                                    <text class="goods-spec">{{item.specstr}}</text>
+                                    <view class="goods-delete" catchtap="bindDeleteOne" data-sindex="{{sindex}}" data-index="{{index}}">删除</view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </view>
+    </block>
+    <block wx:if="{{carts && carts.length == 0}}">
+        <view class="shop-nothing">
+            <view class="ico-moon icon-shopcar"></view>
+            <text>去添加点什么吧</text>
+        </view>
+    </block>
+    <view class="result-show">
+        <view class="cart-balance">
+            <text class="total-money">{{balance||'0.00'}}</text>
+            <text>合计：</text>
+            <text class="express-fee">不含快递费</text>
+        </view>
+        <block wx:if="{{carts && carts.length > 0 && total > 0}}">
+            <view class="statement" catchtap="createOrder" style='background:{{color}}'>结算({{total>99?'99+':total}}件)</view>
+        </block>
+        <block wx:else>
+            <view class="statement" style="background:#959595;">结算({{total>99?'99+':total}}件)</view>
+        </block>
+    </view>
+    <view class="delete-page" hidden="{{!delPageShow}}">
+        <view class="delete-box">
+            <view class="ico-moon icon-cross delete-page-close" catchtap="cancelDel"></view>
+            <text>确认删除商品吗</text>
+            <view class="delete-btn">
+                <button class="cancel" catchtap="cancelDel">取消</button>
+                <button catchtap="sureDel">确认</button>
+            </view>
+        </view>
+    </view>
+    <view class="backhome" catchtap="backhome">回到\n首页</view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

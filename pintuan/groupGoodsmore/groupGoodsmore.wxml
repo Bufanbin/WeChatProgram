@@ -1,0 +1,18 @@
+<view class="app">
+    <view class="goods-line" style="border-bottom:6rpx solid #eee;border-top:0">
+        <text class="groupgoods-now-num"><text style="color:#0e599d">{{startnum}}</text>人正在开团</text>
+    </view>
+    <scroll-view style="height:calc(100% - 66rpx)" scroll-y bindscrolltolower="loadmore">
+        <view class="groupgoods-man-ul">
+            <view wx:for="{{group}}" wx:key="{{item}}">
+                <image lazy-load="true" src="{{item.avatar}}" />
+                <view class="infoBox">
+                    <view class="nickname">{{item.nickname}}</view>
+                    <view class="manNum">{{item.groupnum}}人团还差{{item.groupnum-item.joinnum}}人，剩余{{item.time}}</view>
+                </view>
+                <view class="goGroup" wx:if="{{isend==2}}">去参团</view>
+                <view wx:else class="goGroup" style="background:#f44432" data-orderid="" data-groupid="{{item.groupid}}" data-goodid="{{goodid}}" catchtap="goToGroup">去参团</view>
+            </view>
+        </view>
+    </scroll-view>
+</view>

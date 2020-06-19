@@ -1,0 +1,6 @@
+<view>
+    <view class='ico-moon icon-chenggong1'></view>
+    <view class='cash-suc-txt'>提现成功</view>
+    <view class='cash-tip'>您的提现申请已经提交，我们会在1-5个工作日内为您处理,处理结果会通过微信通知发到您的手机上,请注意查收。</view>
+    <button class='suc-btn' catchtap='finishbtn' style='background:{{color}}'>完成</button>
+</view>

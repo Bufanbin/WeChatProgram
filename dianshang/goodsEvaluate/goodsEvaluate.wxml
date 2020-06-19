@@ -1,0 +1,50 @@
+<view class="app">
+    <view class="evaluate-head">
+        <view>
+            <block wx:for="{{type1}}" wx:key="{{item}}">
+                <button class="{{select1==index?'select':''}}" catchtap="changeEval1" data-index="{{index}}">
+                    {{item.name}}
+                    <block wx:if="{{index!=0}}">
+                        ({{item.num||0}})
+                    </block>
+                </button>
+            </block>
+        </view>
+        <view class="bad-btn">
+            <block wx:for="{{type2}}" wx:key="{{item}}">
+                <button class="{{select2==index?'select':''}}" catchtap="changeEval2" data-index="{{index}}">
+                    {{item.name}}({{item.num||0}})
+                </button>
+            </block>
+        </view>
+    </view>
+    <scroll-view scroll-y="true" class="evaluate-body" bindscrolltolower="loadMoreEval">
+        <block wx:for="{{list}}" wx:key="{{item}}">
+            <view class="evaluate-item">
+                <view class="evaluate-info">
+                    <image lazy-load="true" mode="aspectFit" class="evaluate-avatar" src="{{item.avatar}}"></image>
+                    <view style="display: inline-block;margin-top:10rpx;">
+                        <view class="evaluate-nickname">{{item.nickname}}</view>
+                        <view class="evaluate-time">{{item.commentSub}}</view>
+                    </view>
+                </view>
+                <view class="evaluate-detail">{{item.content}}</view>
+                <block wx:for="{{item.commentpic}}" wx:for-item="evalPic" wx:key="{{evalPic}}">
+                    <image lazy-load="true" src="{{evalPic}}" class="evaluate-pic" catchtap="previewPic" data-picpath="{{item.commentpic}}"></image>
+                </block>
+                <block wx:if="{{item.replay}}">
+                    <view class="evaluate-replay">
+                        <view class="arrow">
+                            <view class="reply-arrow" style=""></view>
+                        </view>
+                        <text>店家回复：{{item.replay}}</text>
+                    </view>
+                </block>
+            </view>
+        </block>
+    </scroll-view>
+    <view class="backhome" catchtap="backhome">回到\n首页</view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>

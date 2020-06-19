@@ -1,0 +1,209 @@
+<view class="app" hidden="{{!loaded}}">
+    <block wx:if="{{status==1}}">
+        <view class="dist-head-box">
+            <image src="{{avatar}}" class="dist-head-img" />
+            <view class="dist-head-info">
+                <view class="dist-head-name">{{nickname}}</view>
+                <view class="dist-head-grade">分销商等级：{{disgrade}}</view>
+            </view>
+        </view>
+        <view class="dist-money-box">
+            <view class="dist-money-item">
+                <view class="dist-money total-income">￥{{total_income}}</view>
+                <view class="dist-text">累计收益</view>
+                <view class="view-detail" catchtap="goToRageDetail">查看明细</view>
+            </view>
+            <view class="dist-money-item">
+                <view class="dist-money wait-settle">￥{{waitmoney}}</view>
+                <view class="dist-text">待结算</view>
+                <view class="view-detail" catchtap="goToRageDetail">查看明细</view>
+            </view>
+            <view class="dist-money-item">
+                <view class="dist-money withdrawals">￥{{already_cash}}</view>
+                <view class="dist-text">已提现</view>
+                <view class="view-detail" catchtap="goToCashRecord">提现记录</view>
+            </view>
+        </view>
+        <view class="withdrawals-box">
+            <view class="withdrawals-tip">*金额低于{{min_limit}}元时不可提现，单日最高累计提现额度{{max_limit}}元</view>
+            <view class="withdrawals-tip">*提现需后台审核，审核结果可在提现记录中查询</view>
+            <view class="withdrawals-tip">*审核通过后预计一三个工作日可到账</view>
+            <view class="withdrawals-tip">*待结算的订单说明其对应订单暂无确认收货，存在退款的风险，无法结算；如确认收货，则佣金即可结算。</view>
+            <view class="withdrawals-btn-box {{!haveMoney?'no-withdrawals':''}}">
+                <view catchtap="goToWithdrawal">可提现余额： ￥{{cashmoney}}</view>
+            </view>
+        </view>
+        <view class="dist-grade-box">
+            <view class="dist-title-box">
+                <view class="dist-grade-title">分销商等级说明</view>
+                <view class="dist-title-line"></view>
+            </view>
+            <view class="dist-grade-tip" style="margin-top: 30rpx;">1.分销商等级从低至高依次为：青铜、白银、黄金；</view>
+            <view class="dist-grade-tip">2.等级不同对应的分销佣金比例不同，如下表格所示；</view>
+            <view class="dist-table-box">
+                <view class="dist-table">
+                    <view class="dist-table-item">
+                        <view class="dist-table-th"></view>
+                        <view class="dist-table-th">一级佣金</view>
+                        <block wx:if="{{dislevel>1}}">
+                            <view class="dist-table-th">二级佣金</view>
+                        </block>
+                        <block wx:if="{{dislevel>2}}">
+                            <view class="dist-table-th">T级佣金</view>
+                        </block>
+                    </view>
+                    <view class="dist-table-item clearfix">
+                        <view class="dist-table-td">青铜</view>
+                        <view class="dist-table-td">{{disGradeInfo[0].one_leve}}</view>
+                        <block wx:if="{{dislevel>1}}">
+                            <view class="dist-table-td">{{disGradeInfo[0].two_leve}}</view>
+                        </block>
+                        <block wx:if="{{dislevel>2}}">
+                            <view class="dist-table-td">{{disGradeInfo[0].three_leve}}</view>
+                        </block>
+                    </view>
+                    <block wx:if="{{disGradeInfo.length>1}}">
+                        <view class="dist-table-item clearfix">
+                            <view class="dist-table-td">白银</view>
+                            <view class="dist-table-td">{{disGradeInfo[1].one_leve}}</view>
+                            <block wx:if="{{dislevel>1}}">
+                                <view class="dist-table-td">{{disGradeInfo[1].two_leve}}</view>
+                            </block>
+                            <block wx:if="{{dislevel>2}}">
+                                <view class="dist-table-td">{{disGradeInfo[1].three_leve}}</view>
+                            </block>
+                        </view>
+                    </block>
+                    <block wx:if="{{disGradeInfo.length>2}}">
+                        <view class="dist-table-item clearfix">
+                            <view class="dist-table-td">黄金</view>
+                            <view class="dist-table-td">{{disGradeInfo[2].one_leve}}</view>
+                            <block wx:if="{{dislevel>1}}">
+                                <view class="dist-table-td">{{disGradeInfo[2].two_leve}}</view>
+                            </block>
+                            <block wx:if="{{dislevel>2}}">
+                                <view class="dist-table-td">{{disGradeInfo[2].three_leve}}</view>
+                            </block>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="dist-grade-tip">3.部分分销商品可能设定特殊的佣金比例，结算时不遵循上表所示的比例或佣金金额；</view>
+            <view class="dist-grade-tip">4.佣金金额=实付款（商品价-折扣金额）*对应佣金比例或佣金金额=设置的固定金额；</view>
+            <view class="dist-grade-tip">5.分销商等级初始默认为青铜，达到条件系统将自动为您升级，升级条件如下：
+                <text class="dist-full-color" catchtap="openMydata">查看我的数据>></text>
+            </view>
+            <block wx:if="{{upgrade_one.length!=0}}">
+                <view class="dist-condition-box clearfix">
+                    <view class="dist-condition-left">青铜-白银：</view>
+                    <view class="dist-condition-right">
+                        <block wx:if="{{upgrade_one.com_money>0}}">
+                            <view class="dist-condition-tip">佣金收入
+                                <text class="dist-full-color">满￥{{upgrade_one.com_money}}</text>
+                                <text wx:if="{{upgrade_one.dis_ordermoney>0 || upgrade_one.dis_ordernum>0 || upgrade_one.order_num>0 || upgrade_one.next_disuser>0}}">且</text>
+                            </view>
+                        </block>
+                        <block wx:if="{{upgrade_one.dis_ordermoney>0}}">
+                            <view class="dist-condition-tip">分销订单总金额
+                                <text class="dist-full-color">满￥{{upgrade_one.dis_ordermoney}}</text>
+                                <text wx:if="{{upgrade_one.dis_ordernum>0 || upgrade_one.order_num>0 || upgrade_one.next_disuser>0}}">且</text>
+                            </view>
+                        </block>
+                        <block wx:if="{{upgrade_one.dis_ordernum>0}}">
+                            <view class="dist-condition-tip">分销订单个数
+                                <text class="dist-full-color">满{{upgrade_one.dis_ordernum}}个</text>
+                                <text wx:if="{{upgrade_one.order_num>0 || upgrade_one.next_disuser>0}}">且</text>
+                            </view>
+                        </block>
+                        <block wx:if="{{upgrade_one.order_num>0}}">
+                            <view class="dist-condition-tip">自购订单金额
+                                <text class="dist-full-color">满￥{{upgrade_one.order_num}}</text>
+                                <text wx:if="{{upgrade_one.next_disuser>0}}">且</text>
+                            </view>
+                        </block>
+                        <block wx:if="{{upgrade_one.next_disuser>0}}">
+                            <view class="dist-condition-tip">直属下级
+                                <text class="dist-full-color">{{upgrade_one.next_disuser}}人</text>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+                <block wx:if="{{upgrade_two.length!=0}}">
+                    <view class="dist-condition-box clearfix">
+                        <view class="dist-condition-left">白银-黄金：</view>
+                        <view class="dist-condition-right">
+                            <block wx:if="{{upgrade_two.com_money>0}}">
+                                <view class="dist-condition-tip">佣金收入
+                                    <text class="dist-full-color">满￥{{upgrade_two.com_money}}</text>
+                                    <text wx:if="{{upgrade_two.dis_ordermoney>0 || upgrade_two.dis_ordernum>0 || upgrade_two.order_num>0 || upgrade_two.next_disuser>0}}">且</text>
+                                </view>
+                            </block>
+                            <block wx:if="{{upgrade_two.dis_ordermoney>0}}">
+                                <view class="dist-condition-tip">分销订单总金额
+                                    <text class="dist-full-color">满￥{{upgrade_two.dis_ordermoney}}</text>
+                                    <text wx:if="{{upgrade_two.dis_ordernum>0 || upgrade_two.order_num>0 || upgrade_two.next_disuser>0}}">且</text>
+                                </view>
+                            </block>
+                            <block wx:if="{{upgrade_two.dis_ordernum>0}}">
+                                <view class="dist-condition-tip">分销订单个数
+                                    <text class="dist-full-color">满{{upgrade_two.dis_ordernum}}个</text>
+                                    <text wx:if="{{upgrade_two.order_num>0 || upgrade_two.next_disuser>0}}">且</text>
+                                </view>
+                            </block>
+                            <block wx:if="{{upgrade_two.order_num>0}}">
+                                <view class="dist-condition-tip">自购订单金额
+                                    <text class="dist-full-color">满￥{{upgrade_two.order_num}}</text>
+                                    <text wx:if="{{upgrade_two.next_disuser>0}}">且</text>
+                                </view>
+                            </block>
+                            <block wx:if="{{upgrade_two.next_disuser>0}}">
+                                <view class="dist-condition-tip">直属下级
+                                    <text class="dist-full-color">{{upgrade_two.next_disuser}}人</text>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <view class="dist-grade-tip">6.以上说明本商城拥有最终解释权；</view>
+        </view>
+        <view class="dist-title-box dist-nothing-box">
+            <view class="dist-grade-title" style="background: #f0f0f0;">没有更多了</view>
+            <view class="dist-title-line" style="background: #E6E6E6;"></view>
+        </view>
+        <view class="shadow-bg" hidden="{{!showBg}}"></view>
+        <view class="dist-data-box" hidden="{{!showData}}">
+            <view class="dist-data-title">我的数据</view>
+            <view class="dist-data-table">
+                <view>
+                    <view class="dist-data-item clearfix">
+                        <view class="dist-data-left">佣金收入：</view>
+                        <view class="dist-data-right">￥{{total_income}}</view>
+                    </view>
+                    <view class="dist-data-item clearfix">
+                        <view class="dist-data-left">分销订单总金额：</view>
+                        <view class="dist-data-right">￥{{myData.disorderMoney}}</view>
+                    </view>
+                    <view class="dist-data-item clearfix">
+                        <view class="dist-data-left">分销订单个数：</view>
+                        <view class="dist-data-right">{{myData.disorderNums}}个</view>
+                    </view>
+                    <view class="dist-data-item clearfix">
+                        <view class="dist-data-left">自购订单：</view>
+                        <view class="dist-data-right">￥{{myData.myorderNums}}</view>
+                    </view>
+                    <view class="dist-data-item clearfix">
+                        <view class="dist-data-left">直属下级：</view>
+                        <view class="dist-data-right">{{myData.lowerLevel}}人</view>
+                    </view>
+                </view>
+                <view class="dist-data-btn" catchtap="closeMydata">我知道了</view>
+            </view>
+        </view>
+    </block>
+</view>
+
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

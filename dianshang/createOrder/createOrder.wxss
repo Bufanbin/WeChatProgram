@@ -1,0 +1,383 @@
+.app {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+.emptyheight {
+    height: 200rpx;
+    background: #efefef;
+}
+.select-add {
+    height: 145rpx;
+    background: #fff;
+}
+.receiver {
+    left: 31rpx;
+    top: 25rpx;
+    max-width: 7rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.phonenum {
+    right: 233rpx;
+    top: 25rpx;
+}
+.icon-adress {
+    left: 25rpx;
+    top: 75rpx;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.icon-rightarrow {
+    position: absolute;
+    right: 15rpx;
+    font-size: 40rpx;
+}
+.order-item {
+    position: relative;
+    padding: 10rpx 0;
+}
+.order-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 30rpx;
+}
+.order-goods-info {
+    width: calc(100% - 271rpx);
+}
+.order-goods-name {
+    margin-top: 10rpx;
+    color: #353535;
+    font-size: 30rpx;
+    word-break: break-all;
+}
+.order-goods-price {
+    font-size: 36rpx;
+}
+.order-goods-num {
+    position: static;
+    float: right;
+}
+.order-item-subtotal {
+    height: 80rpx;
+    line-height: 80rpx;
+    border-bottom: 2rpx #eee solid;
+    background: #fff;
+}
+.order-item-subtotal > text {
+    position: absolute;
+    right: 20rpx;
+    font-size: 30rpx;
+}
+.cart-balance {
+    font-size: 36rpx;
+    position: relative;
+    background: #fff;
+}
+.express {
+    line-height: 11rpx;
+}
+.order-total-fee {
+    line-height: 50rpx;
+}
+.sel-integarl {
+    border-top: 2rpx solid #e7e7e7;
+    padding: 15rpx 25rpx;
+    display: inline-block;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+}
+.sel-integarl-box {
+    float: left;
+}
+.sel-integarl-box > checkbox {
+    display: inline-block;
+}
+.sel-integarl-box > text {
+    display: inline-block;
+    font-size: 28rpx;
+    line-height: 25rpx;
+    color: #ff7070;
+}
+.integarl-promit {
+    line-height: 50rpx;
+    font-size: 28rpx;
+    float: right;
+}
+.integarl-promit > text {
+    color: #3c83da;
+}
+.integarl-promit > text:last-child {
+    color: #ff5a5a;
+}
+.discount {
+    margin-top: 26rpx;
+    background: #fff;
+}
+.discount > view {
+    text-align: right;
+    margin-left: 460rpx;
+    color: #454545;
+}
+.questionMark {
+    margin-right: 10rpx;
+    font-size: 30rpx;
+}
+.exchange {
+    float: left;
+    width: 343rpx;
+}
+.select-add > .default {
+    display: inline-block;
+    float: left;
+    padding: 2rpx 12rpx;
+    font-size: 26rpx;
+    text-align: center;
+    border: 2rpx #3493ed solid;
+    box-sizing: border-box;
+    color: #63a8eb;
+    right: 133rpx;
+    top: 25rpx;
+}
+.select-add > .right-arrow {
+    position: absolute;
+    top: 43rpx;
+    color: #c1c1c1;
+    font-size: 52rpx;
+}
+.takeout-order-box {
+    min-height: 65rpx;
+    background: #fff;
+}
+.newcommodity_home {
+    background: #efefef;
+}
+.statement {
+    background: #ff6d6d;
+}
+.addr_border {
+    margin-bottom: 0;
+}
+.empty-view {
+    width: 100%;
+    height: 56rpx;
+}
+.newsp_shop_name {
+    font-size: 30rpx;
+    color: #888;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background: #fff;
+}
+.newsp_shop_title {
+    color: #353535;
+}
+.newsp_shop_info {
+    margin-top: 30rpx;
+    height: 196rpx;
+}
+.newsp_order_shop {
+    padding: 0 30rpx;
+    margin-top: 30rpx;
+}
+.order-item-info {
+    margin-top: 30rpx;
+    height: auto;
+}
+.order-item-info > image {
+    width: 196rpx;
+    height: 196rpx;
+    margin-left: 30rpx;
+}
+.takeout-order-box, .commodity-discount-box {
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    font-size: 30rpx;
+}
+.select-add > text {
+    font-size: 30rpx;
+    color: #353535;
+}
+.order-goods-info > text {
+    max-width: 100%;
+}
+.order-goods-spec {
+    color: #888;
+}
+.commodity-discount-item {
+    font-size: 30rpx;
+}
+.commodity-discount-box {
+    border-top: 0;
+}
+.sp-order-box {
+    border-bottom: 10rpx solid #eee;
+}
+.sp-order-box:last-child {
+    border-bottom: 0;
+}
+.commodity-discount-right .commodity-discount-arrow {
+    margin-left: 0;
+    right: -10rpx;
+}
+.result-show {
+    position: fixed;
+    z-index: 8;
+}
+.group_sel_gettype {
+    line-height: 80rpx;
+    border-bottom: 2rpx solid #ececec;
+    background: #fff;
+    overflow: hidden;
+    font-size: 28rpx;
+    color: #050505;
+}
+radio {
+    transform: scale(0.7);
+}
+.kd_btn {
+    margin-left: 30rpx;
+}
+.dd_btn {
+    margin-left: 185rpx;
+}
+.seckaddr_border {
+    margin-bottom: 20rpx;
+}
+.seckselect-add {
+    width: 100%;
+    height: auto;
+    padding: 20rpx 30rpx;
+    box-sizing: border-box;
+}
+.select-add-left {
+    float: left;
+    line-height: 100rpx;
+}
+.seck-addricon {
+    font-size: 50rpx;
+    color: #f04a4a;
+    font-weight: bold;
+}
+.select-add-right {
+    float: left;
+    width: calc(100% - 114rpx);
+    margin-left: 20rpx;
+}
+.seck-receiver {
+    font-size: 44rpx;
+    color: #000;
+    line-height: 40rpx;
+}
+.seck-phonenum {
+    font-size: 26rpx;
+    color: #000;
+    margin-left: 36rpx;
+    line-height: 40rpx;
+}
+.seck-default {
+    display: inline-block;
+    vertical-align: top;
+    padding: 2rpx 12rpx;
+    font-size: 26rpx;
+    text-align: center;
+    border: 2rpx #3493ed solid;
+    box-sizing: border-box;
+    color: #63a8eb;
+    margin-left: 15rpx;
+}
+.seck-address {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    font-size: 26rpx;
+    color: #050505;
+    margin-top: 10rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.seck-rightarrow {
+    float: right;
+    line-height: 100rpx;
+    color: #a3a3a3;
+    position: static;
+}
+.seck-order-bg {
+    background: #ececec;
+}
+.seck-cart-balance {
+    border-top: 0;
+}
+.newsecksp_order_shop {
+    padding: 30rpx;
+    margin-top: 0;
+    color: #050505;
+}
+.seckorder-item-info {
+    margin-top: 0;
+    background: #f4f4f4;
+}
+.seckorder-goods-info {
+    margin-left: 30rpx;
+    width: calc(100% - 271rpx);
+}
+.seckorder-goods-name {
+    margin-top: 15rpx;
+}
+.goodname-left {
+    float: left;
+    font-size: 26rpx;
+    color: #3c3c3c;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+}
+.goodname-right {
+    float: right;
+    font-size: 26rpx;
+    color: #666;
+}
+.goodname-len {
+    width: 62%;
+}
+.seck-order-item {
+    padding: 0;
+    padding-bottom: 115rpx !important;
+}
+.get_userinfo {
+    line-height: 64rpx;
+    height: 64rpx;
+}
+.order-total-fee.getself {
+    line-height: 95rpx;
+    top: 0;
+}
+.seck-express {
+    font-size: 22rpx;
+    color: #666;
+}
+.seck-order-total-fee {
+    font-size: 24rpx;
+    color: #666;
+}
+.seck-price {
+    font-size: 34rpx;
+}
+.seck-statement {
+    font-size: 34rpx;
+    background: #f24a4a;
+}
+.seck-order-goods-spec {
+    font-size: 22rpx !important;
+    color: #666 !important;
+    margin-top: 25rpx;
+}

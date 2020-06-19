@@ -1,0 +1,50 @@
+<view class="app" hidden="{{!loaded}}">
+    <block wx:if="{{withtype!=3}}">
+        <view class="withdrawal-head-box">
+            <view class="withdrawal-title">可提现金额（元）</view>
+            <view class="withdrawal-money">￥{{balance}}</view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="rew_all">
+            <view class="rew_all_tip">赏金余额</view>
+            <view class="rew_all_num">
+                <text>￥</text>{{balance}}
+            </view>
+        </view>
+    </block>
+    <form bindsubmit="submitApply">
+        <view class="withdrawal-account-box">
+            <view class="withdrawal-account-item clearfix">
+                <text class="withdrawal-account-left">提现金额</text>
+                <view class="withdrawal-account-right">
+                    <input type="number" class="withdrawal-input" placeholder-class="withdrawal-place" placeholder="请输入提现金额" value="{{cashmoney}}" bindinput="enterInput" name="money" data-type="money" />
+                </view>
+            </view>
+            <block wx:if="{{cash_mode==0}}">
+                <view class="withdrawal-account-item clearfix">
+                    <text class="withdrawal-account-left">微信号</text>
+                    <view class="withdrawal-account-right">
+                        <input type="text" class="withdrawal-input" placeholder-class="withdrawal-place" placeholder="请填写您的微信号" value="{{account_number}}" name="account_number" bindinput="enterInput" data-type="account" />
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="withdrawal-account-item clearfix">
+                    <text class="withdrawal-account-left">支付宝账号</text>
+                    <view class="withdrawal-account-right">
+                        <input type="text" class="withdrawal-input" placeholder-class="withdrawal-place" placeholder="请填写支付宝账号" value="{{account_number}}" name="account_number" bindinput="enterInput" data-type="account" />
+                    </view>
+                </view>
+            </block>
+            <view class="withdrawal-account-item clearfix">
+                <text class="withdrawal-account-left">收款人姓名</text>
+                <view class="withdrawal-account-right">
+                    <input type="text" class="withdrawal-input" placeholder-class="withdrawal-place" placeholder="请填写您的姓名" value="{{account_name}}" name="name" bindinput="enterInput" data-type="name" />
+                </view>
+            </view>
+        </view>
+        <button class="{{withtype!=3?'withdrawal-btn':(old_cashmoney && account_number && account_name)?'goApplication1':'goApplication'}}" form-type="submit">提交申请</button>
+    </form>
+    <view class="withdrawal-tip-box" hidden="{{!showTip}}">{{tipText}}</view>
+</view>

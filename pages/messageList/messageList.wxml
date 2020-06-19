@@ -1,0 +1,619 @@
+<view class="app" hidden="{{!loaded}}">
+    <block wx:if="{{num!=1 && num!=10}}">
+        <view class="msg_type">
+            <block wx:for="{{selArr}}" wx:key="{{item}}">
+                <view class="msg_type_item {{index==selidx?'select':''}}" catchtap="sel_type" data-idx='{{index}}'>
+                    <view class="msg_type_text">
+                        {{item}}
+                        <block wx:if="{{index==1 && selidx==0}}">
+                            <view wx:if="{{isset==1}}" class="msg_type_dot"></view>
+                        </block>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </block>
+    <block wx:if="{{num==1}}">
+        <scroll-view scroll-y="true" class="msg_list msg_list_one" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name">{{item.content}}</view>
+                                <block wx:if="{{item.status==5}}">
+                                    <view class="msg_good_onum">取货码：{{item.mealnum}}</view>
+                                </block>
+                                <view class="msg_good_onum">{{item.status==3?'运单编号':'订单号'}}：{{item.status==3?item.mealnum:item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==2}}">
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" data-groupid="{{item.groupid}}" data-goodid="{{item.good_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name">{{item.content}}</view>
+                                <view class="msg_good_onum">{{item.status==3?'运单编号':'订单号'}}：{{item.status==3?item.mealnum:item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" data-groupid="{{item.groupid}}" data-goodid="{{item.good_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name newmsg_good_name">商品名称：{{item.content}}</view>
+                                <view class="msg_good_name">团长：{{item.group_head}}</view>
+                                <view class="msg_good_onum">订单号：{{item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==3}}">
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" data-grade="{{item.grade}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name">{{item.content}}</view>
+                                <view class="msg_good_onum">{{item.status==3?'运单编号':'订单号'}}：{{item.status==3?item.mealnum:item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" data-grade="{{item.grade}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <block wx:if="{{item.status==15 || item.status==16}}">
+                                    <view class="msg_good_name">下单用户：{{item.nickname}}</view>
+                                    <view class="msg_good_name">所属分销商：{{item.dis_uname}}</view>
+                                    <block wx:if="{{item.status==15}}">
+                                        <view class="msg_good_onum">该订单结算后，您预计将获得{{item.grade==1?'一':item.grade==2?'二':'三'}}级佣金：￥{{item.commission}}</view>
+                                    </block>
+                                    <block wx:else>
+                                        <view class="msg_good_onum">该订单退货后，您将扣除待结算佣金：￥{{item.commission}}</view>
+                                    </block>
+                                </block>
+                                <block wx:elif="{{item.status==17 || item.status==18}}">
+                                    <view class="msg_good_name">提现金额：{{item.money}}</view>
+                                    <view class="msg_good_name">提现账户：{{item.cash_num}}</view>
+                                    <block wx:if="{{item.status==17}}">
+                                        <view class="msg_good_onum">预计一至三个工作日内到账</view>
+                                    </block>
+                                    <block wx:else>
+                                        <view class="msg_good_onum">审核失败已退回手续费和提现佣金</view>
+                                    </block>
+                                </block>
+                                <block wx:elif="{{item.status==19}}">
+                                    <view class="msg_good_name">结算金额：{{item.money}}</view>
+                                    <view class="msg_good_name">订单号：{{item.order_id}}</view>
+                                    <view class="msg_good_onum">结算完成已可提现</view>
+                                </block>
+                                <block wx:elif="{{item.status==20}}">
+                                    <view class="msg_good_name">成员名称：{{item.nickname}}</view>
+                                    <view class="msg_good_name">加入时间：{{item.addtime}}</view>
+                                    <view class="msg_good_onum">可在分销中心-下级成员中查看所有成员</view>
+                                </block>
+                                <block wx:elif="{{item.status==21 || item.status==22}}">
+                                    <view class="msg_good_name">申请用户：{{item.nickname}}</view>
+                                    <view class="msg_good_name">申请时间：{{item.addtime}}</view>
+                                    <block wx:if="{{item.status==21}}">
+                                        <view class="msg_good_onum">您已经成为本商城分销商</view>
+                                    </block>
+                                    <block wx:else>
+                                        <view class="msg_good_onum">审核失败无法成为本商城分销商</view>
+                                    </block>
+                                </block>
+                                <block wx:elif="{{item.status==23}}">
+                                    <view class="msg_good_name">当前等级：{{item.grade==1?'青铜':item.grade==2?'白银':'黄金'}}</view>
+                                    <view class="msg_good_name">更新时间：{{item.addtime}}</view>
+                                    <view class="msg_good_onum">达成条件自动更新分销等级</view>
+                                </block>
+                                <block wx:elif="{{item.status==24}}">
+                                    <view class="msg_good_name">当前等级：{{item.old_grade==1?'青铜':item.old_grade==2?'白银':'黄金'}}</view>
+                                    <view class="msg_good_name">修改等级：{{item.grade==1?'青铜':item.grade==2?'白银':'黄金'}}</view>
+                                    <view class="msg_good_onum">分销等级修改后不自动更新等级</view>
+                                </block>
+                                <block wx:elif="{{item.status==25}}">
+                                    <view class="msg_good_name">当前状态：被拉黑</view>
+                                    <view class="msg_good_name">操作时间：{{item.dotime}}</view>
+                                    <view class="msg_good_onum">拉黑后不再获得佣金收益，可重新申请成为分销商</view>
+                                </block>
+                                <block wx:elif="{{item.status==26}}">
+                                    <view class="msg_good_name">当前状态：已恢复</view>
+                                    <view class="msg_good_name">操作时间：{{item.dotime}}</view>
+                                    <view class="msg_good_onum">已恢复被拉黑前的分销数据，可正常获得收益</view>
+                                </block>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==4}}">
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name">{{item.content}}</view>
+                                <view class="msg_good_onum">{{item.status==3?'运单编号':'订单号'}}：{{item.status==3?item.mealnum:item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name newmsg_good_name">商品名称：{{item.content}}</view>
+                                <view class="msg_good_name">商品金额：￥{{item.money}}</view>
+                                <view class="msg_good_onum">订单号：{{item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==5}}">
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name">{{item.content}}</view>
+                                <view class="msg_good_onum">{{item.status==3?'运单编号':'订单号'}}：{{item.status==3?item.mealnum:item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name newmsg_good_name">商品名称：{{item.content}}</view>
+                                <view class="msg_good_name">砍价金额：￥{{item.money}}</view>
+                                <view class="msg_good_onum">订单号：{{item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==6}}">
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_coup_box">
+                        <view class="msg_coup_boxL">
+                            <view class="msg_coup_tit">{{item.title}}</view>
+                            <view class="msg_coup_tip">{{item.addtime}}</view>
+                            <block wx:if="{{item.status==1}}">
+                                <view class="msg_coup_tip">您的一张优惠券即将到期，快去及时使用，享受优惠吧！</view>
+                            </block>
+                            <block wx:elif="{{item.status==2}}">
+                                <view class="msg_coup_tip">您已领取一张优惠券，快去及时使用，享受优惠吧！</view>
+                            </block>
+                        </view>
+                        <view class="msg_coup_boxR" style="background: url({{msg_coupbg_pic}});">
+                            <view class="msg_coup_val">
+                                <text>￥</text>{{item.give_money}}</view>
+                            <view class="msg_cou_cond">
+                                <view class="msg_cou_cond_name">优惠券</view>
+                                <view class="msg_cou_cond_reduce">满{{item.money}}使用</view>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-discardid="{{item.card_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}<text wx:if="{{item.integral>0}}">{{item.integral}}</text></text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <block wx:if="{{item.status==3}}">
+                                    <view class="msg_good_name">充值金额：￥{{item.money}}</view>
+                                    <view class="msg_good_name">优惠：充{{item.money}}送{{item.give_money}}</view>
+                                    <view class="msg_good_onum">充值成功已可使用</view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==7}}">
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" data-bindobj="{{item.order_type}}" data-childid="{{item.child_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name">{{item.content}}</view>
+                                <view class="msg_good_onum">{{item.status==3?'运单编号':'订单号'}}：{{item.status==3?item.mealnum:item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" data-bindobj="{{item.order_type}}" data-childid="{{item.child_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL reward_good_infoL">
+                                <block wx:if="{{item.status==46}}">
+                                    <view class="msg_good_name">点餐成功</view>
+                                </block>
+                                <block wx:elif="{{item.status==47}}">
+                                    <view class="msg_good_name">您的一个预约订餐已到提取时间，请尽快到门店提取，逾期不候哦</view>
+                                </block>
+                                <block wx:elif="{{item.status==48}}">
+                                    <view class="msg_good_name">预约成功</view>
+                                </block>
+                                <block wx:elif="{{item.status==49}}">
+                                    <view class="msg_good_name">预约失败</view>
+                                </block>
+                                <block wx:elif="{{item.status==50}}">
+                                    <view class="msg_good_name">正在送餐</view>
+                                </block>
+                                <view class="msg_good_onum">订单号：{{item.order_id}}</view>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==8}}">
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name">{{item.content}}</view>
+                                <view class="msg_good_onum">{{item.status==3?'运单编号':'订单号'}}：{{item.status==3?item.mealnum:item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL reward_good_infoL">
+                                <block wx:if="{{item.status==31}}">
+                                    <view class="msg_good_name">打赏成功</view>
+                                </block>
+                                <block wx:elif="{{item.status==32}}">
+                                    <view class="msg_good_name">打赏失败</view>
+                                </block>
+                                <block wx:elif="{{item.status==33}}">
+                                    <view class="msg_good_name">您发布的信息收到来自“{{item.nickname}}”的打赏，打赏金额为￥{{item.money}}，请查收。</view>
+                                </block>
+                                <block wx:elif="{{item.status==34}}">
+                                    <view class="msg_good_name">打赏提现-审核通过</view>
+                                </block>
+                                <block wx:elif="{{item.status==35}}">
+                                    <view class="msg_good_name">打赏提现-审核失败</view>
+                                </block>
+                                <block wx:elif="{{item.status==36}}">
+                                    <view class="msg_good_name">信息发布-成功</view>
+                                </block>
+                                <block wx:elif="{{item.status==37}}">
+                                    <view class="msg_good_name">信息发布-审核通过</view>
+                                </block>
+                                <block wx:elif="{{item.status==38}}">
+                                    <view class="msg_good_name">信息发布-审核失败</view>
+                                </block>
+                                <block wx:elif="{{item.status==39}}">
+                                    <view class="msg_good_name">评论消息（帖子回复及评论回复）</view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==9}}">
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==0}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <view class="msg_good_name">{{item.content}}</view>
+                                <view class="msg_good_onum">{{item.status==3?'运单编号':'订单号'}}：{{item.status==3?item.mealnum:item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+        <scroll-view scroll-y="true" class="msg_list" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <block wx:if="{{item.status==41}}">
+                                    <view class="msg_good_name">已接单及核销码</view>
+                                </block>
+                                <block wx:elif="{{item.status==42}}">
+                                    <view class="msg_good_name">取消接单</view>
+                                </block>
+                                <block wx:elif="{{item.status==43}}">
+                                    <view class="msg_good_name">您的一个预约订单已过期，到期时间为{{item.addtime}}</view>
+                                </block>
+                                <block wx:elif="{{item.status==44}}">
+                                    <view class="msg_good_name">取消预约</view>
+                                </block>
+                                <view class="msg_good_onum">订单号：{{item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{num==10}}">
+        <scroll-view scroll-y="true" class="msg_list msg_list_one" wx:if="{{selidx==1}}" bindscrolltolower="loadMoreData">
+            <block wx:if="{{noticeList.length>0}}">
+                <block wx:for="{{noticeList}}" wx:key="{{item}}">
+                    <view class="msg_item" data-status="{{item.status}}" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                        <view class="msg_line">
+                            <text class="msg_otype">{{item.title}}</text>
+                            <text class="msg_otime">{{item.addtime}}</text>
+                        </view>
+                        <view class="msg_good_info">
+                            <view class="msg_good_infoL">
+                                <block wx:if="{{item.status!=57}}">
+                                    <view class="msg_good_name">房型名称：{{item.content}}</view>
+                                    <block wx:if="{{item.status==51}}">
+                                        <view class="msg_good_onum">支付时间：{{item.hoteltime}}</view>
+                                    </block>
+                                    <block wx:elif="{{item.status==52}}">
+                                        <view class="msg_good_onum">取消时间：{{item.hoteltime}}</view>
+                                    </block>
+                                    <block wx:elif="{{item.status==53}}">
+                                        <view class="msg_good_onum">核销码：{{item.mealnum}}</view>
+                                    </block>
+                                    <block wx:elif="{{item.status==54}}">
+                                        <view class="msg_good_onum">取消原因：{{item.cash_num}}</view>
+                                    </block>
+                                    <block wx:elif="{{item.status==55}}">
+                                        <view class="msg_good_onum">过期时间：{{item.hoteltime}}</view>
+                                    </block>
+                                    <block wx:elif="{{item.status==56}}">
+                                        <view class="msg_good_onum">核销时间：{{item.hoteltime}}</view>
+                                    </block>
+                                </block>
+                                <block wx:else>
+                                    <view class="msg_good_onum">退款金额：{{item.money}}</view>
+                                    <view class="msg_good_onum">退款时间：{{item.hoteltime}}</view>
+                                </block>
+                                <view class="msg_good_onum">订单号：{{item.order_id}}</view>
+                            </view>
+                            <image class="msg_good_infoR" src="{{item.picpath}}" />
+                        </view>
+                    </view>
+                </block>
+            </block>
+            <block wx:else>
+                <view class='new_nothing' hidden="{{!nothing}}">
+                    <view class="ico-moon icon-wujiedu"></view>
+                    <view>暂无任何内容</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+</view>

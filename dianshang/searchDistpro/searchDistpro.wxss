@@ -1,0 +1,51 @@
+.good_list1 {
+    width: 100%;
+    height: calc(100% - 165rpx);
+}
+.newdisgoods-box {
+    height: 632rpx;
+    background: #fff;
+    margin-left: 28rpx;
+    margin-top: 27rpx;
+    display: inline-block;
+    vertical-align: top;
+}
+.disgoods-pic {
+    width: 326rpx;
+    height: 326rpx;
+    display: block;
+}
+.disgoods-textwid {
+    width: 326rpx;
+}
+.distribute-goods-title {
+    font-size: 28rpx;
+    color: #000;
+}
+.dis-goods-price {
+    font-size: 30rpx;
+    color: #e54341;
+}
+.dis-goods-sale {
+    font-size: 26rpx;
+    color: #888;
+}
+.discomm-info-box {
+    padding: 25rpx 0 21rpx;
+    font-size: 26rpx;
+    color: #353535;
+    text-align: center;
+}
+.distsale-btn {
+    width: 120rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #f12435;
+    border-radius: 25rpx;
+}
+.disgoods-info-box {
+    height: 158rpx;
+    padding: 15rpx 10rpx;
+}

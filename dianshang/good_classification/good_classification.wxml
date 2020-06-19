@@ -1,0 +1,35 @@
+<view class='classification'>
+    <block wx:if="{{goodsArr.length>0}}">
+        <view class='classify' catchtap='shrinkClassify' data-name='goodsOpen' style="border-bottom-width:{{goodsOpen?'13rpx':'1rpx'}}">
+            普通商品
+            <text class="{{goodsOpen == true?'icon-rightarrow1':'icon-bottomarrow'}} ico-moon"></text>
+        </view>
+        <view class='classify_ordinary' hidden="{{goodsOpen}}">
+            <block wx:for="{{goodsArr}}" wx:key="{{item}}">
+                <view class='ordinary' catchtap='goToList' data-searchtype="1" data-nid='{{item.nid}}' data-goodstype="1">{{item.name}}</view>
+            </block>
+        </view>
+    </block>
+    <block wx:if="{{seckgoodsArr.length>0}}">
+        <view class='classify' catchtap='shrinkClassify' data-name='seckgoodsOpen' style="border-bottom-width:{{seckgoodsOpen?'13rpx':'1rpx'}}">
+            秒杀商品
+            <text class="{{seckgoodsOpen == true?'icon-rightmorearrow':'icon-bottomarrow'}} ico-moon"></text>
+        </view>
+        <view class='classify_ordinary' hidden="{{seckgoodsOpen}}">
+            <block wx:for="{{seckgoodsArr}}" wx:key="{{item}}">
+                <view class='ordinary' catchtap='goToList' data-searchtype='3' data-nid='{{item.nid}}' data-goodstype="4">{{item.name}}</view>
+            </block>
+        </view>
+    </block>
+    <block wx:if="{{groupgoodsArr.length>0}}">
+        <view class='classify' catchtap='shrinkClassify' data-name='groupgoodsOpen' style="border-bottom-width:{{groupgoodsOpen?'13rpx':'1rpx'}}">
+            拼团商品
+            <text class="{{groupgoodsOpen == true?'icon-rightmorearrow':'icon-bottomarrow'}} ico-moon"></text>
+        </view>
+        <view class='classify_ordinary' hidden="{{groupgoodsOpen}}">
+            <block wx:for="{{groupgoodsArr}}" wx:key="{{item}}">
+                <view class='ordinary' catchtap='goToList' data-searchtype='4' data-nid='{{item.nid}}' data-goodstype="3">{{item.name}}</view>
+            </block>
+        </view>
+    </block>
+</view>

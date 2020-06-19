@@ -1,0 +1,102 @@
+page {
+    background: #f0f0f0;
+}
+.app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.dis-pro-top {
+    width: 100%;
+    padding: 35rpx 0 20rpx;
+    background: #fff;
+    box-sizing: border-box;
+}
+.dis-serach-input {
+    width: 92%;
+    height: 80rpx;
+    line-height: 80rpx;
+    margin: 0 auto;
+    border: 2rpx solid #c9c9c9;
+    border-radius: 40rpx;
+    box-sizing: border-box;
+}
+.dis-serach-input icon {
+    float: left;
+    width: 80rpx;
+    height: 66rpx;
+    text-align: center;
+    margin-top: 14rpx;
+}
+.dis-serach-view {
+    float: left;
+    width: calc(100% - 80rpx);
+    color: #c0c0c0;
+    font-size: 30rpx;
+}
+.order_list {
+    font-size: 30rpx;
+    margin-top: 10rpx;
+    margin-bottom: 0;
+    border-bottom: 0;
+}
+.order_checked {
+    color: #ef2437 !important;
+}
+.order_up.select, .order_down.select {
+    color: #ef2437;
+}
+.good_list1 {
+    width: 100%;
+    height: calc(100% - 238rpx);
+    background: #f0f0f0;
+}
+.newdisgoods-box {
+    height: 632rpx;
+    background: #fff;
+    margin-left: 28rpx;
+    margin-top: 27rpx;
+    display: inline-block;
+    vertical-align: top;
+}
+.disgoods-pic {
+    width: 326rpx;
+    height: 326rpx;
+    display: block;
+}
+.disgoods-textwid {
+    width: 326rpx;
+}
+.distribute-goods-title {
+    font-size: 28rpx;
+    color: #000;
+}
+.dis-goods-price {
+    font-size: 30rpx;
+    color: #e54341;
+}
+.dis-goods-sale {
+    font-size: 26rpx;
+    color: #888;
+}
+.discomm-info-box {
+    padding: 25rpx 0 21rpx;
+    font-size: 26rpx;
+    color: #353535;
+    text-align: center;
+}
+.distsale-btn {
+    width: 120rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #f12435;
+    border-radius: 25rpx;
+}
+.disgoods-info-box {
+    height: 158rpx;
+    padding: 15rpx 10rpx;
+}

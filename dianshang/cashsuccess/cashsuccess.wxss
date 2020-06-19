@@ -1,0 +1,31 @@
+.icon-chenggong1::before {
+    content: '\e6f8';
+}
+.icon-chenggong1 {
+    font-size: 170rpx;
+    color: #09bb07;
+    margin-top: 150rpx;
+    text-align: center;
+}
+.cash-suc-txt {
+    color: #404040;
+    font-size: 40rpx;
+    text-align: center;
+    margin-top: 50rpx;
+    line-height: 40rpx;
+}
+.cash-tip {
+    width: 665rpx;
+    margin: 45rpx auto 85rpx;
+    color: #adadad;
+    font-size: 28rpx;
+}
+.suc-btn {
+    font-size: 33rpx;
+    color: #fff;
+    background: #f65454;
+    width: 260rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    padding: 0;
+}

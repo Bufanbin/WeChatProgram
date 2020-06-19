@@ -1,0 +1,365 @@
+<view class="app">
+    <view class="goods-search">
+        <view class="goods-search-input">
+            <icon type="search" size="20" class="search-icon"></icon>
+            <input placeholder="请输入搜索内容" placeholder-class="goods-search-place" style="text-align: left;" bindinput="enterSearhText" />
+            <view class="search-btn home-search-btn" data-goodstype="0" data-searchtype="0" catchtap="clickSearch" style='background:{{storeinfo.main_color||mcolor}};'>搜索</view>
+        </view>
+        <view class="goods-classify" catchtap="goToClassify">
+            <text class="ico-moon icon-classification"></text>
+            <text style="font-size: 26rpx;">分类</text>
+        </view>
+    </view>
+    <block wx:if="{{searchtype==0}}">
+        <scroll-view scroll-y="true" class="home-goods-scroll1">
+            <block wx:if="{{goodslist.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-goodstype="1" data-searchtype="1" catchtap="clickSearch">
+                        <view class="home-goods-left">普通商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{havenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{goodslist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="0" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <!-- 砍价 -->
+            <block wx:if="{{kjGoodLists.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-searchtype="5" data-goodstype="5" catchtap="goToSearch">
+                        <view class="home-goods-left">砍价商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{kjhavenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{kjGoodLists}}" wx:key="{{item}}">
+                        <view class='home-goods-item clearfix' data-id="{{item.id}}" data-bindobj="8" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}};font-size:30rpx;">原价：￥{{item.oldprice}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">可砍价至：￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">库存：{{item.kucun}}</view>
+                                <view class="home-group-btn" style='background:{{storeinfo.main_color}}; bottom:55rpx !important;'>立即砍价</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <block wx:if="{{distributelist.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-goodstype="2" data-searchtype="2" catchtap="clickSearch">
+                        <view class="home-goods-left">分销商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{dishavenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{distributelist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="7" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price clearfix">
+                                    <view class="home-dist-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                    <view class="home-searchdis-btn">我要分销</view>
+                                </view>
+                                <view class="home-goods-sale clearfix">
+                                    <view class="home-dist-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                                    <view class="home-dist-commision">预估佣金：{{item.commission}}元</view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <block wx:if="{{grouplist.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-goodstype="3" data-searchtype="4" catchtap="clickSearch">
+                        <view class="home-goods-left">拼团商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{grouphavenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{grouplist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="3" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                                <view class="home-group-btn" style='background:{{storeinfo.main_color||mcolor}};'>拼团</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <block wx:if="{{seckilllist.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-goodstype="4" data-searchtype="3" catchtap="clickSearch">
+                        <view class="home-goods-left">秒杀商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{seckhavenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{seckilllist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="4" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name">{{item.goodname}}</view>
+                                <view class="home-goods-price">
+                                    <text>￥{{item.minprice}}</text>
+                                    <text class="seckill-oldprice newseckill-oldprice">￥{{item.maxprice}}</text>
+                                </view>
+                                <view class="seckill-saletype newseckill-saletype">
+                                    <text class="newseckill-span">已抢</text>
+                                    <view class="seckill-progress newseckill-progress home-seck-progress">
+                                        <text class="seckill-progress1 newseckill-progress1" style="border-color:{{storeinfo.main_color||mcolor}};"></text>
+                                        <text class="seckill-progress2" style="background:{{storeinfo.main_color||mcolor}};width:{{item.ratio}}"></text>
+                                    </view>
+                                    <text class="seckill-progress-span home-progress-span">{{item.ratio}}</text>
+                                </view>
+                                <view class="seckill-deadline home-seckill-deadline">
+                                    <text class="seckill-deadline-span overspanstyle">
+                    <text wx:if="{{item.is_start==1}}">距开始</text>
+                                    <text wx:elif="{{item.is_start==2}}">距结束</text>
+                                    </text>
+                                    <text class="seckill-time" style="background:{{storeinfo.main_color||mcolor}};">{{h1Arr[index] || 0}}{{h2Arr[index] || 0}}</text>
+                                    <text>:</text>
+                                    <text class="seckill-time" style="background:{{storeinfo.main_color||mcolor}};">{{m1Arr[index] || 0}}{{m2Arr[index] || 0}}</text>
+                                    <text>:</text>
+                                    <text class="seckill-time" style="background:{{storeinfo.main_color||mcolor}};">{{s1Arr[index] || 0}}{{s2Arr[index] || 0}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <view style="width: 100%;height: 70rpx;background: #ECECEC;"></view>
+        </scroll-view>
+    </block>
+    <block wx:elif="{{searchtype==1}}">
+        <view class="home-goods-box home-goods-scroll1">
+            <view class="order_list" style="margin-bottom:0;">
+                <view class="order_item" data-sel="1" catchtap="orderCheck" style='color:{{order==1?storeinfo.main_color:""}}'>
+                    <text class="items">综合</text>
+                </view>
+                <view class="order_item" data-sel="2" catchtap="orderCheck" style='color:{{order==2?storeinfo.main_color:""}}'>
+                    <text class="items">销量</text>
+                </view>
+                <view class="order_item" data-sel="3" catchtap="orderCheck" style='color:{{order==3||order==4?storeinfo.main_color:""}}'>
+                    <text class="items">价格</text>
+                    <view class="order_adjust">
+                        <text class="order_up ico-moon icon-up" style='color:{{order==3?storeinfo.main_color:""}}'></text>
+                        <text class="order_down ico-moon icon-tripple-down" style='color:{{order==4?storeinfo.main_color:""}}'></text>
+                    </view>
+                </view>
+                <view class="order_item" data-sel="5" catchtap="orderCheck" style='color:{{order==5?storeinfo.main_color:""}}'>
+                    <text class="items">新品</text>
+                </view>
+            </view>
+            <block wx:if="{{goodslist.length>0}}">
+                <scroll-view scroll-y="true" class="home-goods-scroll2" bindscrolltolower="searchMore">
+                    <block wx:for="{{goodslist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="0" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </block>
+            <block wx:else>
+                <view class="search_nothing" style="position:relative;" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+            </block>
+        </view>
+    </block>
+    <block wx:elif="{{searchtype==2}}">
+        <view class="home-goods-box home-goods-scroll1">
+            <view class="order_list" style="margin-bottom:0;">
+                <view class="order_item" data-sel="1" catchtap="orderCheck" style='color:{{order==1?storeinfo.main_color:""}}'>
+                    <text class="items">综合</text>
+                </view>
+                <view class="order_item" data-sel="2" catchtap="orderCheck" style='color:{{order==2?storeinfo.main_color:""}}'>
+                    <text class="items">销量</text>
+                </view>
+                <view class="order_item" data-sel="3" catchtap="orderCheck" style='color:{{order==3||order==4?storeinfo.main_color:""}}'>
+                    <text class="items">价格</text>
+                    <view class="order_adjust">
+                        <text class="order_up ico-moon icon-up" style='color:{{order==3?storeinfo.main_color:""}}'></text>
+                        <text class="order_down ico-moon icon-tripple-down" style='color:{{order==4?storeinfo.main_color:""}}'></text>
+                    </view>
+                </view>
+                <view class="order_item" data-sel="5" catchtap="orderCheck" style='color:{{order==5?storeinfo.main_color:""}}'>
+                    <text class="items">新品</text>
+                </view>
+            </view>
+            <block wx:if="{{distributelist.length>0}}">
+                <scroll-view scroll-y="true" class="home-goods-scroll2" bindscrolltolower="searchMore">
+                    <block wx:for="{{distributelist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="7" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price clearfix">
+                                    <view class="home-dist-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                    <view class="home-searchdis-btn">我要分销</view>
+                                </view>
+                                <view class="home-goods-sale clearfix">
+                                    <view class="home-dist-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                                    <view class="home-dist-commision">预估佣金：{{item.commission}}元</view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </block>
+            <block wx:else>
+                <view class="search_nothing" style="position:relative;" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+            </block>
+        </view>
+    </block>
+    <block wx:elif="{{searchtype==4}}">
+        <view class="home-goods-box home-goods-scroll1">
+            <view class="order_list" style="margin-bottom:0;">
+                <view class="order_item" data-sel="1" catchtap="orderCheck" style='color:{{order==1?storeinfo.main_color:""}}'>
+                    <text class="items">综合</text>
+                </view>
+                <view class="order_item" data-sel="2" catchtap="orderCheck" style='color:{{order==2?storeinfo.main_color:""}}'>
+                    <text class="items">销量</text>
+                </view>
+                <view class="order_item" data-sel="3" catchtap="orderCheck" style='color:{{order==3||order==4?storeinfo.main_color:""}}'>
+                    <text class="items">价格</text>
+                    <view class="order_adjust">
+                        <text class="order_up ico-moon icon-up" style='color:{{order==3?storeinfo.main_color:""}}'></text>
+                        <text class="order_down ico-moon icon-tripple-down" style='color:{{order==4?storeinfo.main_color:""}}'></text>
+                    </view>
+                </view>
+                <view class="order_item" data-sel="5" catchtap="orderCheck" style='color:{{order==5?storeinfo.main_color:""}}'>
+                    <text class="items">新品</text>
+                </view>
+            </view>
+            <block wx:if="{{grouplist.length>0}}">
+                <scroll-view scroll-y="true" class="home-goods-scroll2" bindscrolltolower="searchMore">
+                    <block wx:for="{{grouplist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="3" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                                <view class="home-group-btn" style='background:{{storeinfo.main_color||mcolor}};'>拼团</view>
+                            </view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </block>
+            <block wx:else>
+                <view class="search_nothing" style="position:relative;" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+            </block>
+        </view>
+    </block>
+    <block wx:elif="{{searchtype==3}}">
+        <view class="home-goods-box home-goods-scroll1">
+            <view class="order_list" style="margin-bottom:0;">
+                <view class="order_item" data-sel="1" catchtap="orderCheck" style='color:{{order==1?storeinfo.main_color:""}}'>
+                    <text class="items">综合</text>
+                </view>
+                <view class="order_item" data-sel="2" catchtap="orderCheck" style='color:{{order==2?storeinfo.main_color:""}}'>
+                    <text class="items">销量</text>
+                </view>
+                <view class="order_item" data-sel="3" catchtap="orderCheck" style='color:{{order==3||order==4?storeinfo.main_color:""}}'>
+                    <text class="items">价格</text>
+                    <view class="order_adjust">
+                        <text class="order_up ico-moon icon-up" style='color:{{order==3?storeinfo.main_color:""}}'></text>
+                        <text class="order_down ico-moon icon-tripple-down" style='color:{{order==4?storeinfo.main_color:""}}'></text>
+                    </view>
+                </view>
+                <view class="order_item" data-sel="5" catchtap="orderCheck" style='color:{{order==5?storeinfo.main_color:""}}'>
+                    <text class="items">新品</text>
+                </view>
+            </view>
+            <block wx:if="{{seckilllist.length>0}}">
+                <scroll-view scroll-y="true" class="home-goods-scroll2" bindscrolltolower="searchMore">
+                    <block wx:for="{{seckilllist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="4" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name">{{item.goodname}}</view>
+                                <view class="home-goods-price">
+                                    <text>￥{{item.minprice}}</text>
+                                    <text class="seckill-oldprice newseckill-oldprice">￥{{item.maxprice}}</text>
+                                </view>
+                                <view class="seckill-saletype newseckill-saletype">
+                                    <text class="newseckill-span">已抢</text>
+                                    <view class="seckill-progress newseckill-progress home-seck-progress">
+                                        <text class="seckill-progress1 newseckill-progress1" style="border-color:{{storeinfo.main_color||mcolor}};"></text>
+                                        <text class="seckill-progress2" style="background:{{storeinfo.main_color||mcolor}};width:{{item.ratio}}"></text>
+                                    </view>
+                                    <text class="seckill-progress-span home-progress-span">{{item.ratio}}</text>
+                                </view>
+                                <view class="seckill-deadline home-seckill-deadline">
+                                    <text class="seckill-deadline-span overspanstyle">
+                    <text wx:if="{{item.is_start==1}}">距开始</text>
+                                    <text wx:elif="{{item.is_start==2}}">距结束</text>
+                                    </text>
+                                    <text class="seckill-time" style="background:{{storeinfo.main_color||mcolor}};">{{h1Arr[index] || 0}}{{h2Arr[index] || 0}}</text>
+                                    <text>:</text>
+                                    <text class="seckill-time" style="background:{{storeinfo.main_color||mcolor}};">{{m1Arr[index] || 0}}{{m2Arr[index] || 0}}</text>
+                                    <text>:</text>
+                                    <text class="seckill-time" style="background:{{storeinfo.main_color||mcolor}};">{{s1Arr[index] || 0}}{{s2Arr[index] || 0}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </block>
+            <block wx:else>
+                <view class="search_nothing" style="position:relative;" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+            </block>
+        </view>
+    </block>
+    <block wx:elif="{{searchtype==5}}">
+        <view class="home-goods-box home-goods-scroll1">
+            <view class="order_list" style="margin-bottom:0;">
+                <view class="order_item" data-sel="1" catchtap="orderCheck" style='color:{{order==1?storeinfo.main_color:""}}'>
+                    <text class="items">综合</text>
+                </view>
+                <view class="order_item" data-sel="2" catchtap="orderCheck" style='color:{{order==2?storeinfo.main_color:""}}'>
+                    <text class="items">销量</text>
+                </view>
+                <view class="order_item" data-sel="3" catchtap="orderCheck" style='color:{{order==3||order==4?storeinfo.main_color:""}}'>
+                    <text class="items">价格</text>
+                    <view class="order_adjust">
+                        <text class="order_up ico-moon icon-up" style='color:{{order==3?storeinfo.main_color:""}}'></text>
+                        <text class="order_down ico-moon icon-tripple-down" style='color:{{order==4?storeinfo.main_color:""}}'></text>
+                    </view>
+                </view>
+                <view class="order_item" data-sel="5" catchtap="orderCheck" style='color:{{order==5?storeinfo.main_color:""}}'>
+                    <text class="items">新品</text>
+                </view>
+            </view>
+            <!-- 砍价 -->
+            <block wx:if="{{kjGoodLists.length>0}}">
+                <scroll-view scroll-y="true" class="home-goods-scroll2" bindscrolltolower="searchMore">
+                    <block wx:for="{{kjGoodLists}}" wx:key="{{item}}">
+                        <view class='home-goods-item clearfix' data-id="{{item.id}}" data-bindobj="8" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}};font-size:30rpx;">原价：￥{{item.oldprice}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">可砍价至：￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">库存：{{item.kucun}}</view>
+                                <view class="home-group-btn" style='background:{{storeinfo.main_color}}; bottom:55rpx !important;'>立即砍价</view>
+                            </view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </block>
+            <block wx:else>
+                <view class="search_nothing" style="position:relative;" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+            </block>
+        </view>
+    </block>
+</view>

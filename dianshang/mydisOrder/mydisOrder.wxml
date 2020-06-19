@@ -1,0 +1,139 @@
+<view class="app" hidden="{{!loaded}}">
+    <view class=" orderType">
+        <block wx:for="{{orderType}}" wx:key="{{item}}">
+            <view class="{{index==selectIdx?'select':''}}" data-index="{{index}}" catchtap="selectType">{{item.name}}</view>
+        </block>
+    </view>
+    <block wx:if="{{orderList.length>0}}">
+        <scroll-view scroll-y="true" bindscrolltolower="loadmoreOrder" class="order-content">
+            <block wx:for="{{orderList}}" wx:key="{{item}}">
+                <view class="order-item" data-orderid="{{item.order_id}}" catchtap="goToDetail">
+                    <view class="newsp_shop_name">
+                        <text class="newsp_shop_title">商家名称：</text>
+                        <text>{{item.storename||'暂未设置店铺名称'}}</text>
+                    </view>
+                    <block wx:for="{{item.orders}}" wx:for-item="oitem" wx:key="{{oitem}}">
+                        <view class="order-item-info">
+                            <image lazy-load="true" src="{{oitem.picpath}}"></image>
+                            <view class="order-goods-info">
+                                <text class="order-goods-name">{{oitem.goodname}}</text>
+                                <view class="order-goods-line clearfix">
+                                    <text class="order-goods-spec" style="max-width: 76%;">{{oitem.specstr}}</text>
+                                    <text class="order-goods-num">×{{oitem.nums}}</text>
+                                </view>
+                                <text class="order-goods-price">￥{{oitem.price}}</text>
+                                <block wx:if="{{item.status==0}}">
+                                    <text class="trade-type type3">待付款</text>
+                                </block>
+                                <block wx:if="{{item.status==1}}">
+                                    <text class="trade-type type4">待发货</text>
+                                </block>
+                                <block wx:if="{{item.status==2}}">
+                                    <text class="trade-type type2">卖家已发货</text>
+                                </block>
+                                <block wx:if="{{item.status==3||item.status==4}}">
+                                    <text class="trade-type type1">交易成功</text>
+                                </block>
+                                <block wx:if="{{item.status==5}}">
+                                    <text class="trade-type">交易关闭</text>
+                                </block>
+                                <block wx:if="{{item.status==6}}">
+                                    <block wx:if="{{item.refund==1}}">
+                                        <text class="trade-type">待退款</text>
+                                    </block>
+                                    <block wx:if="{{item.refund==2}}">
+                                        <text class="trade-type">已退款</text>
+                                    </block>
+                                </block>
+                            </view>
+                        </view>
+                    </block>
+                    <view class="order-item-subtotal">
+                        <block wx:if="{{item.status<7}}">
+                            <text>共<text class="subtotal-num">{{item.nums}}</text>件商品</text>
+                        </block>
+                        <block wx:if="{{item.talk_money>0}}">
+                            <text>商家议价:<text class="subtotal-num">￥{{item.talk_money}}</text></text>
+                        </block>
+                        <block wx:else>
+                            <text>合计：<text class="subtotal-num">￥{{item.totalprice}}</text></text>
+                        </block>
+                        <block wx:if="{{item.status<7}}">
+                            <text wx:if="{{item.freight=='无需物流'}}">(含运费：<text class="subtotal-num">￥{{item.freight}}</text>)</text>
+                            <text wx:else>(含运费：<text class="subtotal-num">￥{{item.freight}}</text>)</text>
+                        </block>
+                    </view>
+                    <block wx:if="{{item.status==0 && item.payway=='0'}}">
+                        <view class="order-operate">
+                            <button class="style1" catchtap="orderPayNow" data-sonid="{{item.sonid}}" data-isself="{{item.isself}}" data-orderid="{{item.order_id}}" data-idx="{{index}}">立即付款</button>
+                            <button catchtap="cancelOrder" data-orderid="{{item.order_id}}" data-idx="{{index}}">取消订单</button>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==1 && item.payway=='0'}}">
+                        <view class="order-operate">
+                            <button catchtap="refundOrder" data-orderid="{{item.order_id}}" data-idx="{{index}}" data-canrefund="{{item.canrefund}}">取消订单并退款</button>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==1 && item.payway=='1'}}">
+                        <view class="order-operate">
+                            <button catchtap="cancelOrder" data-type="{{item.type}}" data-orderid="{{item.order_id}}" data-idx="{{index}}">取消订单</button>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==2}}">
+                        <view class="order-operate">
+                            <button class="style1" catchtap="sureGetGoods" data-orderid="{{item.order_id}}" data-idx="{{index}}">确认收货</button>
+                            <block wx:if="{{item.payway=='0'}}">
+                                <button catchtap="refundOrder" data-orderid="{{item.order_id}}" data-idx="{{index}}" wx:if="{{item.status==2}}">退款</button>
+                            </block>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==3}}">
+                        <view class="order-operate">
+                            <button class="style1" catchtap="goToEvaluate" data-orderid="{{item.order_id}}" data-childid="{{item.child_id}}">评价</button>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==5}}">
+                        <view class="order-operate">
+                            <button catchtap="deleteOrder" data-orderid="{{item.order_id}}" data-idx="{{index}}">删除订单</button>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==6 || item.status==7}}">
+                        <block wx:if="{{item.refund==1}}">
+                            <view class="order-operate">
+                                <button catchtap="cancelRefund" data-orderid="{{item.order_id}}" data-idx="{{index}}">取消退款</button>
+                            </view>
+                        </block>
+                        <block wx:if="{{item.refund==2}}">
+                            <view class="order-operate">
+                                <button catchtap="deleteOrder" data-orderid="{{item.order_id}}" data-idx="{{index}}">删除订单</button>
+                            </view>
+                        </block>
+                    </block>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:else>
+        <view class="nothing-order" hidden="{{!nothing}}">暂无相关内容，再找找吧！</view>
+    </block>
+    <view class="delete-page" hidden="{{!delPageShow}}">
+        <view class="delete-box">
+            <view class="ico-moon icon-cross delete-page-close" catchtap="cancelDel"></view>
+            <text>确认删除该订单吗</text>
+            <view class="delete-btn">
+                <button class="cancel" catchtap="cancelDel">取消</button>
+                <button catchtap="sureDel">确认</button>
+            </view>
+        </view>
+    </view>
+    <view class="withdrawal-tip-box" hidden="{{!showTip}}">
+        <view>申请成为分销商后，</view>
+        <view>此前购买的商品无法申请退款</view>
+    </view>
+    <view class="backhome" catchtap="backhome">回到\n首页</view>
+</view>
+
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

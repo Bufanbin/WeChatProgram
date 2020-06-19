@@ -1,0 +1,159 @@
+page {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: #f0f0f0;
+    top: 0;
+    left: 0;
+}
+.member_top {
+    width: 100%;
+    background: #fff;
+    color: #888;
+    font-size: 30rpx;
+    margin-bottom: 20rpx;
+    overflow: hidden;
+}
+.member_top > view {
+    width: 50%;
+    text-align: center;
+    height: 110rpx;
+    padding-top: 20rpx;
+    border-bottom: 2rpx solid #fff;
+    box-sizing: border-box;
+    float: left;
+}
+.member_top >view.select {
+    color: #f02437;
+    border-bottom: 2rpx solid #f02437;
+}
+.member_tit {
+    width: 100%;
+    background: #fff;
+    overflow: hidden;
+    text-align: center;
+    font-size: 26rpx;
+    color: #000;
+}
+.member_tit > view {
+    float: left;
+    width: 20%;
+    height: 90rpx;
+    line-height: 90rpx;
+}
+.memberlist_box {
+    color: #353535;
+    font-size: 24rpx;
+    text-align: left;
+    width: 100%;
+    margin-top: 20rpx;
+    height: calc(100% - 220rpx);
+}
+.memberitem_box {
+    width: 100%;
+    overflow: hidden;
+    text-align: center;
+    background: #fff;
+    font-size: 24rpx;
+    margin-bottom: 1px;
+}
+.memberitem_box > view {
+    width: 20%;
+    float: left;
+    height: 120rpx;
+    line-height: 120rpx;
+}
+.member_avatar {
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 100%;
+    vertical-align: middle;
+}
+.text_hide {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.color1 {
+    color: #f02437;
+}
+.memberitem_box > view.member_num {
+    line-height: 40rpx;
+    padding-top: 20rpx;
+    box-sizing: border-box;
+}
+.member_check {
+    text-decoration: underline;
+}
+.tipbg {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.twomember_box {
+    width: 670rpx;
+    height: 855rpx;
+    margin: 100rpx 40rpx 35rpx;
+    padding-bottom: 17.5rpx;
+    background: #fff;
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+}
+.icon-tubiaolunkuo-:before {
+    content: '\e694';
+}
+.icon-tubiaolunkuo- {
+    color: #fff;
+    font-size: 65rpx;
+    margin: 0 auto;
+    width: 65rpx;
+}
+.tip_avatar {
+    margin-top: 15rpx;
+}
+.tip_name {
+    font-size: 30rpx;
+    color: #000;
+    width: 60%;
+    margin: 15rpx auto 0;
+    line-height: 30rpx;
+}
+.tip_grade {
+    margin: 30rpx auto 0;
+    font-size: 24rpx;
+    line-height: 24rpx;
+    width: 60%;
+}
+.tip_tit {
+    width: 635rpx;
+    margin: 45rpx auto 20rpx;
+    overflow: hidden;
+}
+.tip_tit > view {
+    width: 20%;
+    float: left;
+    line-height: 24rpx;
+    font-size: 24rpx;
+}
+.twomemberlist_box {
+    color: #353535;
+    font-size: 24rpx;
+    text-align: left;
+    width: 635rpx;
+    height: calc(100% - 293rpx);
+    background: #eee;
+    margin: 0 auto;
+}
+.twomember_avatar.member_avatar {
+    width: 70rpx;
+    height: 70rpx;
+}
+.memberitem_box.twomemberitem_box {
+    background: rgba(0, 0, 0, 0);
+}

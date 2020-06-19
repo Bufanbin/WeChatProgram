@@ -1,0 +1,58 @@
+<view class="app" hidden="{{!loaded}}">
+    <view class="dis-pro-top">
+        <view class="dis-serach-input" catchtap="goToSearchProduct">
+            <icon type="search" size="16" color="#C0C0C0"></icon>
+            <view class="dis-serach-view">单行输入</view>
+        </view>
+        <view class="order_list">
+            <view class="order_item {{order==1?'order_checked':''}}" data-sel="1" catchtap="selOrder">
+                <text class="items">综合</text>
+            </view>
+            <view class="order_item {{order==2?'order_checked':''}}" data-sel="2" catchtap="selOrder">
+                <text class="items">销量</text>
+            </view>
+            <view class="order_item {{order==3||order==4?'order_checked':''}}" data-sel="3" catchtap="selOrder">
+                <text class="items">价格</text>
+                <view class="order_adjust">
+                    <text class="order_up ico-moon icon-up {{order==3?'select':''}}"></text>
+                    <text class="order_down ico-moon icon-tripple-down {{order==4?'select':''}}"></text>
+                </view>
+            </view>
+            <view class="order_item {{order==5?'order_checked':''}}" data-sel="5" catchtap="selOrder">
+                <text class="items">新品</text>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{goodslist.length>0}}">
+        <scroll-view scroll-y="true" class="good_list1" bindscrolltolower="loadmoreGoods">
+            <block wx:for="{{goodslist}}" wx:key="{{item}}">
+                <view class="seckill-gooditem newseckill-gooditem newdisgoods-box" data-id="{{item.id}}" catchtap="goToDistDetail" data-childid="{{item.child_id}}">
+                    <view class="distribute-gooditem clearfix">
+                        <image lazy-load="true" src="{{item.picpath}}" class="disgoods-pic"></image>
+                        <view class="disgoods-textwid">
+                            <view class="disgoods-info-box">
+                                <view class="distribute-goods-title">{{item.goodname}}</view>
+                                <view class="distsale-box1 clearfix">
+                                    <text class="dis-goods-price">￥{{item.price}}</text>
+                                    <text class="dis-goods-sale">销量：{{item.salesnums}}</text>
+                                </view>
+                            </view>
+                            <view class="discomm-info-box">
+                                <block wx:if="{{style_type==2}}">
+                                    <view class="distsale-btn distbuy-btn2">立即购买</view>
+                                </block>
+                                <block wx:else>
+                                    <view>预估佣金：{{item.commision}}元</view>
+                                    <view class="distsale-btn distsale-btn1">我要分销</view>
+                                </block>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:else>
+        <view wx:if="{{nothing}}" style="text-align:center;padding:50rpx;">亲~暂无内容，谢谢！</view>
+    </block>
+</view>

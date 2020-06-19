@@ -1,0 +1,31 @@
+<view class="app">
+    <view class="oneLevel" catchtap="selectClassify" data-nid="" data-title="全部">
+        <text>全部</text>
+        <text class="ico-moon icon-rightarrow rightArrow"></text>
+    </view>
+    <block wx:for="{{levelOne}}" wx:key="{{item}}">
+        <view class="oneLevel" data-nid="{{item.onenid}}" catchtap="selectClassify" data-title="{{item.nameone}}">
+            <text>{{item.nameone}}</text>
+            <text class="ico-moon icon-rightarrow rightArrow"></text>
+        </view>
+    </block>
+    <view class="twoLevel">
+        <block wx:for="{{levelTwo}}" wx:key="{{item}}">
+            <view class="twoLevel-item">
+                <view class="classname">
+                    <text style="font-size: 30rpx;">{{item.nameone}}</text>
+                    <text class="ico-moon icon-rightarrow rightArrow"></text>
+                </view>
+                <view class="twoLevel-list">
+                    <block wx:for="{{item.two}}" wx:for-item="LTwo" wx:key="{{LTwo}}">
+                        <button class="twoLevel-list-btn" data-nid="{{LTwo.twonid}}" catchtap="selectClassify" data-title="{{item.nameone+'-'+LTwo.nametwo}}">{{LTwo.nametwo}}</button>
+                    </block>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="backhome" catchtap="backhome">回到\n首页</view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>

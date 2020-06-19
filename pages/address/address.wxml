@@ -1,0 +1,39 @@
+<view class="app" hidden="{{!loaded}}">
+    <view style="height: 100%;">
+        <scroll-view scroll-y="true" class="newaddress_manage_ul">
+            <block wx:for="{{addressList}}" wx:key="{{item}}">
+                <view class="address-list">
+                    <view class="address-list-info" data-addressid="{{item.id}}">
+                        <view class="address-info">
+                            <text>{{item.consignee}}</text>
+                            <text>{{item.telphone}}</text>
+                        </view>
+                        <view class="address-detail">{{item.province+item.city+item.county+item.street}}</view>
+                    </view>
+                    <view class="address-list-edit">
+                        <view class="default-address">
+                            <icon type="{{item.isdefault==1?'success_circle':'circle'}}" size="18" catchtap="changeDefault" data-index="{{index}}" />
+                            <text style="color:{{item.isdefault==1?'#f87373':'#a8a7a7'}}">默认地址</text>
+                        </view>
+                        <view class="add-delete" catchtap="deleteAdd" data-index="{{index}}">
+                            <text class="ico-moon icon-iconfont05"></text>
+                            <text>删除</text>
+                        </view>
+                        <view class="add-edit" catchtap="editAdd" data-index="{{index}}">
+                            <text class="ico-moon icon-iconfontedit"></text>
+                            <text>编辑</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+        <view class="addnew-address" catchtap="addNewAddress" style='background:{{color}}'>
+            <text>新增地址</text>
+        </view>
+    </view>
+    <view class="backhome" catchtap="backhome">回到\n首页</view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

@@ -1,0 +1,29 @@
+<view class="ragedetail_top">
+    <block wx:for="{{typeArr}}" wx:key="{{item}}">
+        <view class="{{selidx==index?'select':''}}" catchtap="seltype" data-idx="{{index}}">{{item}}</view>
+    </block>
+</view>
+<view class="ragelist_tit">
+    <view>订单日期</view>
+    <view>金额（元）</view>
+    <view>佣金等级</view>
+    <view>状态</view>
+</view>
+<block wx:if="{{ragelist.length>0}}">
+    <scroll-view scroll-y="true" class="ragelist_box" bindscrolltolower="loadmore">
+        <block wx:for="{{ragelist}}" wx:key="{{item}}">
+            <view class='rageitem_box'>
+                <view>{{item.addtime}}</view>
+                <view class="rage_money">{{item.money}}</view>
+                <view>{{item.leve}}</view>
+                <view class="rage_type{{item.status}}">{{item.status!=3?'待结算':'已结算'}}</view>
+            </view>
+        </block>
+    </scroll-view>
+</block>
+<block wx:else>
+    <view class='new_nothing' hidden="{{!nothing}}">
+        <view class="ico-moon icon-wujiedu"></view>
+        <view>暂无任何内容</view>
+    </view>
+</block>

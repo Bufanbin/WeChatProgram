@@ -1,0 +1,64 @@
+<block wx:if="{{dislevel>1}}">
+    <view class="disOrder_top">
+        <block wx:for="{{topArr}}" wx:key="{{item}}">
+            <view class="{{seldis_grade==index?'select':''}}" catchtap="seltype" data-type='{{index}}'>
+                <view>{{item.name}}</view>
+                <view>{{item.num}}</view>
+            </view>
+        </block>
+    </view>
+</block>
+<view class="order_type">
+    <block wx:for="{{ordertype}}" wx:key="{{item}}">
+        <view class="{{seldis_type==index?'select':''}}" catchtap="sel_ordertype" data-type="{{index}}">{{item.name}}{{(index==0 && dislevel>1)?'':'('+item.num+')'}}</view>
+    </block>
+    <text class="subscript" style='left:calc({{12.5+seldis_type*25}}% - 6px);'></text>
+</view>
+<block wx:if="{{orderlist.length>0}}">
+    <scroll-view scroll-y="true" class="orderlist_box" bindscrolltolower="loadmore">
+        <block wx:for="{{orderlist}}" wx:key="{{item}}">
+            <view class="orderitem_box">
+                <image class="goodspic" src="{{item.pic}}"></image>
+                <view class="order_info">
+                    <view class="order_line">
+                        <view class="goods_name text_hide">{{item.goodname}}</view>
+                        <view class="goods_type color{{item.status}}">{{item.status==3?'已结算':item.status==4?'已退货':'待结算'}}</view>
+                    </view>
+                    <view class="order_line">
+                        <view class="order_block text_hide">
+                            <text>买家：</text>{{item.nickname}}</view>
+                        <view class="order_block text_hide">
+                            <block wx:if="{{seldis_grade==0}}">
+                                <text>金额：</text>￥{{item.totalprice}}
+                            </block>
+                            <block wx:else>
+                                <text>分销商：</text>{{item.dis_nickname}}
+                            </block>
+                        </view>
+                    </view>
+                    <view class="order_line">
+                        <view class="order_block text_hide ">
+                            <text>实付：</text>￥{{item.realmoney}}</view>
+                        <view class="order_block text_hide color3">
+                            <text>佣金：</text>￥{{item.commission}}</view>
+                    </view>
+                    <view class="order_line">
+                        <text>订单号：</text>{{item.orderid}}</view>
+                    <view class="order_line">
+                        <text>付款时间：</text>{{item.addtime}}</view>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
+</block>
+<block wx:else>
+    <view class='new_nothing' hidden="{{!nothing}}">
+        <view class="ico-moon icon-wujiedu"></view>
+        <view>暂无任何内容</view>
+    </view>
+</block>
+
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

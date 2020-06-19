@@ -1,0 +1,29 @@
+<view class="personal_info_box">
+    <view class="info_box_save">
+        <view class="detail_name_box">
+            <image src="{{avatar}}"></image>
+            <text style="float: none;padding:0;">{{nickname}}</text>
+        </view>
+    </view>
+    <view class="info_box newcenterPage_user_info">
+        <view class="userCenter_li clearfix" data-num="2" catchtap="goToUserset" data-text='{{name}}'>
+            <text class="user_info_label">姓名</text>
+            <text class="user_info_span {{!name?'no_info':''}}">{{name||'请填写您的姓名'}}</text>
+            <image src="{{rightIcon}}" class="right_icon"></image>
+        </view>
+        <view class="userCenter_li clearfix" data-num="0" catchtap="goToUserset" data-text="{{phone}}">
+            <text class="user_info_label">手机号</text>
+            <text class="user_info_span {{!phone?'no_info':''}}">{{phone||'请填写您的手机号'}}</text>
+            <image src="{{rightIcon}}" class="right_icon"></image>
+        </view>
+        <view class="userCenter_li clearfix" data-num="1" catchtap="goToUserset" data-text="{{qq}}">
+            <text class="user_info_label">QQ号</text>
+            <text class="user_info_span {{!qq?'no_info':''}}">{{qq||'请填写您的QQ号（可不填写）'}}</text>
+            <image src="{{rightIcon}}" class="right_icon"></image>
+        </view>
+    </view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

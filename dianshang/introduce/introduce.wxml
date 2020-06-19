@@ -1,0 +1,21 @@
+<view class='contain' style="background-image: url({{introduce_bg}});">
+    <text class='title'>名词解释</text>
+    <view>
+        <text class='paragroph'>1.可提现佣金：已经确认收货后的订单，隔一天，佣金自动计入可提现佣金中（不包含已经提现的）。</text>
+    </view>
+    <view>
+        <text class='paragroph'>2.今日预估佣金：今天24小时内，通过推广带来的买家付款的订单产生的预估收入（不包含退款的）。</text>
+    </view>
+    <view>
+        <text class='paragroph'>3.预估总佣金：通过推广带来的买家的订单计算出预估佣金收入（不包含退款的</text>
+    </view>
+    <view>
+        <text class='paragroph'>4.订单明细-预估佣金：买家拍下商品后，实际付款金额*佣金比比例。</text>
+    </view>
+    <view>
+        <text class='paragroph'>5.订单明细-结算佣金：是实际付款金额*佣金比比例，买家确认收货后，隔一天，可结算，钱会自动划入可提现佣金余额中。</text>
+    </view>
+    <view>
+        <text class='paragroph'>6.订单明细-佣金比例：平台拟定好的比例。</text>
+    </view>
+</view>

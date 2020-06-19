@@ -1,0 +1,23 @@
+<view class="app">
+    <view class='dis-cash-top'>
+        <block wx:for="{{typeArr}}" wx:key="{{item}}">
+            <view class='dis-sel-item {{index==selIdx?"select":""}}' catchtap='selType' data-idx='{{index}}' style='{{index==selIdx?"color:"+color+";border-bottom:4rpx solid "+color:""}}'>{{item}}</view>
+        </block>
+    </view>
+    <block wx:if="{{list.length>0}}">
+        <scroll-view scroll-y="true" class='scroll-box' bindscrolltolower="loadmorecash">
+            <block wx:for="{{list}}" wx:key="{{item}}">
+                <view class='cash-item'>
+                    <view class='cash-info'>
+                        <text class='cash-money'>{{item.total_money}}元</text>
+                        <text class='cash-type cash-type{{item.verify+1}}'><block wx:if="{{item.verify==0}}">审核中</block><block wx:elif="{{item.verify==1}}">提现成功</block><block wx:else>提现失败</block></text>
+                    </view>
+                    <view class='cashtime'>{{item.addtime}}</view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:else>
+        <view class="nothing-order" hidden="{{!nothing}}">暂无相关内容，再找找吧！</view>
+    </block>
+</view>

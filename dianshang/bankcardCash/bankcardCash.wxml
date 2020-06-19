@@ -1,0 +1,56 @@
+<view class="app">
+    <view class="withdrawal-head-box">
+        <view class="withdrawal-title">可提现金额（元）</view>
+        <view class="withdrawal-money">￥{{balance}}</view>
+    </view>
+    <form bindsubmit="submitApply">
+        <view class="withdrawal-account-box">
+            <view class="withdrawal-account-item clearfix">
+                <view class="withdrawal-account-left">户名</view>
+                <view class="withdrawal-account-right">
+                    <input type="text" class="withdrawal-input" placeholder="请填写您的户名" placeholder-class="withdrawal-place" value="{{account_name}}" name="name" />
+                </view>
+            </view>
+            <view class="withdrawal-account-item clearfix">
+                <view class="withdrawal-account-left">借记卡卡号</view>
+                <view class="withdrawal-account-right">
+                    <input type="number" class="withdrawal-input" placeholder="请填写借记卡卡号" placeholder-class="withdrawal-place" value="{{account_number}}" name="account_number" />
+                </view>
+            </view>
+            <view class="withdrawal-account-item clearfix">
+                <view class="withdrawal-account-left">开户行</view>
+                <picker value="{{bankIdx}}" mode="selector" range="{{openBank}}" bindchange="bindBank">
+                    <view class="withdrawal-account-right">
+                        <block wx:if="{{bankIdx==-1}}">
+                            <text class="withdrawal-account-text">请选择对应的开户行</text>
+                        </block>
+                        <block wx:else>
+                            <text>{{openBank[bankIdx]}}</text>
+                        </block>
+                        <text class="ico-moon icon-rightarrow"></text>
+                    </view>
+                </picker>
+            </view>
+            <view class="withdrawal-account-item clearfix">
+                <view class="withdrawal-account-left">提现金额</view>
+                <view class="withdrawal-account-right">
+                    <input type="number" class="withdrawal-input" placeholder="请输入提现金额" placeholder-class="withdrawal-place" value="{{cashmoney}}" bindinput="enterInput" name="money" />
+                </view>
+            </view>
+            <view class="withdrawal-account-item clearfix">
+                <view class="withdrawal-account-left">手续费</view>
+                <view class="withdrawal-account-right">
+                    <input type="text" value="{{poundage}}" name="poundage" class="hidden" />
+                    <text class="withdrawal-account-text" style="position: relative;top: 4rpx;">{{poundage}}</text>
+                    <text class="withdrawal-account-text" style="position: relative;top: 4rpx;margin-left: 5rpx;">元</text>
+                </view>
+            </view>
+        </view>
+        <view class="bankcard-tip-box">
+            <view class="bankcard-tip">*提现到银行卡的手续费为0.1%，最低1元，最高25元</view>
+            <view class="bankcard-tip" style="margin-top: 25rpx;">*手续费+提现金额不能大于可提现金额</view>
+        </view>
+        <button class="withdrawal-btn" form-type="submit">提交申请</button>
+    </form>
+    <view class="withdrawal-tip-box" hidden="{{!showTip}}">{{tipText}}</view>
+</view>

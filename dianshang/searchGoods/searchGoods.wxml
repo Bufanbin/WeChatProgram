@@ -1,0 +1,76 @@
+<view class="app">
+    <template name="goodsList">
+        <view class="element list" style="height:100%;position:fixed!important;{{data.style}}">
+            <view class="element search">
+                <view class="search-input" style="{{inputstype}}">
+                    <icon type="search" size="16"></icon>
+                    <input focus="true" placeholder="{{data.searchText}}" placeholder-style="color:#ccc;font-size:25rpx;" value="{{searchtext}}" bindinput="enterSearhText" />
+                    <view class="search-btn" catchtap="clickSearch">搜索</view>
+                </view>
+            </view>
+            <scroll-view class="good_list1" bindscrolltolower="searchMore" scroll-y="{{data.mode!=4}}">
+                <block wx:if="{{data.showLabel}}">
+                    <view class="quick-tags">
+                        <view class="quick-tags-title">热门搜索</view>
+                        <view class="tags">
+                            <block wx:for="{{data.labelContent}}" wx:key="{{item}}">
+                                <text catchtap="tagSearch" data-text="{{item}}">{{item}}</text>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+                <block wx:if="{{data.mode!=4}}">
+                    <view class='list-container'>
+                        <block wx:if="{{data.content.length>0}}">
+                            <block wx:for="{{data.content}}" wx:key="{{item}}">
+                                <navigator url="/dianshang/goodsDetail/goodsDetail?id={{item.id}}&bindObj={{data.bindObj}}" class="{{data.mode==4?'scroll-left':''}}">
+                                    <view class="list-item background-ele goodType{{data.mode}} {{data.mode==2?'double-list':''}}" style="{{data.listStyle}}">
+                                        <image lazy-load="true" class="list-img" src="{{item.picpath}}" style="{{data.imgStyle}}"></image>
+                                        <view class="title-container" style="{{data.titleWidth}}">
+                                            <view class="title goodsName{{data.mode}}" style="{{data.titlefont}}">{{item.goodname}}</view>
+                                            <view class="sec-title" style="{{data.abstractfont}}">
+                                                <text>￥{{item.price}}</text>
+                                                <text>销量:{{item.salesnums}}</text>
+                                            </view>
+                                        </view>
+                                        <label class="ico-moon icon-recommend" wx:if="{{item.recommend==1}}"></label>
+                                    </view>
+                                </navigator>
+                            </block>
+                        </block>
+                        <block wx:else>
+                            <view class="search_nothing" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+                        </block>
+                    </view>
+                </block>
+                <block wx:else>
+                    <scroll-view class="list-container {{data.mode==4?'good_list_ul':''}}" scroll-x="true" bindscrolltolower="searchMore" style="min-height:200rpx;">
+                        <block wx:if="{{data.content.length>0}}">
+                            <block wx:for="{{data.content}}" wx:key="{{item}}">
+                                <navigator url="/dianshang/goodsDetail/goodsDetail?id={{item.id}}&bindObj={{data.bindObj}}" class="{{data.mode==4?'scroll-left':''}}">
+                                    <view class="list-item background-ele goodType{{data.mode}} {{data.mode==2?'double-list':''}}" style="{{data.listStyle}}">
+                                        <image lazy-load="true" class="list-img" src="{{item.picpath}}" style="{{data.imgStyle}}"></image>
+                                        <view class="title-container" style="{{data.titleWidth}}">
+                                            <view class="title" style="{{data.titlefont}}">{{item.goodname}}</view>
+                                            <view class="sec-title" style="{{data.abstractfont}}">
+                                                <text>￥{{item.price}}</text>
+                                                <text>销量:{{item.salesnums}}</text>
+                                            </view>
+                                        </view>
+                                        <label class="ico-moon icon-recommend" wx:if="{{item.recommend==1}}"></label>
+                                    </view>
+                                </navigator>
+                            </block>
+                        </block>
+                        <block wx:else>
+                            <view class="search_nothing" style="position:relative;" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+                        </block>
+                    </scroll-view>
+                </block>
+            </scroll-view>
+        </view>
+    </template>
+    <view class="ele-container">
+        <template is="goodsList" data="{{data:goodslist,searchtext:searchtext,searchNothing:searchNothing,inputstype:inputstype}}"></template>
+    </view>
+</view>

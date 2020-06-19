@@ -1,0 +1,56 @@
+<view class="app">
+    <view class="goods-search">
+        <view class="goods-search-input" catchtap="searchArticle">
+            <icon type="search" size="20" class="search-icon"></icon>
+            <input type="text" placeholder="请输入搜索内容" placeholder-style="color:#d2d2d2;font-size:30rpx;" confirm-type="search" bindinput="enterText" style="text-align: left;" value="{{searchText}}" bindconfirm="sureSearch" />
+            <view hidden="{{searchText==''}}" class='ico-moon icon-guanbi' catchtap='del_searchtext'></view>
+        </view>
+        <button class='new_search_btn' catchtap="sureSearch">搜索</button>
+    </view>
+    <view class='list_head'>
+        <view class='list_btn' style="color: {{selected==1?'#FE7376':'#4a4a4a'}};" data-sel="1" catchtap="selectType">默认</view>
+        <view class='list_btn' style="color: {{selected==2||selected==3?'#FE7376':'#4a4a4a'}};" data-sel="2" catchtap="selectType">
+            <text class="items">价格</text>
+            <view class="order_adjust">
+                <text class="order_up ico-moon icon-up {{selected==2?'select':''}}"></text>
+                <text class="order_down ico-moon icon-tripple-down {{selected==3?'select':''}}"></text>
+            </view>
+        </view>
+        <view class='list_btn' style="color: {{selected==4||selected==5?'#FE7376':'#4a4a4a'}};" data-sel="4" catchtap="selectType">
+            <text class="items">销量</text>
+            <view class="order_adjust">
+                <text class="order_up ico-moon icon-up {{selected==4?'select':''}}"></text>
+                <text class="order_down ico-moon icon-tripple-down {{selected==5?'select':''}}"></text>
+            </view>
+        </view>
+        <view class='list_btn' style="color: {{selected==6?'#FE7376':'#4a4a4a'}};" data-sel="6" catchtap="selectType">新品</view>
+    </view>
+    <block wx:if="{{goodsList.length>0}}">
+        <scroll-view class="goods-list" scroll-y="true" bindscrolltolower="loadmore">
+            <block wx:for="{{goodsList}}" wx:key="{{item}}">
+                <view class="goods-list-item1" data-id="{{item.id}}" catchtap="goToDetail">
+                    <view class="classify_goods_li">
+                        <image lazy-load="true" src="{{item.picpath}}"></image>
+                        <view class="classify_goods_bottom">
+                            <text class="goods-name">{{item.goodname}}</text>
+                            <view class="clearfix">
+                                <text class="goods-price">￥{{item.price||0}}</text>
+                                <text class="goods-sale">销量：{{item.salesnums}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:else>
+        <view class="nothing" hidden="{{!nothing}}">暂无找到相关内容，在找找吧！</view>
+    </block>
+    <view class="backhome" catchtap="backhome">
+        <view>回到</view>
+        <view>首页</view>
+    </view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>

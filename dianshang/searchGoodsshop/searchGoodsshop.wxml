@@ -1,0 +1,48 @@
+<view class="app">
+    <view class="takshop-search">
+        <view class="element search">
+            <view class="search-input" style="{{inputstype}}">
+                <icon type="search" size="16"></icon>
+                <input focus="true" placeholder="{{goodsshoplist.searchText}}" placeholder-style="color:#ccc;font-size:25rpx;" value="{{storename}}" bindinput="enterSearhText" />
+                <view class="search-btn" catchtap="clickSearch">搜索</view>
+            </view>
+        </view>
+        <block wx:if="{{goodsshoplist.searchContent.length>0}}">
+            <scroll-view scroll-y="true" class="apposhop-list" bindscrolltolower="searchMore">
+                <block wx:for="{{goodsshoplist.searchContent}}" wx:key="{{item}}">
+                    <view class="appoint-shop-item clearfix" style="{{goodsshoplist.listyle}}" data-index="{{index}}" catchtap="goToShopHome">
+                        <view class="appoint-shop-pic">
+                            <image lazy-load="true" src="{{item.logo}}" style="{{goodsshoplist.imgstyle}}"></image>
+                        </view>
+                        <view class="appoint-text-box" style="margin-top: 10rpx;{{goodsshoplist.textstyle}}">
+                            <view class="appoint-goods-title clearfix">
+                                <view class="appoint-title-left" style="{{goodsshoplist.titlestyle}}">{{item.storename}}</view>
+                                <block wx:if="{{goodsshoplist.showaddr}}">
+                                    <view class="appoint-title-right">距您
+                                        <text class="appoint-distance">{{item.range}}</text>
+                                    </view>
+                                </block>
+                            </view>
+                            <block wx:if="{{goodsshoplist.showaddr}}">
+                                <view class="appoint-goods-address">
+                                    <text class="ico-moon icon-dizhi1 shop-address-icon" style="{{goodsshoplist.addriconstyle}}"></text>
+                                    <text class="shop-address" style="{{goodsshoplist.shopaddrstyle}}">{{item.detailaddress}}</text>
+                                </view>
+                            </block>
+                            <block wx:if="{{goodsshoplist.showclass}}">
+                                <view class="appoint-goods-reduce" style="margin-top: 0;">
+                                    <view class="appoint-member-reduce" style="margin-bottom: 0;margin-top: 0;color: #AAAAAA;">
+                                        <text class="ico-moon icon-dianpu1 takshop-dianpu1" style="margin-right:0;color: #AAAAAA;"></text> {{item.store_type || ''}}
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+            </scroll-view>
+        </block>
+        <block wx:else>
+            <view class="search_nothing" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+        </block>
+    </view>
+</view>

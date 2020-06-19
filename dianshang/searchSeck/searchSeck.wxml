@@ -1,0 +1,64 @@
+<view class="app">
+    <template name="vqdnewseckill">
+        <view class="element list" style="height:100%;position:fixed;{{data.style}}">
+            <view class="element search">
+                <view class="search-input" style="{{inputstype}}">
+                    <icon type="search" size="16"></icon>
+                    <input focus="true" placeholder="{{data.searchText || '请输入搜索内容'}}" placeholder-style="color:#ccc;font-size:25rpx;" value="{{searchtext}}" bindinput="enterSearhText" />
+                    <view class="search-btn" catchtap="clickSearch">搜索</view>
+                </view>
+            </view>
+            <scroll-view scroll-y="true" class="good_list1" bindscrolltolower="searchMore">
+                <block wx:if="{{data.showLabel}}">
+                    <view class="quick-tags">
+                        <view class="quick-tags-title">热门搜索</view>
+                        <view class="tags">
+                            <block wx:for="{{data.labelContent}}" wx:key="{{item}}">
+                                <text catchtap="tagSearch" data-text="{{item}}">{{item}}</text>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+                <block wx:if="{{data.searchContent.length>0}}">
+                    <scroll-view class="seckill-goodlist {{data.choosenum==2?'goodlistXstyle':''}}" scroll-x="{{data.choosenum==2}}">
+                        <block wx:for="{{data.searchContent}}" wx:key="{{item}}">
+                            <view class="seckill-gooditem newseckill-gooditem {{data.choosenum==0?'newseckill-gooditem-border':''}} {{data.choosenum==1?'secktype2':''}}" style="{{data.listyle}}" catchtap="goToSeck" data-id="{{item.id}}" data-childid="{{item.childid}}">
+                                <view class="seckill-center-box clearfix">
+                                    <image src="{{item.picpath}}" class="newseckill-goodpic" style="{{data.imgwh}}"></image>
+                                    <view class="newseckill-goodR {{data.choosenum==0?'goodRstyle':''}} {{data.choosenum==1?'newseckill-goodR-div':''}}" style="{{data.textwid}}">
+                                        <view class="seckill-goodname newseckill-goodname {{data.choosenum==1?'newseckill-goodname-row1':'newseckill-goodname-row2'}}" style="{{data.titlefont}}">{{item.goodname}}</view>
+                                        <view class="">
+                                            <text class="seckill-newprice newseckill-newprice" style="{{data.pricefont}}">￥{{item.minprice}}</text>
+                                            <text class="seckill-oldprice">￥{{item.maxprice}}</text>
+                                        </view>
+                                        <view class="seckill-saletype newseckill-saletype">
+                                            <view class="seckill-progress newseckill-progress">
+                                                <text class="seckill-progress1 newseckill-progress1" style="{{data.progressborder}}"></text>
+                                                <text class="seckill-progress2" style="{{data.progresscolor}} width:{{item.ratio}}"></text>
+                                            </view>
+                                            <text class="seckill-progress-span" style="{{data.progresstext}}">{{item.ratio}}</text>
+                                        </view>
+                                        <view class="seckill-deadline" style="{{data.overtimefont}}">
+                                            <text class="seckill-deadline-span {{data.choosenum==0?'overspanstyle':''}}">距结束</text>
+                                            <text class="seckill-time" style="{{data.overtimestyle}}">{{data.h1Arr[index] || 0}}{{data.h2Arr[index] || 0}}</text>
+                                            <text class="seckill-time-text">:</text>
+                                            <text class="seckill-time" style="{{data.overtimestyle}}">{{data.m1Arr[index] || 0}}{{data.m2Arr[index] || 0}}</text>
+                                            <text class="seckill-time-text">:</text>
+                                            <text class="seckill-time" style="{{data.overtimestyle}}">{{data.s1Arr[index] || 0}}{{data.s2Arr[index] || 0}}</text>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                    </scroll-view>
+                </block>
+                <block wx:else>
+                    <view class="search_nothing" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+                </block>
+            </scroll-view>
+        </view>
+    </template>
+    <view class="ele-container">
+        <template is="vqdnewseckill" data="{{data:secklist,searchtext:searchtext,searchNothing:searchNothing,inputstype:inputstype}}"></template>
+    </view>
+</view>

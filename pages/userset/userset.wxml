@@ -1,0 +1,31 @@
+<view class="app">
+    <form bindsubmit="saveInfo">
+        <block wx:if="{{num==0}}">
+            <view class="set-info-box">
+                <input type="text" class="set-info-input" name="telnum" placeholder="请填写您的手机号" placeholder-class="set-info-place" data-type="phone" bindinput="enterInfo" value="{{stelnum||''}}" />
+                <button wx:if="{{is_check!=1}}" class='img' style='background:url("https://app.iegret.com/static/newuser/images/WX_logo.png")' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber"></button>
+            </view>
+            <block wx:if="{{is_check==1}}">
+                <view class="set-info-box clearfix">
+                    <input type="text" class="set-info-input verification-input" name="checknum" placeholder="请输入6位验证码" placeholder-class="set-info-place" data-type="code" bindinput="enterInfo" value="{{schecknum||''}}" />
+                    <view class="verification-btn" wx:if="{{!issend}}" catchtap="sendCode">发送验证码</view>
+                    <view class="verification-btn verification-resend" wx:else>{{second}}s后重发</view>
+                </view>
+            </block>
+        </block>
+        <block wx:elif="{{num==1}}">
+            <view class="set-info-box">
+                <input type="text" class="set-info-input" name="qqnum" placeholder="请填写您的QQ号（可不填写）" placeholder-class="set-info-place" data-type="qq" bindinput="enterInfo" value="{{sqqnum||''}}" />
+            </view>
+        </block>
+        <block wx:else>
+            <view class="set-info-box">
+                <input type="text" class="set-info-input" name="namenum" placeholder="请填写您的姓名" placeholder-class="set-info-place" data-type="name" bindinput="enterInfo" value="{{snamenum||''}}" />
+            </view>
+        </block>
+        <button class="save-set-info {{!isset?'no-set-info':''}}" form-type="submit">保存</button>
+    </form>
+    <view class="service-tip-box" hidden="{{!showTip}}">
+        <view class="service-tip-txt">{{tipText}}</view>
+    </view>
+</view>

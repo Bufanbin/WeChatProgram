@@ -1,0 +1,39 @@
+.phone-box {
+    margin: 33rpx 25rpx;
+    overflow: hidden;
+}
+.phone-box > input {
+    width: 485rpx;
+    border: 1rpx solid #bfbfbf;
+    height: 85rpx;
+    padding-left: 25rpx;
+    box-sizing: border-box;
+    float: left;
+    border-right: 0;
+}
+.codeopt {
+    width: 215rpx;
+    height: 85rpx;
+    line-height: 85rpx;
+    color: #fff;
+    background: #ff6b6b;
+    float: left;
+    text-align: center;
+    font-size: 30rpx;
+}
+.code-box {
+    border: 1rpx solid #bfbfbf;
+    height: 85rpx;
+    padding-left: 25rpx;
+    margin-left: 25rpx;
+    width: 340rpx;
+}
+.sub-btn {
+    margin-top: 50rpx;
+}
+.unbind.sub-btn {
+    background: #bfbfbf;
+}
+.timedowm.codeopt {
+    background: #959595;
+}

@@ -1,0 +1,200 @@
+.wantdis_bg {
+    overflow: hidden;
+    width: 750rpx;
+    height: 100%;
+    position: fixed;
+    background: #f0f0f0;
+    top: 0;
+    left: 0;
+}
+.ragepage {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-size: cover !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.ragetxt {
+    width: 100%;
+    height: 306rpx;
+    position: relative;
+    margin-top: 117rpx;
+}
+.apply_btn {
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+    width: 280rpx;
+    height: 70rpx;
+    line-height: 70rpx;
+    background: #f02437;
+    position: absolute;
+    bottom: 30rpx;
+    left: 235rpx;
+    border-radius: 50rpx;
+}
+.rage_tit {
+    font-size: 30rpx;
+    color: #000;
+    height: 36rpx;
+    line-height: 36rpx;
+    text-indent: 13rpx;
+    border-left: 8rpx solid #f02437;
+    margin: 28rpx 0 24rpx 30rpx;
+}
+.rage_databox {
+    overflow: hidden;
+    width: 100%;
+}
+.rage_dataitem {
+    float: left;
+    width: 33.33%;
+    text-align: center;
+    height: 160rpx;
+    background: #fff;
+    margin-bottom: 2rpx;
+}
+.rage_num {
+    font-size: 36rpx;
+    line-height: 36rpx;
+    padding-top: 35rpx;
+}
+.rage_pro {
+    font-size: 24rpx;
+    line-height: 24rpx;
+    padding-top: 34rpx;
+    color: #888;
+}
+.color1 {
+    color: #ff570d;
+}
+.color2 {
+    color: #7c48ff;
+}
+.color3 {
+    color: #1294a3;
+}
+.color4 {
+    color: #ff4d4d;
+}
+.color5 {
+    color: #e944f3;
+}
+.rage_spreadbox {
+    overflow: hidden;
+    width: 100%;
+}
+.rage_spreaditem {
+    width: 50%;
+    box-sizing: border-box;
+    height: 168rpx;
+    background: #fff;
+    float: left;
+    text-align: center;
+}
+.icon-wodechanpin:before {
+    content: '\e692';
+}
+.icon-wodechanpin {
+    font-size: 50rpx;
+    color: #24c222;
+    padding-top: 40rpx;
+}
+.icon-chuanzhongshangdian:before {
+    content: '\e693';
+}
+.icon-chuanzhongshangdian {
+    font-size: 50rpx;
+    color: #fb8a26;
+    padding-top: 40rpx;
+}
+.rage_spreadpro {
+    color: #000;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    padding-top: 20rpx;
+}
+.spreaditemL {
+    border-right: 1rpx solid #f0f0f0;
+}
+.spreaditemR {
+    border-left: 1rpx solid #f0f0f0;
+}
+.sharebg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+}
+.sharebox {
+    background: #fff;
+    height: 330rpx;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+.cancel_share {
+    font-size: 30rpx;
+    color: #000;
+    text-align: center;
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    background: #eee;
+}
+.share_type {
+    width: 100%;
+    height: 250rpx;
+}
+.share_type_item {
+    width: 50%;
+    float: left;
+    text-align: center;
+    padding: 0;
+    height: 100%;
+    background: #fff;
+}
+.share_type_item > image {
+    width: 90rpx;
+    height: 90rpx;
+    margin-top: 47rpx;
+}
+.share_type_item > view {
+    color: #353535;
+    font-size: 24rpx;
+    line-height: 24rpx;
+    margin-top: 28rpx;
+}
+.sharePic {
+    position: fixed;
+    width: 576rpx;
+    margin: 60rpx 87rpx 40rpx;
+    top: 0;
+}
+.shareimg {
+    width: 100%;
+    height: 907rpx;
+}
+.sharetip {
+    color: #fff;
+    font-size: 30rpx;
+    text-align: center;
+    text-decoration: underline;
+    line-height: 70rpx;
+}
+.mycanvas {
+    width: 640px;
+    height: 1008px;
+    background: #f00;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 1000000000000px;
+}

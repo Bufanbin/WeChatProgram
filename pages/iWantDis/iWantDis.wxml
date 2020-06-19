@@ -1,0 +1,90 @@
+<view hidden='{{!loaded}}' class='wantdis_bg'>
+    <block wx-if="{{!isdis}}">
+        <view class="ragepage" style="background-image:url({{applybg}});">
+            <view style='color:{{apply_txtcolor}};background-color:{{apply_btncolor}};' class="apply_btn" catchtap="{{userInfo.avatarUrl?'goToApply':'openAuthor'}}">{{isapply==1&&isblack==0?'审核情况':'立即申请'}}</view>
+        </view>
+    </block>
+    <block wx:else>
+        <view>
+            <view class="rage_tit">分销数据</view>
+            <view class="rage_databox">
+                <view class="rage_dataitem">
+                    <view class="rage_num color1">{{total_income}}</view>
+                    <view class="rage_pro">累计收益</view>
+                </view>
+                <view class="rage_dataitem">
+                    <view class="rage_num color2">{{disorderNums}}</view>
+                    <view class="rage_pro">分销订单数</view>
+                </view>
+                <view class="rage_dataitem">
+                    <view class="rage_num color3">{{disorderMoney}}</view>
+                    <view class="rage_pro">分销订单总额</view>
+                </view>
+                <view class="rage_dataitem">
+                    <view class="rage_num color4">{{usernums}}</view>
+                    <view class="rage_pro">累计客户</view>
+                </view>
+                <block wx:if="{{dislevel>1}}">
+                    <view class="rage_dataitem">
+                        <view class="rage_num color5">{{lowerLevel}}</view>
+                        <view class="rage_pro">{{dislevel==2?'下级成员':'直属下级'}}</view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="rage_dataitem"></view>
+                </block>
+                <view class="rage_dataitem">
+                </view>
+            </view>
+        </view>
+        <view>
+            <view class="rage_tit">分销推广</view>
+            <view class="rage_spreadbox">
+                <view class="rage_spreaditem spreaditemL" catchtap="spread_app">
+                    <view class="ico-moon icon-chuanzhongshangdian"></view>
+                    <view class="rage_spreadpro">推广商城</view>
+                </view>
+                <view class="rage_spreaditem spreaditemR" catchtap="spread_preduct">
+                    <view class="ico-moon icon-wodechanpin"></view>
+                    <view class="rage_spreadpro">推广产品</view>
+                </view>
+            </view>
+        </view>
+        <view class="sharebg" style="background:none;" hidden='{{!showShare}}'>
+            <view class='sharebox'>
+                <view class='share_type'>
+                    <button open-type="share" class='share_type_item'>
+                        <image src='{{wxhy_icon_pic}}'></image>
+                        <view>微信好友</view>
+                    </button>
+                    <view class='share_type_item' catchtap='goToSahre'>
+                        <image src='{{pyq_icon_pic}}'></image>
+                        <view>生成海报</view>
+                    </view>
+                </view>
+                <view class='cancel_share' catchtap='hideShare'>取消</view>
+            </view>
+        </view>
+        <view class="sharebg" hidden='{{!showPic}}' catchtap='hidePic'>
+            <view class="sharePic" catchtap='emptyEvent'>
+                <image class="shareimg" src="{{posturl}}"></image>
+                <view class="sharetip" catchtap='savePic'>保存生成海报</view>
+            </view>
+        </view>
+        <template is="authorpage" data="{{userInfo:userInfo}}"></template>
+    </block>
+</view>
+<canvas class="mycanvas" canvas-id="myCanvas"></canvas>
+<view class='zdy_tipbg' hidden='{{!showTip}}'>
+    <view class='zdy_tipbox'>
+        <view class='zdy_tiptxt'>是否允许保存图片到您的相册？</view>
+        <view class='zdy_btn'>
+            <button catchtap='closeTip' hover-class="none">取消</button>
+            <button bindopensetting="openSet" open-type="openSetting" class='zdy_sure_btn' hover-class="none">确定</button>
+        </view>
+    </view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

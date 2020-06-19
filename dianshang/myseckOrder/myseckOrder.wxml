@@ -1,0 +1,137 @@
+<view class="app">
+    <view class="orderType">
+        <block wx:for="{{orderType}}" wx:key="{{item}}">
+            <view class="{{item.idx==selectIdx?'select':''}}" data-index="{{item.idx}}" data-status="{{item.status}}" catchtap="selectType">{{item.name}}</view>
+        </block>
+        <view class="{{2<selectIdx?'select':''}}" data-index="100" catchtap="selectType">其他
+            <text class='icon-bottomarrow ico-moon'></text>
+        </view>
+    </view>
+    <view class='new_group_ordertop' hidden='{{!showother}}'>
+        <block wx:for="{{orderType_other}}" wx:key="{{item}}">
+            <view class="{{item.idx==4 || item.idx==6?'line_b':''}} {{item.idx==5 || item.idx==6?'line_r':''}}" data-index="{{item.idx}}" data-status="{{item.status}}" catchtap="selectType">{{item.name}}</view>
+        </block>
+    </view>
+    <block wx:if="{{orderList.length>0}}">
+        <scroll-view scroll-y="true" bindscrolltolower="loadmoreOrder" class="order-content">
+            <block wx:for="{{orderList}}" wx:key="{{item}}">
+                <view class="order-item" data-orderid="{{item.order_id}}" data-type="{{item.type||0}}">
+                    <view class="newsp_shop_name">
+                        <text class="newsp_shop_title">{{item.storename||'暂未设置店铺名称'}}</text>
+                        <block wx:if="{{item.refund==0}}">
+                            <block wx:if="{{item.status==19}}">
+                                <text class="trade-type" style="color:#FD8853;">待付款</text>
+                            </block>
+                            <block wx:if="{{item.status==20}}">
+                                <text class="trade-type" style="color:#F22424;">秒杀成功，待发货</text>
+                            </block>
+                            <block wx:if="{{item.status==36}}">
+                                <text class="trade-type" style="color:#F22424;">秒杀成功，待自提</text>
+                            </block>
+                            <block wx:if="{{item.status==21}}">
+                                <text class="trade-type" style="color:#F22424;">秒杀成功，待收货</text>
+                            </block>
+                            <block wx:if="{{item.status==22}}">
+                                <text class="trade-type" style="color:#F52326;">待评价</text>
+                            </block>
+                            <block wx:if="{{item.status==23}}">
+                                <text class="trade-type" style="color:#666666;">已评价</text>
+                            </block>
+                        </block>
+                    </view>
+                    <block wx:for="{{item.orders}}" wx:for-item="oitem" wx:key="{{oitem}}">
+                        <navigator url="/dianshang/seckGoodsorderdetails/seckGoodsorderdetails?orderId={{item.order_id}}&goodid={{oitem.good_id}}&&childid={{item.child_id}}">
+                            <view class="order-item-info">
+                                <image lazy-load="true" src="{{oitem.picpath}}"></image>
+                                <view class="order-goods-info">
+                                    <text class="order-goods-name">{{oitem.goodname}}</text>
+                                    <text class="order-goods-spec">{{oitem.specstr}}</text>
+                                    <text class="order-goods-price">￥{{oitem.price}}<text class='group_oldprice'>￥{{oitem.oldprice}}</text></text>
+                                    <text class="order-goods-num">×{{oitem.nums}}</text>
+                                </view>
+                            </view>
+                        </navigator>
+                    </block>
+                    <view class="order-item-subtotal">
+                        <text>共<text class="subtotal-num">{{item.nums}}</text>件商品</text>
+                        <text>实付：<text class="subtotal-num">￥{{item.totalprice}}</text>
+                        </text>
+                        <block wx:if="{{item.myself==0}}">
+                            <text wx:if="{{item.freight=='无需物流'}}">(含运费：{{item.freight}})</text>
+                            <text wx:else>(含运费：￥{{item.freight}})</text>
+                        </block>
+                        <block wx:else>
+                            <text>(自提)</text>
+                        </block>
+                    </view>
+                    <block wx:if="{{item.status==19}}">
+                        <view class="order-operate">
+                            <button catchtap="paynow" data-orderid="{{item.order_id}}" data-idx="{{index}}" data-infonum="1">立即付款</button>
+                            <button catchtap="cancelOrder" data-orderid="{{item.order_id}}" data-idx="{{index}}" data-infonum="2">取消订单</button>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==21}}">
+                        <view class="order-operate">
+                            <button catchtap="seeLogistics" data-info="{{item}}" data-idx="{{index}}" data-infonum="1">确认收货</button>
+                            <button catchtap="seeLogistics" data-info="{{item}}" data-idx="{{index}}" data-infonum="2">查看物流</button>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==22}}">
+                        <view class="order-operate">
+                            <button catchtap="goToEvaluate" data-orderid="{{item.order_id}}" data-childid="{{item.child_id}}">评价</button>
+                        </view>
+                    </block>
+                    <block wx:if="{{item.status==36}}">
+                        <view class="order-operate">
+                            <button catchtap="writeoff" data-orderid="{{item.order_id}}" data-wcode="{{item.writeoff_code}}" data-qrurl="{{item.qrpath}}">核销</button>
+                            <text>核销码：{{item.writeoff_code||''}}</text>
+                        </view>
+                    </block>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:else>
+        <view class="nothing-order" hidden="{{!nothing}}">暂无相关内容，再找找吧！</view>
+    </block>
+    <view class="backhome" catchtap="backhome">回到\n首页</view>
+    <view class="shop-remove-bg" hidden="{{!showdialog}}">
+        <view class="receipt-dialog">
+            <view class="receipt-dialog-head" wx:if="{{infonum==2}}">查看物流</view>
+            <view class="receipt-dialog-head" wx:if="{{infonum==1}}">确认收货</view>
+            <view class="receipt-info">
+                <text style="color:#363636">收货人：</text>
+                <text>{{info.consignee}} {{info.telphone}}</text>
+            </view>
+            <view class="receipt-info">
+                <text style="color:#363636;float:left">地址：</text>
+                <text style="display: inline-block;width: 300rpx;">{{info.address}}</text>
+            </view>
+            <view class="receipt-info">
+                <text style="color:#363636">快递公司：</text>
+                <text>{{info.express}}</text>
+            </view>
+            <view class="receipt-info">
+                <text style="color:#363636">快递单号：</text>
+                <text>{{info.expressnum}}</text>
+            </view>
+            <view style="text-align:center">
+                <view class="receipt-close" wx:if="{{infonum==2}}" catchtap="closeLogistics">关闭</view>
+                <view class="receipt-close" wx:if="{{infonum==1}}" catchtap="confirmsh" data-order="{{info.order_id}}">确认收货</view>
+                <view class="receipt-close" style="background:#959595" catchtap="closeLogistics" wx:if="{{infonum==1}}">取消</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view class='qrtip-bg' hidden='{{!showQr}}'>
+    <view class='qr-box'>
+        <image src='{{qrUrl}}'></image>
+        <text>向商家出示以上券即可完成核销</text>
+        <view class='ico-moon icon-close' catchtap='hiddenQR'></view>
+    </view>
+</view>
+
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

@@ -1,0 +1,116 @@
+<view class="app" hidden="{{!loaded}}">
+    <view class="groupgoods-box">
+        <view class="groupgoods-head">{{storename||'暂未设置店铺名称'}}</view>
+        <view class="groupgoods-con clearfix" catchtap="{{(groupinfo.status==1 || groupinfo.status==5) && !orderdetail?'goToGroup':''}}">
+            <image src="{{groupinfo.picpath}}" />
+            <view class="groupgoods-info">
+                <view class="groupgoods-name">{{groupinfo.goodname}}</view>
+                <view class="groupgoods-num">{{groupinfo.groupnum}}人拼团</view>
+                <view class="groupgoods-price">￥{{groupinfo.price}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="groupuser-detail">
+        <view class="clearfix">
+            <view class="groupuser-left">
+                {{orderstatus}}
+                <block wx:if="{{groupinfo.status==1}}">
+                    <text>仅剩<text style="color: #F52525;">{{groupinfo.decnum}}个</text>名额，{{h1}}{{h2}}:{{m1}}{{m2}}:{{s1}}{{s2}}后结束</text>
+                </block>
+            </view>
+            <block wx:if="{{groupinfo.status==2 && orderdetail}}">
+                <view class="groupuser-right" catchtap="goToOrderDetail">订单详情</view>
+            </block>
+        </view>
+        <view class="groupuser-box">
+            <block wx:for="{{groupuser}}" wx:key="{{item}}">
+                <view class="groupuser-item">
+                    <image src="{{item.avatar}}" />
+                    <block wx:if="{{item.ishead==0}}">
+                        <view class="grouphead">团长</view>
+                    </block>
+                </view>
+            </block>
+            <block wx:if="{{isalone==0}}">
+                <block wx:for="{{leftuser}}" wx:key="{{item}}">
+                    <view class="groupuser-item">
+                        <view class="leftgroupuser">{{item}}</view>
+                    </view>
+                </block>
+            </block>
+        </view>
+        <block wx:if="{{groupinfo.status==1 || groupinfo.status==5}}">
+            <block wx:if="{{orderdetail}}">
+                <button class="groupuser-btn" open-type="share">邀请好友参团</button>
+            </block>
+            <block wx:else>
+                <button class="groupuser-btn" catchtap="{{userInfo.avatarUrl?'showbuy':'openAuthor'}}">一键参团</button>
+            </block>
+        </block>
+        <block wx:elif="{{groupinfo.status==3 || groupinfo.status==4 || groupinfo.status==6}}">
+            <block wx:if="{{orderdetail}}">
+                <button class="groupuser-btn" catchtap="reGroup">重新拼团</button>
+            </block>
+            <block wx:else>
+                <button class="groupuser-btn" catchtap="reGroup">发起拼团</button>
+            </block>
+        </block>
+        <block wx:else>
+            <block wx:if="{{orderdetail}}">
+                <button class="groupuser-btn" catchtap="reGroup">重新开团</button>
+            </block>
+            <block wx:else>
+                <button class="groupuser-btn" catchtap="reGroup">发起拼团</button>
+            </block>
+        </block>
+    </view>
+    <view class="add-goods-page" hidden="{{!showDescPage}}">
+        <view class="add-goods-info">
+            <view class="add-goods-head">
+                <image class="goods-pic" src="{{picpath}}"></image>
+                <view class="choose-goods-info">
+                    <view class="choose-money">￥{{needMoney}}</view>
+                    <view class="surplus-num">库存{{surplus}}件</view>
+                    <view class="choose-spec">
+                        <text>已选:</text>
+                        <text>"{{groupeople}}人拼团"</text>
+                        <block wx:for="{{speclist}}" wx:key="{{item}}">
+                            <text>"{{item}}"</text>
+                        </block>
+                    </view>
+                </view>
+                <view class="ico-moon icon-cross goods-close" catchtap="closeSpec"></view>
+            </view>
+            <scroll-view scroll-y="true" class="goods-spec">
+                <view class="goods-spec-list">
+                    <text>参团人数</text>
+                    <view class="goods-spec-list-detail">
+                        <button class="select">{{groupeople}}</button>
+                    </view>
+                    <block wx:for="{{goodspec}}" wx:key="{{item}}">
+                        <text>{{item.nameone}}</text>
+                        <view class="goods-spec-list-detail">
+                            <block wx:for="{{item.two}}" wx:for-item="titem" wx:for-index="tindex" wx:key="{{titem}}">
+                                <button class="{{titem.select?'select':''}}" data-idx="{{index}}" data-tidx="{{tindex}}" catchtap="selectSpec">{{titem.nametwo}}</button>
+                            </block>
+                        </view>
+                    </block>
+                </view>
+                <view class="add-buy-num">
+                    <text>购买数量</text>
+                    <view class="add-buy-operate">
+                        <button class="{{buynum<=1?'nottap':''}}" catchtap="reducenum">-</button>
+                        <input type="number" confirm-type="done" value="{{buynum}}" bindinput="editnum" />
+                        <button class="{{buynum>=1000?'nottap':''}}" catchtap="addnum">+</button>
+                    </view>
+                </view>
+            </scroll-view>
+            <view class="add-goods-btn" catchtap="buynow">确定购买</view>
+        </view>
+    </view>
+    <view class="withdrawal-tip-box" hidden="{{!showTip}}">{{tipText}}</view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

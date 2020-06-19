@@ -1,0 +1,32 @@
+<view class="app" hidden="{{!pageshow}}">
+    <view class="evaluate-head">发表评价</view>
+    <block wx:for="{{evalInfo}}" wx:key="{{item}}">
+        <view class="eval-grade">
+            <image lazy-load="true" src="{{item.picpath}}"></image>
+            <view class="eval-grade-level">
+                <block wx:for="{{item.evalLevel}}" wx:for-item="eitem" wx:for-index="eidx" wx:key="{{eitem}}">
+                    <text class="{{item.evalGrade==eidx?'select':''}}" data-idx="{{index}}" data-eidx="{{eidx}}" catchtap="selectLevel"><text class="ico-moon {{eitem.icon}}"></text>{{eitem.name}}</text>
+                </block>
+            </view>
+        </view>
+        <view class="eval-content">
+            <textarea maxlength='100' placeholder="这个商品怎么样?给其他想买的小伙伴做个参考吧!" placeholder-class="text-place" bindinput="enterEval" data-index="{{index}}" />
+            <view class="picInfo">
+                <view class="piclist">
+                    <block wx:for="{{item.picList}}" wx:for-item="pitem" wx:for-index="pidx" wx:key="{{pitem}}">
+                        <view class="pic-one">
+                            <text class="ico-moon icon-close" catchtap="removePic" data-idx="{{index}}" data-pidx="{{pidx}}"></text>
+                            <image lazy-load="true" src="{{pitem}}" data-picpath="{{item.picList}}" catchtap="previewPic"></image>
+                        </view>
+                    </block>
+                </view>
+                <view class="uploadPic" catchtap="uploadPic" data-index="{{index}}">
+                    <text class="ico-moon icon-paizhao"></text>
+                    <text style="font-size: 28rpx;">添加照片</text>
+                </view>
+            </view>
+        </view>
+    </block>
+    <button class="submit-btn" catchtap="submitEval">发表评论</button>
+    <view class="backhome" catchtap="backhome">回到\n首页</view>
+</view>

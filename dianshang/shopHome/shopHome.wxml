@@ -1,0 +1,286 @@
+<view class="app" wx:if="{{loaded}}" catchtap="closeDialog">
+    <canvas class="mycanvas" canvas-id="myCanvas"></canvas>
+    <block wx:if="{{status==1}}">
+        <scroll-view scroll-y="true" class="home-center-box">
+            <view class="goods-search">
+                <view class="goods-search-input" style='height:84rpx; line-height:84rpx;' data-searchtype="0" data-goodstype="0" catchtap="goToSearch">
+                    <icon type="search" size="20" class="search-icon"></icon>
+                    <text style="text-align: left;">请输入搜索内容</text>
+                </view>
+                <view class="goods-classify" catchtap="goToClassify">
+                    <text class="ico-moon icon-classification"></text>
+                    <text style="font-size: 26rpx;">分类</text>
+                </view>
+            </view>
+            <view class="home-head-box" style="background:url({{storepic}}) no-repeat" catchtap="openShopDetail">
+                <image lazy-load="true" src="{{storeinfo.logo}}" class="home-st-img" />
+                <view class="home-st-name">
+                    <view>
+                        <view style="color: {{storeinfo.storename_color}}">{{storeinfo.storename}}</view>
+                        <view class="shop-head-addr" style="color: {{storeinfo.storename_color}}" data-lat="{{storeinfo.latitude}}" data-lng="{{storeinfo.longitude}}" data-address="{{storeinfo.address+storeinfo.detailaddress}}" catchtap="shopMap">
+                            <text class="ico-moon icon-dizhi3 shop-addr-icon"></text>
+                            <text class="shop-addr-text">地图导航</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="swiper_right">
+                    <text class="icon-rightarrow ico-moon swiper-arrow"></text>
+                </view>
+            </view>
+            <block wx:if="{{couponlist.length>0}}">
+                <scroll-view class="home-coupon-box clearfix" scroll-x="true">
+                    <block wx:for="{{couponlist}}" wx:key="{{item}}">
+                        <view class="home-coupon-item clearfix" style="background: url({{home_coupon_img}}) no-repeat;" data-cid="{{item.id}}" catchtap="useCoupon">
+                            <view class="home-coupon-left">
+                                <text style="font-size:44rpx;">￥</text>{{item.reduce}}
+                            </view>
+                            <view class="home-coupon-right">
+                                <view>
+                                    <view class="home-coupon-full">满{{item.full}}元可用</view>
+                                    <view class="home-coupon-use" style='background:{{storeinfo.main_color}}'>立即领取</view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </block>
+            <block wx:if="{{goodslist.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-searchtype="1" data-goodstype="1" catchtap="goToSearch">
+                        <view class="home-goods-left">普通商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{havenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{goodslist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="0" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <!-- 砍价 -->
+            <block wx:if="{{kjGoodLists.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-searchtype="5" data-goodstype="5" catchtap="goToSearch">
+                        <view class="home-goods-left">砍价商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{kjhavenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{kjGoodLists}}" wx:key="{{item}}">
+                        <view class='home-goods-item clearfix' data-id="{{item.id}}" data-bindobj="8" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}};font-size:30rpx;">原价：￥{{item.oldprice}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">可砍价至：￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">库存：{{item.kucun}}</view>
+                                <view class="home-group-btn" style='background:{{storeinfo.main_color}}; bottom:55rpx !important;'>立即砍价</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <block wx:if="{{grouplist.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-searchtype="4" data-goodstype="3" catchtap="goToSearch">
+                        <view class="home-goods-left">拼团商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{grouphavenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{grouplist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="3" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                                <view class="home-group-btn" style='background:{{storeinfo.main_color}}'>拼团</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <block wx:if="{{seckilllist.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-searchtype="3" data-goodstype="4" catchtap="goToSearch">
+                        <view class="home-goods-left">秒杀商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{seckhavenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{seckilllist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="4" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name">{{item.goodname}}</view>
+                                <view class="home-goods-price">
+                                    <text>￥{{item.minprice}}</text>
+                                    <text class="seckill-oldprice newseckill-oldprice">￥{{item.maxprice}}</text>
+                                </view>
+                                <view class="seckill-saletype newseckill-saletype">
+                                    <view class="seckill-progress newseckill-progress home-seck-progress">
+                                        <text class="seckill-progress1 newseckill-progress1" style="border-color:{{storeinfo.main_color}};"></text>
+                                        <text class="seckill-progress2" style="background:{{storeinfo.main_color}};width:{{item.ratio}}"></text>
+                                    </view>
+                                    <text class="seckill-progress-span home-progress-span">{{item.ratio}}</text>
+                                </view>
+                                <view class="seckill-deadline home-seckill-deadline">
+                                    <text class="seckill-deadline-span overspanstyle">
+										<text wx:if="{{item.is_start==1}}">距开始</text>
+                                    <text wx:elif="{{item.is_start==2}}">距结束</text>
+                                    </text>
+                                    <text class="seckill-time" style='background:{{storeinfo.main_color}}'>{{h1Arr[index] || 0}}{{h2Arr[index] || 0}}</text>
+                                    <text>:</text>
+                                    <text class="seckill-time" style='background:{{storeinfo.main_color}}'>{{m1Arr[index] || 0}}{{m2Arr[index] || 0}}</text>
+                                    <text>:</text>
+                                    <text class="seckill-time" style='background:{{storeinfo.main_color}}'>{{s1Arr[index] || 0}}{{s2Arr[index] || 0}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <block wx:if="{{distributelist.length>0}}">
+                <view class="home-goods-box">
+                    <view class="home-goods-head clearfix" data-searchtype="2" data-goodstype="2" catchtap="goToSearch">
+                        <view class="home-goods-left">分销商品</view>
+                        <text class="icon-rightarrow ico-moon home-goods-right" wx:if="{{dishavenums>0}}"></text>
+                    </view>
+                    <block wx:for="{{distributelist}}" wx:key="{{item}}">
+                        <view class="home-goods-item clearfix" data-id="{{item.id}}" data-bindobj="7" catchtap="goToDetail">
+                            <image lazy-load="true" src="{{item.picpath}}" class="home-goods-img" />
+                            <view class="home-goods-info">
+                                <view class="home-goods-name" style="max-width: 79%;color: {{storeinfo.title_color}}">{{item.goodname}}</view>
+                                <view class="home-goods-price" style="color: {{storeinfo.price_color}}">￥{{item.price}}</view>
+                                <view class="home-goods-sale" style="color: {{storeinfo.salenum_color}}">销量：{{item.salesnums}}</view>
+                            </view>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <view style="width: 100%;height: 131rpx;background: #ECECEC;"></view>
+        </scroll-view>
+        <view class="home-bottom-box">
+            <view class="home-bottom-item" style="background: {{storeinfo.typeback_color}};" catchtap="openClassify">
+                <text class="icon-remenicon ico-moon home-remenicon"></text>
+                <text style="color: {{storeinfo.typefont_color}}">热销分类</text>
+                <block wx:if="{{showclassify}}">
+                    <view class="hot-arrow1">
+                        <view class="hot-arrow2"></view>
+                    </view>
+                    <scroll-view scroll-y="true" class="hot-classify-box">
+                        <block wx:for="{{classifylist}}" wx:key="{{item}}">
+                            <view class="hot-classify-item" data-searchtype="1" data-goodstype="1" data-nid="{{item.nid}}" catchtap="goToSearch">{{item.name}}</view>
+                        </block>
+                    </scroll-view>
+                </block>
+            </view>
+            <view class="home-bottom-item" style="background: {{storeinfo.typeback_color}};" data-phone="{{storeinfo.telphone}}" catchtap="callPhone">
+                <text class="icon-lianxi ico-moon home-lianxi" style="color: {{storeinfo.suppliericon_color}}"></text>
+                <text style="color: {{storeinfo.supplierfont_color}}">联系商家</text>
+            </view>
+        </view>
+        <view class="share-goods-bg" wx:if="{{showbg}}" catchtap="emptyOpt"></view>
+        <scroll-view scroll-y="true" class="shop-detail-box" wx:if="{{showdetail}}" catchtap="emptyOpt">
+            <view class="shop-detail-head">
+                <view class="shop-img-box">
+                    <image lazy-load="true" src="{{storeinfo.logo}}"></image>
+                </view>
+                <view class="shop-detail-name">{{storeinfo.storename}}</view>
+            </view>
+            <view class="shop-detail-info">
+                <view class="shop-detail-con">
+                    <view class="shop-detail-item clearfix" data-phone="{{storeinfo.telphone}}" catchtap="callPhone">
+                        <text class="shop-detail-left">客服电话：</text>
+                        <text class="shop-detail-right">{{storeinfo.telphone}}</text>
+                    </view>
+                    <view class="shop-detail-item clearfix">
+                        <text class="shop-detail-left">营业时间：</text>
+                        <block wx:if="{{storeinfo.timetype==0}}">
+                            <text class="shop-detail-right">{{storeinfo.starttime}}-{{storeinfo.endtime}}</text>
+                        </block>
+                        <block wx:else>
+                            <text class="shop-detail-right">24小时营业</text>
+                        </block>
+                    </view>
+                    <view class="shop-detail-item clearfix">
+                        <text class="shop-detail-left">店铺地址：</text>
+                        <text class="shop-detail-right">{{storeinfo.address+storeinfo.detailaddress}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="shop-discount-box">
+                <view class="shop-discount-con">
+                    <block wx:for="{{fullInfo}}" wx:key="{{item}}">
+                        <view class="shop-discount-item">
+                            <text class="appoint-label discount-label detail-label">优</text>
+                            <text class="appoint-discount">满{{item.full}}减{{item.reduce}}</text>
+                        </view>
+                    </block>
+                </view>
+            </view>
+            <view class="shop-notice-box">
+                <view class="notice-title">店铺简介</view>
+                <view class="notice-border"></view>
+                <view class="notice-con">{{storeinfo.store_introduction}}</view>
+            </view>
+        </scroll-view>
+        <view class="close_shopdetail" wx:if="{{showbg}}" catchtap="closeDialog">
+            <image lazy-load="true" src="{{close_shopdetail_pic}}"></image>
+        </view>
+        <view class='right_bottom_btn'>
+            <block wx:if="{{storeinfo.linecost_start==1}}">
+                <view class="home-dist-btn" catchtap="openBuyNow">
+                    <view>在线</view>
+                    <view>买单</view>
+                </view>
+            </block>
+            <block wx:if="{{distributelist.length>0}}">
+                <view class="home-dist-btn" catchtap="openShare">
+                    <view>我要</view>
+                    <view>分销</view>
+                </view>
+            </block>
+        </view>
+        <view class="share-goods-bg" style="background:none;" hidden="{{!showShare}}" catchtap="closeShare">
+            <view class="share-goods-bottom" catchtap="emptyEvent">
+                <view class="share-goods-box clearfix">
+                    <view class="share-goods-item share-goods-left">
+                        <view class="share-goods-icon">
+                            <image src="{{wechat_icon_pic}}" />
+                        </view>
+                        <view class="share-goods-title">微信好友</view>
+                        <button open-type="share" class='share-btn'></button>
+                    </view>
+                    <view class="share-goods-item share-goods-right" catchtap="openFriends">
+                        <view class="share-goods-icon">
+                            <image src="{{loadSharePic?loading_pic:friends_circle_pic}}" />
+                        </view>
+                        <view class="share-goods-title">生成海报</view>
+                    </view>
+                </view>
+                <view class="share-goods-cancel" catchtap="closeShare">
+                    <text>取消</text>
+                </view>
+            </view>
+        </view>
+        <view class="share-goods-bg" hidden="{{!showBg}}" catchtap="closeShare"></view>
+        <view class="share-friends-box" hidden="{{!showFriends}}" catchtap="closeShare">
+            <view class="share-goods-image" catchtap="emptyEvent">
+                <image mode="aspectFill" src="{{compic}}"></image>
+            </view>
+            <view class="share-goods-btn" catchtap="shareFriends">
+                <text>保存生成海报</text>
+            </view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="nothing-page">
+            <view class="ico-moon icon-dianpu"></view>
+            <text>{{shopmsg}}</text>
+        </view>
+    </block>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>

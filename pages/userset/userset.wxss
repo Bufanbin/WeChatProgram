@@ -1,0 +1,78 @@
+page {
+    background: #eee;
+}
+.app {
+    width: 100%;
+    height: 100%;
+}
+.set-info-box {
+    width: 100%;
+    height: 120rpx;
+    padding: 0 20rpx 0 36rpx;
+    background: #fff;
+    border-bottom: 2rpx solid #eee;
+    box-sizing: border-box;
+    position: relative;
+}
+.set-info-box:last-child {
+    border-bottom: 0;
+}
+.set-info-input {
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+    font-size: 30rpx;
+    color: #353535;
+    border: 0;
+    box-sizing: border-box;
+}
+.set-info-place {
+    color: #c2c2c2 !important;
+}
+.verification-input {
+    float: left;
+    min-width: 50%;
+    max-width: 50%;
+}
+.verification-btn {
+    float: right;
+    width: 210rpx;
+    height: 80rpx;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    text-align: center;
+    margin-top: 18rpx;
+    color: #000;
+    background: #fff;
+    border-radius: 3rpx;
+    border: 2rpx solid #535353;
+    box-sizing: border-box;
+}
+.verification-resend {
+    border: 0;
+    color: #fff;
+    background: #959595;
+}
+.save-set-info {
+    width: 668rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    margin: 36rpx auto;
+    font-size: 30rpx;
+    color: #fff;
+    background: #09ba07;
+    border-radius: 10rpx;
+}
+.no-set-info {
+    background: #7d7d7d;
+}
+.img {
+    position: absolute;
+    right: 20rpx;
+    top: 27rpx;
+    width: 166rpx;
+    height: 66rpx;
+    background-size: 100% 100%;
+    z-index: 9;
+}

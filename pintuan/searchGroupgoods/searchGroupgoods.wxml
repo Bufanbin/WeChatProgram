@@ -1,0 +1,64 @@
+<view class="app">
+    <template name="goodsList">
+        <view class="element list" style="height:100%;position:fixed!important;{{data.style}}">
+            <view class="element search">
+                <view class="search-input" style="{{inputstype}}">
+                    <icon type="search" size="16"></icon>
+                    <input focus="true" type="text" placeholder="{{data.searchText}}" placeholder-style="color:#ccc;font-size:25rpx;" value="{{searchtext}}" bindinput="enterSearhText" />
+                    <view class="search-btn" catchtap="clickSearch">搜索</view>
+                </view>
+            </view>
+            <scroll-view style="height:calc(100% - 165rpx);" scroll-y="true" bindscrolltolower="searchMore">
+                <block wx:if="{{data.showLabel}}">
+                    <view class="quick-tags">
+                        <view class="quick-tags-title">热门搜索</view>
+                        <view class="tags">
+                            <block wx:for="{{data.labelContent}}" wx:key="{{item}}">
+                                <text catchtap="tagSearch" data-text="{{item}}">{{item}}</text>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+                <scroll-view class="list-container {{data.sec_mode}}" scroll-y="{{data.mode!=3}}" scroll-x="{{data.mode==3}}" style="min-height:200rpx;{{data.mode==3?'white-space: nowrap;':''}};">
+                    <block wx:if="{{data.content.length>0}}">
+                        <block wx:for="{{data.content}}" wx:key="{{item}}">
+                            <navigator url="/pintuan/groupGoodsdetail/groupGoodsdetail?id={{item.id}}&childid={{item.childid}}" class="{{data.mode==3?'scroll-left':''}}">
+                                <view class="list-item background-ele {{data.mode==2?'double-list':''}}" style="{{data.listStyle}};text-align:center;position:relative; overflow:hidden;border-bottom:0;">
+                                    <image lazy-load="true" class="list-img" src="{{item.picpath}}" style="{{data.imgStyle}}"></image>
+                                    <view class="title-container" style="padding:24rpx 0;display:block; {{data.mode==3?data.titW:'width:100%'}};{{data.mode==4?data.titleWidth+'float:left;':''}}">
+                                        <view class="new_title" style="{{data.titlefont}}; {{data.mode==1?'text-indent:23rpx;':data.mode==2?'text-indent:16rpx':'text-indent:6rpx'}};display:block;">{{item.goodname}}</view>
+                                    </view>
+                                    <view style="{{data.mode==4?data.titleWidth+'float:left;':'width: 100%;'}}">
+                                        <block wx:if="{{data.mode==2||data.mode==3}}">
+                                            <view class="sec-title" style="{{data.abstractfont}}; line-height:normal;margin-top:-7rpx; {{data.mode==1?'text-indent:23rpx;':data.mode==2?'text-indent:15rpx':'text-indent:10rpx'}};overflow:hidden;width:100%;">
+                                                <text>￥{{item.price}}起</text>
+                                            </view>
+                                            <view class="sec-title" style="{{data.pricestyle}}; line-height:normal;margin-top:-4rpx; {{data.mode==1?'text-indent:23rpx;':data.mode==2?'text-indent:15rpx':'text-indent:10rpx'}};overflow:hidden;width:100%;margin-left:0;">
+                                                <text>￥{{item.oneprice}}</text>
+                                            </view>
+                                        </block>
+                                        <block wx:else>
+                                            <view class="sec-title {{data.mode==4?'group_line':''}}" style="line-height:normal;margin-top:-7rpx; {{data.mode==1?'text-indent:23rpx;':data.mode==2?'text-indent:15rpx':'text-indent:10rpx'}};">
+                                                <text style="{{data.abstractfont}}">￥{{item.price}}起</text>
+                                                <text style="{{data.pricestyle}}">￥{{item.oneprice}}</text>
+                                            </view>
+                                        </block>
+                                    </view>
+                                    <view class="{{data.mode==3?'new-go-Groupgoods-div': 'go-Groupgoods-div'}}">
+                                        <text class="go-Groupgoods" style="{{data.btnstyle}}">{{data.mode == 2 || data.mode == 3?'团':'去开团'}}</text>
+                                    </view>
+                                </view>
+                            </navigator>
+                        </block>
+                    </block>
+                    <block wx:else>
+                        <view class="search_nothing" style="position:relative;" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+                    </block>
+                </scroll-view>
+            </scroll-view>
+        </view>
+    </template>
+    <view class="ele-container">
+        <template is="goodsList" data="{{data:goodslist,searchtext:searchtext,searchNothing:searchNothing,inputstype:inputstype}}"></template>
+    </view>
+</view>

@@ -1,0 +1,59 @@
+.oneLevel {
+    height: 75rpx;
+    line-height: 75rpx;
+    border-bottom: 3rpx solid #dfdfdf;
+    color: #4b4a4a;
+    font-size: 30rpx;
+    padding: 0 35rpx;
+}
+.rightArrow {
+    float: right;
+    font-size: 40rpx;
+    transform: rotate(90deg);
+}
+.twoLevel {
+    padding-bottom: 20rpx;
+}
+.twoLevel-item {
+    padding: 25rpx 35rpx 0;
+}
+.twoLevel-item > text {
+    color: #3e3e3e;
+}
+.twoLevel-list {
+    display: inline-block;
+    margin-top: 20rpx;
+}
+.twoLevel-list-btn {
+    margin-right: 20rpx;
+    margin-top: 15rpx;
+    width: 330rpx;
+    float: left;
+    height: 95rpx;
+    line-height: 95rpx;
+    color: #fff;
+    font-size: 30rpx;
+    border-radius: 0;
+    padding: 0;
+}
+.twoLevel-list-btn:nth-child(2n) {
+    margin-right: 0;
+}
+.twoLevel-list-btn:nth-child(6n+1) {
+    background: #88abda;
+}
+.twoLevel-list-btn:nth-child(6n+2) {
+    background: #f8b551;
+}
+.twoLevel-list-btn:nth-child(6n+3) {
+    background: #f19ec2;
+}
+.twoLevel-list-btn:nth-child(6n+4) {
+    background: #aa89bd;
+}
+.twoLevel-list-btn:nth-child(6n+5) {
+    background: #f29b76;
+}
+.twoLevel-list-btn:nth-child(6n+6) {
+    background: #69bdb9;
+}

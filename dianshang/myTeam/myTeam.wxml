@@ -1,0 +1,16 @@
+<view>
+    <view class='team_num'>
+        <text>团队总人数：<text style='color:red; margin-left: 0;'>{{total}}</text> 人</text>
+    </view>
+    <scroll-view scroll-y bindscrolltolower="loadmoreOrder">
+        <block wx:for="{{list}}" wx:key="{{item}}">
+            <view class="teamer">
+                <image src='{{item.pic}}'></image>
+                <view>
+                    <view>{{item.nickname}}</view>
+                    <view style='color: #8E8E8E;'>{{item.addtime}}</view>
+                </view>
+            </view>
+        </block>
+    </scroll-view>
+</view>

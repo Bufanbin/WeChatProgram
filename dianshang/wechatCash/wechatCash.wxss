@@ -1,0 +1,140 @@
+page {
+    background: #f0f0f0;
+}
+.app {
+    width: 100%;
+    height: 100%;
+}
+.withdrawal-head-box {
+    width: 100%;
+    background: #fff;
+}
+.withdrawal-title {
+    width: 100%;
+    height: 90rpx;
+    line-height: 90rpx;
+    padding-left: 30rpx;
+    font-size: 28rpx;
+    color: #000;
+    background: #fff;
+    box-sizing: border-box;
+}
+.withdrawal-money {
+    width: 100%;
+    height: 145rpx;
+    line-height: 145rpx;
+    text-align: center;
+    font-size: 60rpx;
+    color: #ef2437;
+    background: #fff;
+    box-sizing: border-box;
+}
+.withdrawal-account-box {
+    width: 100%;
+    margin-top: 20rpx;
+}
+.withdrawal-account-item {
+    width: 100%;
+    padding: 29rpx;
+    background: #fff;
+    border-bottom: 2rpx solid #f0f0f0;
+    box-sizing: border-box;
+}
+.withdrawal-account-item:last-child {
+    border-bottom: 0;
+}
+.withdrawal-account-left {
+    float: left;
+    font-size: 30rpx;
+    color: #353535;
+}
+.withdrawal-account-right {
+    float: right;
+}
+.withdrawal-input {
+    font-size: 30rpx;
+    color: #353535;
+    text-align: right;
+    outline: none;
+}
+.withdrawal-place {
+    font-size: 30rpx !important;
+    color: #888 !important;
+}
+.withdrawal-btn {
+    width: 691rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+    text-align: center;
+    padding: 0;
+    font-size: 30rpx;
+    color: #fff;
+    margin: 51rpx auto;
+    background: #ef2437;
+    border-radius: 10rpx;
+}
+.withdrawal-tip-box {
+    width: 562rpx;
+    height: 99rpx;
+    line-height: 99rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 3rpx;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+.rew_all {
+    height: 335rpx;
+    background: #ec8464;
+    overflow: hidden;
+}
+.rew_other {
+    position: absolute;
+    bottom: 20rpx;
+    width: 700rpx;
+    height: 170rpx;
+    margin-left: 25rpx;
+    background: #fff;
+    border-radius: 10px;
+}
+.rew_all_tip {
+    color: #fbccbe;
+    font-size: 28rpx;
+    margin-left: 25rpx;
+    margin-top: 20rpx;
+    line-height: 28rpx;
+}
+.rew_all_num {
+    color: #fff;
+    margin-top: 35rpx;
+    font-size: 120rpx;
+    text-align: center;
+}
+.rew_all_num > text {
+    font-size: 80rpx;
+}
+.goApplication {
+    width: 320rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    color: #fff;
+    background: #a5a19f;
+    border-radius: 10rpx;
+    margin: 30rpx auto;
+}
+.goApplication1 {
+    width: 320rpx;
+    height: 80rpx;
+    line-height: 80rpx;
+    text-align: center;
+    color: #fff;
+    background: #ec8464;
+    border-radius: 10rpx;
+    margin: 30rpx auto;
+}

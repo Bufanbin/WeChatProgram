@@ -1,0 +1,92 @@
+page {
+    background: #ececec;
+}
+.app {
+    width: 100%;
+    height: 100%;
+}
+.dep-head-box {
+    width: 100%;
+    background: #fd5f5e;
+}
+.dep-head-title {
+    width: 100%;
+    padding: 0 30rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    font-size: 26rpx;
+    color: #fff;
+    background: transparent;
+    box-sizing: border-box;
+}
+.dep-head-money {
+    width: 100%;
+    height: 120rpx;
+    line-height: 120rpx;
+    text-align: center;
+    font-size: 60rpx;
+    color: #fff;
+    background: transparent;
+}
+.dep-head-bottom {
+    width: 100%;
+    height: 50rpx;
+    background: transparent;
+}
+.dep-money-icon {
+    font-size: 46rpx;
+    margin-right: 16rpx;
+}
+.dep-opt-box {
+    width: 100%;
+    height: 157rpx;
+    background: transparent;
+}
+.dep-comm-box {
+    width: 688rpx;
+    margin: 0 auto;
+    background: #fff;
+    display: flex;
+    position: relative;
+    top: -50rpx;
+}
+.dep-comm-item {
+    flex: 1;
+    padding: 45rpx 0;
+    text-align: center;
+    font-size: 26rpx;
+}
+.dep-comm-money {
+    color: #000;
+    font-size: 28rpx;
+}
+.dep-comm-title {
+    color: #fe5e5e;
+    margin-top: 30rpx;
+}
+.withdrawal-account-box {
+    width: 100%;
+    background: #fff;
+}
+.withdrawal-account-item {
+    width: 100%;
+    padding: 24rpx 29rpx;
+    background: #fff;
+    border-bottom: 2rpx solid #ececec;
+    box-sizing: border-box;
+}
+.withdrawal-account-item:last-child {
+    border-bottom: 0;
+}
+.withdrawal-account-left {
+    float: left;
+    font-size: 26rpx;
+    color: #666;
+}
+.icon-rightarrow {
+    float: right;
+    color: #a3a3a3;
+    font-size: 35rpx;
+    position: relative;
+    top: 4rpx;
+}

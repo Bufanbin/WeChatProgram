@@ -1,0 +1,154 @@
+<scroll-view class="app {{orderdetail.status==5||orderdetail.status==4?'app_short':''}}" scroll-y="true" hidden="{{!pageshow}}">
+    <block wx:if="{{!nothing}}">
+        <view class='new_group_top'>
+            <view class='new_group_type'>{{orderstatus}}</view>
+            <text class='new_group_onum' style='display:block;' selectable="true">订单编号:{{orderdetail.order_id}}</text>
+        </view>
+        <view class='new_group_oinfo'>
+            <view class='store_name'>{{storename}}</view>
+            <view class='order_info' catchtap="restart_group">
+                <image src="{{orderdetail.picpath}}"></image>
+                <view class='order_info_r'>
+                    <view class='goodsname'>{{orderdetail.goodname}}</view>
+                    <view class='goosdattr'>{{orderdetail.specstr}}
+                        <text>×{{orderdetail.num}}</text>
+                    </view>
+                    <view class='goodsprice'>￥{{orderdetail.price}}</view>
+                </view>
+            </view>
+            <view class='oinfo_total'>
+                <text class='total_num'>共<text class='color_red'>{{orderdetail.num}}</text>件商品</text>
+                <text class='total_price'>合计: <text class='color_red'>￥{{orderdetail.totalprice}}</text>
+                <block wx:if="{{groupinfo.is_self==0}}">（含运费:
+                    <text class='color_red'>￥{{orderdetail.freight}}</text>)</block>
+                <block wx:else>(自提)</block>
+                </text>
+            </view>
+            <view class='info_dismode'>配送方式: {{groupinfo.is_self==1?'到店自提':'快递配送'}}</view>
+            <view class='info_remark'>备注: {{!orderdetail.remark?'无':orderdetail.remark}}</view>
+        </view>
+        <view class='new_group_oinfo'>
+            <view class='new_group_line'>
+                开团时间
+                <text>{{orderdetail.grouptime}}</text>
+            </view>
+            <block wx:if="{{orderdetail.status==1}}">
+                <block wx:if="{{groupinfo.is_self==1}}">
+                    <view class='new_group_line'>
+                        提货人姓名
+                        <text selectable="true">{{orderdetail.consignee}}</text>
+                    </view>
+                    <view class='new_group_line'>
+                        提货人电话
+                        <text selectable="true">{{orderdetail.telphone}}</text>
+                    </view>
+                    <view class='new_group_line'>
+                        店铺地址
+                        <text catchtap='gotoMap' selectable="true">{{storeadress}}</text>
+                    </view>
+                    <view class='new_group_line'>
+                        营业时间
+                        <text>{{storetime}}</text>
+                    </view>
+                </block>
+                <view class='new_group_line'>
+                    参团人数
+                    <text>仅剩<text style='color:#f52424'>{{groupinfo.decnum}}</text>个名额，{{h}}:{{m}}:{{s}}后结束</text>
+                </view>
+            </block>
+            <!--拼团成功  -->
+            <block wx:if="{{orderdetail.status==2 || orderdetail.status==7 ||orderdetail.status==4 || orderdetail.status==5 || orderdetail.status==6}}">
+                <view class='new_group_line'>拼团成功</view>
+                <view class='new_group_line'>
+                    拼团成功时间
+                    <text>{{orderdetail.groupsucctime}}</text>
+                </view>
+                <block wx:if="{{groupinfo.is_self==1}}">
+                    <view class='new_group_line' wx:if="{{orderdetail.status==4 || orderdetail.status==5 ||orderdetail.status==6}}">
+                        核销时间
+                        <text>{{orderdetail.submittime}}</text>
+                    </view>
+                    <view class='new_group_line'>
+                        提货人姓名
+                        <text selectable="true">{{orderdetail.consignee}}</text>
+                    </view>
+                    <view class='new_group_line'>
+                        提货人电话
+                        <text selectable="true">{{orderdetail.telphone}}</text>
+                    </view>
+                    <view class='new_group_line'>
+                        店铺地址
+                        <text catchtap='gotoMap' selectable="true">{{storeadress}}</text>
+                    </view>
+                    <view class='new_group_line'>
+                        营业时间
+                        <text>{{storetime}}</text>
+                    </view>
+                </block>
+                <block wx:else>
+                    <block wx:if="{{orderdetail.status!=2}}">
+                        <view class='new_group_line' wx:if="{{orderdetail.status==4 || orderdetail.status==5 ||orderdetail.status==6}}">
+                            发货时间
+                            <text>{{orderdetail.delivertime}}</text>
+                        </view>
+                        <view class='new_group_line' wx:if="{{orderdetail.status==5 ||orderdetail.status==6}}">
+                            确认收货时间
+                            <text>{{orderdetail.submittime}}</text>
+                        </view>
+                        <view class='new_group_line'>
+                            快递公司
+                            <text selectable="true">{{orderdetail.express}}</text>
+                        </view>
+                        <view class='new_group_line'>
+                            快递单号
+                            <text selectable="true">{{orderdetail.expressnum}}</text>
+                        </view>
+                    </block>
+                </block>
+            </block>
+            <!--核销码  -->
+            <block wx:if="{{groupinfo.is_self==1}}">
+                <view class='new_group_line'>
+                    核销码
+                    <text>{{orderdetail.writeoff_code||''}}</text>
+                </view>
+            </block>
+            <!--拼团失败  -->
+            <block wx:if="{{orderdetail.status==3 || orderdetail.refund!=0}}">
+                <view class='new_group_line'>
+                    拼团失败时间
+                    <text>{{orderdetail.applytime}}</text>
+                </view>
+                <view class='new_group_line'>拼团失败，已过期！</view>
+            </block>
+            <view class='groupuser_box'>
+                <block wx:for="{{groupuser}}" wx:key="{{item}}" wx:if="{{index<5}}">
+                    <view class='groupuser'>
+                        <image src="{{item.avatar}}"></image>
+                        <text class='group_first' wx:if="{{index==0}}">团长</text>
+                    </view>
+                </block>
+                <view class='groupuser' catchtap='lookMoreUser' wx:if="{{groupuser.length>5}}">
+                    <text class='group_ellipsis'>···</text>
+                </view>
+            </view>
+            <button class='new_group_btn' open-type='share' wx:if="{{orderdetail.status==1}}">邀请好友参团</button>
+            <button catchtap='restart_group' class='new_group_btn' wx:if="{{orderdetail.status==3}}">重新开团</button>
+        </view>
+    </block>
+</scroll-view>
+<view class='new_group_optbtn' wx:if="{{orderdetail.status==5}}" catchtap='goToEvaluate'>评价</view>
+<view class='new_group_optbtn' wx:if="{{orderdetail.status==4}}" catchtap='confirmsh'>确认收货</view>
+<view class='groupuser_more' hidden='{{!showMoreUser}}'>
+    <view class='groupuser_more_box'>
+        <view class='groupuser_num'>拼团成员
+            <text>{{groupuser.length}}个</text>
+        </view>
+        <view class='ico-moon icon-close' catchtap='hideMoreUser'></view>
+        <scroll-view class='groupuser_scroll' scroll-y="true">
+            <block wx:for="{{groupuser}}" wx:key="{{item}}">
+                <image src="{{item.avatar}}"></image>
+            </block>
+        </scroll-view>
+    </view>
+</view>

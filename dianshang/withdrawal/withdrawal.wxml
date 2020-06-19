@@ -1,0 +1,26 @@
+<view class="app" hidden="{{!loaded}}">
+    <view class="withdrawal-head">
+        <view class="withdrawal-left-line"></view>
+        <text>提现账户</text>
+    </view>
+    <view class="withdrawal-account-box">
+        <block wx:if="{{wechat_pay==1}}">
+            <view class="withdrawal-account-item clearfix" catchtap="goToWechatCash">
+                <text class="withdrawal-account-left">微信账户</text>
+                <text class="ico-moon icon-rightarrow"></text>
+            </view>
+        </block>
+        <block wx:if="{{alipay==1}}">
+            <view class="withdrawal-account-item clearfix" catchtap="goToAlipayCash">
+                <text class="withdrawal-account-left">支付宝账户</text>
+                <text class="ico-moon icon-rightarrow"></text>
+            </view>
+        </block>
+        <block wx:if="{{card_one!=0}}">
+            <view class="withdrawal-account-item clearfix" catchtap="goToBankcardCash">
+                <text class="withdrawal-account-left">银行卡<text style="color: #888888;">（需手续费）</text></text>
+                <text class="ico-moon icon-rightarrow"></text>
+            </view>
+        </block>
+    </view>
+</view>

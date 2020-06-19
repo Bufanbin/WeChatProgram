@@ -1,0 +1,79 @@
+<block wx:if="{{dislevel==3}}">
+    <view class="member_top">
+        <block wx:for="{{topArr}}" wx:key="{{item}}">
+            <view class="{{selidx==index?'select':''}}" catchtap="seltype" data-type="{{index}}">
+                <view>{{item.name}}</view>
+                <view>{{item.num}}</view>
+            </view>
+        </block>
+    </view>
+</block>
+<view class="member_tit">
+    <view>头像</view>
+    <view>昵称</view>
+    <view>加入时间</view>
+    <view>下级数量</view>
+    <view>贡献收益</view>
+</view>
+<block wx:if="{{member_list.length>0}}">
+    <scroll-view scroll-y="true" class="memberlist_box" bindscrolltolower="loadmore">
+        <block wx:for="{{member_list}}" wx:key="{{item}}">
+            <view class="memberitem_box">
+                <view>
+                    <image class="member_avatar" src="{{item.avatar}}"></image>
+                </view>
+                <view class="text_hide">{{item.nickname}}</view>
+                <view>{{item.addtime}}</view>
+                <block wx:if="{{dislevel==3 && selidx==0 && item.nums>0}}">
+                    <view class="member_num">
+                        <view>{{item.nums}}</view>
+                        <view class="member_check color1" catchtap="moremember" data-idx='{{index}}' data-id="{{item.id}}">查看</view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view>{{item.nums}}</view>
+                </block>
+                <view class="color1">￥{{item.total_money||0}}</view>
+            </view>
+        </block>
+    </scroll-view>
+</block>
+<block wx:else>
+    <view class='new_nothing' hidden="{{!nothing}}">
+        <view class="ico-moon icon-wujiedu"></view>
+        <view>暂无任何内容</view>
+    </view>
+</block>
+<view class="tipbg" hidden="{{!showtwo_member}}">
+    <view class="twomember_box">
+        <image class="member_avatar tip_avatar" src="{{member_list[sel_memidx].avatar}}"></image>
+        <view class="tip_name text_hide">{{member_list[sel_memidx].nickname}}</view>
+        <view class="color1 tip_grade">直属下级</view>
+        <view class="tip_tit">
+            <view>头像</view>
+            <view>昵称</view>
+            <view>加入时间</view>
+            <view>下级数量</view>
+            <view>贡献收益</view>
+        </view>
+        <scroll-view scroll-y="true" class="twomemberlist_box">
+            <block wx:for="{{last_member_list}}" wx:key="{{item}}">
+                <view class="memberitem_box twomemberitem_box">
+                    <view>
+                        <image class="member_avatar twomember_avatar" src="{{item.avatar}}"></image>
+                    </view>
+                    <view class="text_hide">{{item.nickname}}</view>
+                    <view class='text_hide'>{{item.addtime}}</view>
+                    <view>{{item.nums}}</view>
+                    <view class="color1">￥{{item.total_money||0}}</view>
+                </view>
+            </block>
+        </scroll-view>
+    </view>
+    <view class="ico-moon icon-tubiaolunkuo-" catchtap="closetip"></view>
+</view>
+
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

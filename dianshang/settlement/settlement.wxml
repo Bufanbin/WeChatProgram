@@ -1,0 +1,77 @@
+<view class="app" hidden="{{!pageshow}}">
+    <block wx:if="{{businessStatus==1}}">
+        <view class="order-item" wx:for="{{goodslist}}" wx:key="{{item}}">
+            <view class="order-item-info">
+                <image lazy-load="true" src="{{item.picpath}}"></image>
+                <view class="order-goods-info">
+                    <text class="order-goods-name">{{item.goodname}}</text>
+                    <text class="order-goods-spec">{{item.specstr}}</text>
+                    <text class="order-goods-price">￥{{item.price}}</text>
+                    <text class="order-goods-num">×{{item.nums}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="settlement-box">
+            <view class="settlement-title">方式选择：</view>
+            <view class="settlement-con">
+                <view class="select-order {{tostore_type == 1 ? 'selorder' : ''}}" catchtap="selPaytype" data-id="1">
+                    <block wx:if="{{tostore_type == 1}}">
+                        <icon type="success_circle" size="16" />
+                        <text class="select-text">点餐</text>
+                    </block>
+                    <block wx:else>
+                        <icon type="circle" size="16" />
+                        <text class="select-text">点餐</text>
+                    </block>
+                </view>
+                <view class="select-order {{tostore_type == 2 ? 'selorder' : ''}}" catchtap="selPaytype" data-id="2">
+                    <block wx:if="{{tostore_type == 2}}">
+                        <icon type="success_circle" size="16" />
+                        <text class="select-text">预定</text>
+                    </block>
+                    <block wx:else>
+                        <icon type="circle" size="16" />
+                        <text class="select-text">预定</text>
+                    </block>
+                </view>
+            </view>
+            <block wx:if="{{tostore_type==2}}">
+                <view class="settlement-title">选择取餐时间：
+                    <block>
+                        <text style="color: rgb(187, 187, 187);">(有效时间段为{{timeStr}})</text>
+                    </block>
+                </view>
+                <picker mode="time" value="{{startTime}}" start="{{startTime}}" end="{{endTime}}" bindchange="bindTimeChange">
+                    <view class="settlement-time">
+                        <view class="settlement-hm">{{hour}}</view>
+                        <text>:</text>
+                        <view class="settlement-hm">{{minute}}</view>
+                    </view>
+                </picker>
+            </block>
+            <view class="settlement-title">信息填写：</view>
+            <view class="settlement-con" style="border-bottom:0">
+                <view class="settlement-info">姓名</view>
+                <input type="text" placeholder="请输入你的姓名" bindblur="bindName" value="{{meal_name}}" />
+            </view>
+            <view class="settlement-con">
+                <view class="settlement-info">电话号码</view>
+                <input type="number" placeholder="请输入你的联系电话" bindblur="bindPhone" value="{{meal_tel}}" />
+            </view>
+            <view class="settlement-title">支付方式：</view>
+            <view class="settlement-con">
+                <view class="settlement-info">微信</view>
+            </view>
+            <view class="settlement-pay">需付：
+                <text style="color: rgb(254, 93, 93);font-size:46rpx">￥{{totalmoney}}</text>
+            </view>
+            <view class="settlement-btn" catchtap="truePay">确认支付</view>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="nothing-page">
+            <text style="margin-top:300rpx;">商家暂无营业</text>
+            <text>营业时间:{{busTimeStr}}</text>
+        </view>
+    </block>
+</view>

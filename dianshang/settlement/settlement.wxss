@@ -1,0 +1,111 @@
+.app {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #f4f4f4;
+    overflow-y: auto;
+}
+.order-item {
+    position: relative;
+    margin-bottom: 12rpx;
+}
+.order-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 30rpx;
+}
+.order-item-info {
+    height: 185rpx;
+    background: #fff;
+}
+.order-item-info > image {
+    width: 155rpx;
+    height: 155rpx;
+}
+.order-goods-name {
+    margin-top: 12rpx;
+    color: #545454;
+    font-size: 30rpx;
+}
+.order-goods-spec {
+    margin-top: 10rpx;
+}
+.order-goods-price {
+    font-size: 36rpx;
+    margin-top: 10rpx;
+}
+.order-goods-num {
+    top: 110rpx;
+    right: 40rpx;
+}
+.settlement-box {
+    padding: 0 20rpx;
+}
+.settlement-title {
+    line-height: 70rpx;
+    color: #5f5f5f;
+    font-size: 30rpx;
+}
+.settlement-con {
+    height: 86rpx;
+    border: 1rpx solid #dcdcdc;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding-left: 20rpx;
+    font-size: 34rpx;
+    box-sizing: border-box;
+}
+.select-order {
+    display: flex;
+    align-items: center;
+    margin-right: 60rpx;
+}
+.select-text {
+    margin-left: 8rpx;
+}
+.selorder {
+    color: #518aff;
+}
+.settlement-info {
+    width: 160rpx;
+}
+.settlement_con input[type="text"] {
+    border: 0;
+}
+.settlement-pay {
+    text-align: right;
+    line-height: 140rpx;
+    font-size: 34rpx;
+    color: #545454;
+}
+.settlement-btn {
+    height: 106rpx;
+    background: #ef5b5b;
+    text-align: center;
+    line-height: 106rpx;
+    border-radius: 4rpx;
+    font-size: 38rpx;
+    color: #fff;
+    margin-bottom: 60rpx;
+    width: 90%;
+    margin-left: 5%;
+}
+.settlement-time {
+    display: flex;
+    align-items: center;
+    color: #777;
+    font-size: 34rpx;
+    width: 300rpx;
+}
+.settlement-time >text {
+    margin: 0 20rpx;
+}
+.settlement-hm {
+    width: 120rpx;
+    height: 60rpx;
+    border: 1rpx solid #dcdcdc;
+    border-radius: 2rpx;
+    background: #fff;
+    line-height: 60rpx;
+    text-align: center;
+}

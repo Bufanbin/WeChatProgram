@@ -1,0 +1,186 @@
+.app {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+.goods-search-input > input {
+    float: left;
+    width: 430rpx;
+    text-align: center;
+    height: 100%;
+    font-size: 30rpx;
+    outline: none;
+}
+.sort-arr {
+    position: absolute;
+    right: -11rpx;
+    font-size: 20rpx;
+    display: block;
+    height: 18rpx;
+    line-height: 20rpx;
+    width: 36rpx;
+    text-align: center;
+}
+.arr-up {
+    top: 0;
+}
+.arr-down {
+    bottom: 0;
+}
+.arr-wrap {
+    position: relative;
+    display: inline-block;
+    width: 30rpx;
+    height: 25.75rpx;
+    vertical-align: middle;
+}
+.goods-sort {
+    overflow: hidden;
+    margin-top: 25rpx;
+}
+.goods-sort-item {
+    width: 29.5%;
+    float: left;
+    margin-left: 22rpx;
+    text-align: center;
+    border: 1px solid #e2e2e2;
+    height: 84rpx;
+    line-height: 84rpx;
+    font-size: 30rpx;
+    color: #626262;
+    box-sizing: border-box;
+}
+.goods-sort-item.select {
+    background: #ff7373;
+    color: #fff;
+    border-color: #ff7373;
+}
+.goods-list {
+    padding-bottom: 30rpx;
+    height: calc(100% - 260rpx);
+}
+.goods-list-item1 {
+    width: 374rpx;
+    padding: 0 22rpx;
+    margin-top: 36rpx;
+    float: left;
+    box-sizing: border-box;
+}
+.goods-list-item1 image {
+    width: 100%;
+    height: 330rpx;
+    display: block;
+}
+.goods-name {
+    display: block;
+    width: 100%;
+    text-align: left;
+    font-size: 28rpx;
+    color: #000;
+    margin: 24rpx 0 28rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.goods-price {
+    color: #e64240;
+    float: left;
+    width: 40%;
+    font-size: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.goods-sale {
+    font-size: 26rpx;
+    color: #888;
+    float: right;
+    width: 55%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+}
+.nothing {
+    width: 100%;
+    text-align: center;
+    margin-top: 300rpx;
+    color: #c1c1c1;
+}
+.new_search_btn {
+    font-size: 30rpx;
+    background: #ff7373;
+    height: 82rpx;
+    width: 136rpx;
+    color: #fff;
+    line-height: 82rpx;
+    text-align: center;
+    float: left;
+    border-radius: 0 10rpx 10rpx 0;
+    padding: 0;
+}
+.goods-search-input {
+    width: 544rpx;
+    border-right: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.icon-guanbi {
+    float: right;
+    font-size: 42rpx;
+    color: #aaa;
+    margin-right: 15rpx;
+}
+.arrow_down1 {
+    transform: rotate(180deg);
+}
+.search-icon {
+    float: left;
+}
+.list_head {
+    width: 100%;
+    height: 100rpx;
+    background: #fff;
+    border-bottom: 12rpx solid #eee;
+}
+.list_btn {
+    width: 25%;
+    height: 100rpx;
+    float: left;
+    line-height: 100rpx;
+    font-size: 32rpx;
+    color: #4a4a4a;
+    text-align: center;
+    position: relative;
+}
+.items {
+    float: left;
+    margin-left: 30rpx;
+}
+.order_up {
+    top: -5rpx;
+    position: absolute;
+    font-size: 30rpx;
+    color: #cacaca;
+}
+.order_down {
+    bottom: -10rpx;
+    position: absolute;
+    font-size: 30rpx;
+    color: #cacaca;
+}
+.order_up.select, .order_down.select {
+    color: #fe7376;
+}
+.list_btn {
+    color: #000;
+}
+.classify_goods_li {
+    width: 100%;
+    padding-bottom: 30rpx;
+    border: 2rpx solid #d7d5d6;
+    box-sizing: border-box;
+}
+.classify_goods_bottom {
+    padding: 0 12rpx;
+}

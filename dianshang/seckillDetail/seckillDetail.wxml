@@ -1,0 +1,159 @@
+<view class="app" style="overflow:{{srcoll}};" hidden="{{!pageshow}}">
+    <view class="ico-moon icon-gouwuche" catchtap="goToShopCats"></view>
+    <block wx:if="{{carousel.length>0}}">
+        <swiper indicator-dots="{{carousel.length>1}}" autoplay="true" interval="5000" duration="1000" circular="true" class="goodsCar">
+            <block wx:for="{{carousel}}" wx:key="{{item}}">
+                <swiper-item>
+                    <image class="swiper-item" src="{{item}}" data-img="{{item}}" catchtap="openImg" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </block>
+    <view class="goods-head">
+        <view class="goods-head-content">
+            <text class="goods-name">{{goodname}}</text>
+            <view class="goods-money">
+                <text class="goods-discount">￥{{goodsDiscount}}</text>
+                <text class="goods-price">￥{{goodsPrice}}</text>
+                <block wx:if="{{is_show==1}}">
+                    <text class="remain-time">距离结束还剩：{{hour}}:{{minute}}:{{second}}</text>
+                </block>
+                <block wx:elif="{{is_show==2}}">
+                    <text class="over-time">已售罄</text>
+                </block>
+                <block wx:elif="{{is_show==3}}">
+                    <text class="come-time">{{startime}}准时开始</text>
+                </block>
+                <block wx:elif="{{is_show==4}}">
+                    <text class="over-time">活动已结束</text>
+                </block>
+            </view>
+        </view>
+        <view class="goods-line">
+            <view class="goods-line-text">快递：{{freight}}</view>
+            <view class="line"></view>
+            <view class="goods-line-text">月销量：{{salenum}}</view>
+        </view>
+        <view class="goods-line" catchtap="chooseSpec">
+            <view class="goods-line-choose">选择规格</view>
+            <view class="icon-rightarrow ico-moon right-arrow"></view>
+        </view>
+        <view class="goods-line" catchtap="showParamPage">
+            <view class="goods-line-choose">产品参数</view>
+            <view class="icon-rightarrow ico-moon right-arrow"></view>
+        </view>
+        <block wx:if="{{evaluate.total>0 && isEvaluate!=1}}">
+            <view>
+                <view class="evaluate-head">
+                    <text class="horLine" style="left: 145rpx;"></text>
+                    <image class="evaluate-icon" mode="aspectFit" src="{{senior_icon4_pic}}"></image>
+                    <text class="evaluate-title">评 价</text>
+                    <text class="horLine" style="right:145rpx;"></text>
+                </view>
+                <view class="evaluate-brief">
+                    <view class="evaluate-total">产品评价（{{evaluate.total}}）</view>
+                    <view>
+                        <view class="evaluate-info">
+                            <image mode="aspectFit" class="evaluate-avatar" src="{{evaluate.list.avatar}}"></image>
+                            <text class="evaluate-nickname">{{evaluate.list.nickname}}</text>
+                        </view>
+                        <view class="evaluate-time">
+                            {{evaluate.list.commentSub}}
+                        </view>
+                        <view class="evaluate-detail">{{evaluate.list.content}}</view>
+                    </view>
+                    <button class="evaluate-more" catchtap="moreEvaluate">查看全部评价</button>
+                </view>
+            </view>
+        </block>
+        <view>
+            <view class="evaluate-head">
+                <text class="horLine" style="left: 145rpx;"></text>
+                <image class="evaluate-icon" mode="aspectFit" src="{{senior_icon10_pic}}"></image>
+                <text class="evaluate-title">详 情</text>
+                <text class="horLine" style="right:145rpx;"></text>
+            </view>
+            <import src="../../components/wxParse/wxParse.wxml" />
+            <view class="wxParse">
+                <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+            </view>
+        </view>
+        <view class="goods-bottom">
+            <view class="goods-suspension">
+                <view class="ico-moon icon-service2 gooods-service"></view>
+                <text class="goods-service-text">客服</text>
+                <contact-button type="default-dark" size="20" session-from="suspension" class="goods-contact-button"></contact-button>
+            </view>
+            <view class="addShopCar {{is_show!=1?'cancel':''}}" catchtap="chooseSpec">加入购物车</view>
+            <view class="paynow {{is_show!=1?'cancel':''}}" catchtap="showbuy">立即购买</view>
+        </view>
+    </view>
+    <view class="add-goods-page" hidden="{{!showDescPage}}">
+        <view class="add-goods-info">
+            <view class="add-goods-head">
+                <image class="goods-pic" src="{{thumbnail}}"></image>
+                <view class="choose-goods-info">
+                    <text class="choose-money">￥{{needMoney}}</text>
+                    <text class="surplus-num">库存{{surplus}}件</text>
+                    <text class="choose-spec">
+              <text>选择 </text> {{specstr}}
+                    </text>
+                </view>
+                <view class="ico-moon icon-cross goods-close" catchtap="closeSpec"></view>
+            </view>
+            <view class="goods-spec">
+                <view class="goods-spec-list">
+                    <block wx:for="{{goodspec}}" wx:key="{{item}}">
+                        <text>{{item.nameone}}</text>
+                        <view class="goods-spec-list-detail">
+                            <block wx:for="{{item.two}}" wx:for-item="titem" wx:for-index="tindex" wx:key="{{titem}}">
+                                <button class="{{titem.select?'select':''}}" data-idx="{{index}}" data-tidx="{{tindex}}" catchtap="selectSpec">{{titem.nametwo}}</button>
+                            </block>
+                        </view>
+                    </block>
+                </view>
+                <view class="add-buy-num">
+                    <text>购买数量</text>
+                    <view class="add-buy-operate">
+                        <button class="{{buynum<=1?'nottap':''}}" catchtap="reducenum">-</button>
+                        <input type="number" confirm-type="done" value="{{buynum}}" bindinput="editnum" />
+                        <button class="{{buynum>=1000?'nottap':''}}" catchtap="addnum">+</button>
+                    </view>
+                </view>
+            </view>
+            <block wx:if="{{!btnType}}">
+                <view class="add-goods-btn" catchtap="addShopCar">加入购物车</view>
+            </block>
+            <block wx:else>
+                <view class="add-goods-btn" catchtap="buynow">立即购买</view>
+            </block>
+        </view>
+    </view>
+    <view class="goods-param-page" hidden="{{!showParamPage}}">
+        <view class="goods-param-info">
+            <text class="gooods-param-title">产品参数</text>
+            <view class="goods-param-list">
+                <block wx:for="{{goodattr}}" wx:key="{{item}}">
+                    <view class="goods-param-item">
+                        <view class="param-item-par">{{item.nameone}}</view>
+                        <view class="param-item-chi">
+                            <block wx:for="{{item.two}}" wx:for-item="titem" wx:for-index="tidx" wx:key="{{titem}}">{{titem.nametwo}}
+                                <block wx:if="{{tidx!=item.two.length-1}}">/</block>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <button class="goods-param-btn" catchtap="closeParamPage">完成</button>
+        </view>
+    </view>
+    <view class="expire_limit" hidden="{{vqdlevel!=1000}}">
+        <text>高级版即可体验，请到后台升级。</text>
+    </view>
+    <view class="expire_limit" hidden="{{vqdlevel!=2000}}">
+        <text>进阶版或高级版即可体验，请到后台升级。</text>
+    </view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>

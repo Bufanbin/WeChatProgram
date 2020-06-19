@@ -1,0 +1,10 @@
+<view>
+    <form bindsubmit="surecash" report-submit="true">
+        <view class='cash-box'>
+            <text>提现金额</text>
+            <input value="100" name="cashnum"></input>
+            <text>元</text>
+        </view>
+        <button class='sub-btn' form-type="submit" style='background:{{color}}'>提交</button>
+    </form>
+</view>

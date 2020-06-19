@@ -1,0 +1,211 @@
+.app {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+.detailHead {
+    height: 110rpx;
+    background-color: #eee;
+    text-align: center;
+}
+.detailHead > text {
+    display: block;
+}
+.detailHead-title {
+    height: 60rpx;
+    line-height: 60rpx;
+    font-size: 36rpx;
+    color: #393939;
+    margin-top: 5rpx;
+}
+.detailHead-type {
+    height: 40rpx;
+    line-height: 40rpx;
+    color: #3190f1;
+    font-size: 28rpx;
+}
+.select-add {
+    height: 165rpx;
+    border-bottom: 10rpx solid #eee;
+}
+.select-add > text {
+    color: #353535;
+    font-size: 30rpx;
+}
+.receiver {
+    left: 55rpx;
+    top: 35rpx;
+}
+.phonenum {
+    right: 30rpx;
+    top: 35rpx;
+}
+.icon-adress {
+    left: 25rpx;
+    top: 95rpx;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.order-item {
+    position: relative;
+    border-bottom: 2rpx solid #eee;
+    padding-top: 30rpx;
+}
+.order-item:last-child {
+    border-bottom: 10rpx solid #eee;
+    margin-bottom: 30rpx;
+}
+.order-goods-info {
+    width: 463rpx;
+}
+.order-goods-name {
+    margin-top: 15rpx;
+    color: #121212;
+    font-size: 30rpx;
+}
+.order-goods-spec {
+    color: #666464;
+    margin-top: 15rpx;
+}
+.order-goods-price {
+    margin-top: 25rpx;
+}
+.order-goods-num {
+    color: #666464;
+    top: 64rpx;
+    right: 40rpx;
+}
+.order-item-subtotal > text {
+    position: absolute;
+    right: 40rpx;
+    font-size: 30rpx;
+}
+.cart-balance {
+    position: relative;
+    background: #fff;
+}
+.orderInfo {
+    margin-top: 30rpx;
+    padding: 0 30rpx 20rpx;
+    font-size: 30rpx;
+    color: #606060;
+}
+.orderInfo > text {
+    display: block;
+    line-height: 40rpx;
+}
+.order-total {
+    padding: 0 40rpx;
+    float: right;
+    text-align: right;
+    width: 100%;
+    margin-bottom: 60rpx;
+}
+.order-total > text:first-child {
+    display: block;
+    font-size: 30rpx;
+    color: #606060;
+    height: 40rpx;
+    line-height: 40rpx;
+}
+.order-total > text:last-child {
+    display: block;
+    color: #454545;
+    font-size: 30rpx;
+    margin-top: 15rpx;
+}
+.confirm {
+    float: right;
+    overflow: hidden;
+    right: 30rpx;
+    position: relative;
+}
+.confirm-btn {
+    font-size: 30rpx;
+    color: #fff;
+    width: 270rpx;
+    height: 83rpx;
+    line-height: 83rpx;
+    background: #1a91c6;
+    margin-bottom: 30rpx;
+    padding: 0;
+}
+.delete-btn {
+    margin-top: 60rpx;
+}
+.delete-btn > button {
+    width: 191rpx;
+    height: 73rpx;
+    line-height: 73rpx;
+    background: #447ecd;
+    margin-left: 39rpx;
+}
+.express-info {
+    overflow: hidden;
+    line-height: 50rpx;
+    border-bottom: 5rpx solid #eee;
+    color: #575757;
+    font-size: 20rpx;
+    padding: 10rpx 0;
+}
+.express-info > text {
+    display: block;
+    float: left;
+}
+.icon-car {
+    font-size: 50rpx;
+    margin-left: 40rpx;
+    margin-right: 10rpx;
+    position: relative;
+    top: 9rpx;
+}
+.express-com {
+    margin-right: 80rpx;
+}
+.discount > view {
+    text-align: left;
+    margin-left: 436rpx;
+}
+.tostore-suc {
+    height: 74rpx;
+    background: #ef5b5b;
+    line-height: 74rpx;
+    text-align: center;
+    font-size: 36rpx;
+    color: #fff;
+}
+.takeout-order-box {
+    min-height: 45rpx;
+}
+.newcart-balance {
+    width: 100%;
+}
+.newsp_shop_name {
+    font-size: 30rpx;
+    color: #888;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.newsp_shop_title {
+    color: #353535;
+}
+.newsp_shop_info {
+    margin-top: 30rpx;
+    height: 196rpx;
+}
+.newsp_order_shop {
+    padding: 0 30rpx;
+    margin-top: 30rpx;
+}
+.order-item-info {
+    margin-top: 30rpx;
+    height: auto;
+}
+.order-item-info > image {
+    width: 196rpx;
+    height: 196rpx;
+    margin-left: 30rpx;
+}

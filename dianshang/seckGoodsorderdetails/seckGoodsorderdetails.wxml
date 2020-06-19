@@ -1,0 +1,130 @@
+<scroll-view class="app {{ordersinfo.status==21||ordersinfo.status==22?'app_short':''}}" scroll-y="true" hidden="{{!pageshow}}">
+    <block wx:if="{{!nothing}}">
+        <view class='new_group_top'>
+            <view class='new_group_type'>{{orderstatus}}</view>
+            <block wx:if="{{ordersinfo.status==21 && ordersinfo.myself==0}}">
+                <view class='new_group_onum' style="color: #FF7170;">{{ordersinfo.time}}</view>
+            </block>
+            <text class='new_group_onum' style='display:block' selectable='true'>订单编号:{{ordersinfo.order_id}}</text>
+        </view>
+        <view class='new_group_oinfo'>
+            <view class='store_name'>{{storename}}</view>
+            <block wx:for="{{orderdetail}}" wx:key="{{item}}">
+                <view class='order_info' catchtap="restart_group">
+                    <image src="{{item.picpath}}"></image>
+                    <view class='order_info_r'>
+                        <view class='goodsname'>{{item.goodname}}</view>
+                        <view class='goosdattr'>{{item.specstr}}
+                            <text>×{{item.nums}}</text>
+                        </view>
+                        <view class='goodsprice'>￥{{item.price}}</view>
+                    </view>
+                </view>
+            </block>
+            <view class='oinfo_total'>
+                <text class='total_num'>共<text class='color_red'>{{ordersinfo.nums}}</text>件商品</text>
+                <text class='total_price'>合计: <text class='color_red'>￥{{ordersinfo.totalprice}}</text>
+                <block wx:if="{{ordersinfo.myself==0}}">（含运费:
+                    <text class='color_red'>￥{{freight}}</text>）</block>
+                <block wx:else>(自提)</block>
+                </text>
+            </view>
+            <view class='info_dismode'>配送方式: {{ordersinfo.myself==1?'到店自提':'快递配送'}}</view>
+            <view class='info_remark'>备注: {{!remark?'无':remark}}</view>
+        </view>
+        <view class='new_group_oinfo' style="margin-bottom: 200rpx;">
+            <view class='new_group_line'>
+                下单时间
+                <text>{{ordersinfo.addtime}}</text>
+            </view>
+            <block wx:if="{{(ordersinfo.status==19 && ordersinfo.myself==0) || ordersinfo.status==20 || ordersinfo.status==21 || (ordersinfo.status==22 && ordersinfo.myself==0) || (ordersinfo.status==23 && ordersinfo.myself==0)}}">
+                <block wx:if="{{ordersinfo.status==21 || ordersinfo.status==22 || ordersinfo.status==23}}">
+                    <view class='new_group_line'>
+                        发货时间
+                        <text>{{ordersinfo.delivertime}}</text>
+                    </view>
+                    <block wx:if="{{ordersinfo.status==22 || ordersinfo.status==23}}">
+                        <view class='new_group_line'>
+                            收货时间
+                            <text>{{ordersinfo.submittime}}</text>
+                        </view>
+                    </block>
+                    <block wx:if="{{ordersinfo.status==23}}">
+                        <view class='new_group_line'>
+                            评论时间
+                            <text>{{ordersinfo.commenttime}}</text>
+                        </view>
+                    </block>
+                    <view class='new_group_line'>
+                        快递公司
+                        <text selectable='true'>{{ordersinfo.express}}</text>
+                    </view>
+                    <view class='new_group_line'>
+                        快递单号
+                        <text selectable='true'>{{ordersinfo.expressnum}}</text>
+                    </view>
+                </block>
+                <view class='new_group_line'>
+                    收货人
+                    <text selectable='true'>{{ordersinfo.consignee}}</text>
+                    <text selectable='true'>{{ordersinfo.telphone}}</text>
+                </view>
+                <view class='new_group_line'>
+                    收货地址
+                    <text selectable='true'>{{ordersinfo.address}}</text>
+                </view>
+            </block>
+            <block wx:if="{{(ordersinfo.status==19 && ordersinfo.myself==1) || ordersinfo.status==36 || (ordersinfo.status==22 && ordersinfo.myself==1) || (ordersinfo.status==23 && ordersinfo.myself==1)}}">
+                <block wx:if="{{ordersinfo.status==22 || ordersinfo.status==23}}">
+                    <view class='new_group_line'>
+                        核销时间
+                        <text>{{ordersinfo.submittime}}</text>
+                    </view>
+                    <block wx:if="{{ordersinfo.status==23}}">
+                        <view class='new_group_line'>
+                            评论时间
+                            <text>{{ordersinfo.commenttime}}</text>
+                        </view>
+                    </block>
+                </block>
+                <view class='new_group_line'>
+                    提货人姓名
+                    <text selectable='true'>{{ordersinfo.consignee}}</text>
+                </view>
+                <view class='new_group_line'>
+                    提货人电话
+                    <text selectable='true'>{{ordersinfo.telphone}}</text>
+                </view>
+                <view class='new_group_line'>
+                    店铺地址
+                    <text catchtap='gotoMap' selectable='true'>{{storeinfo.address + storeinfo.detailaddress}}</text>
+                </view>
+                <view class='new_group_line'>
+                    营业时间
+                    <text>{{storeinfo.timetype==0?storeinfo.starttime+'-'+storeinfo.endtime:'24小时营业'}}</text>
+                </view>
+                <block wx:if="{{ordersinfo.status!=19}}">
+                    <view class='new_group_line'>
+                        核销码
+                        <text>{{ordersinfo.writeoff_code||''}}</text>
+                    </view>
+                </block>
+            </block>
+        </view>
+    </block>
+</scroll-view>
+<block wx:if="{{ordersinfo.status==19}}">
+    <view class="result-show clearfix">
+        <view class="cart-balance">
+            <view class="express" wx:if="{{ordersinfo.myself==0}}">配送方式：{{freight}}</view>
+            <view class="order-total-fee {{ordersinfo.myself==1?'getself':''}}">
+                <text style="margin-right:15rpx;">共{{ordersinfo.nums}}件商品</text>
+                <text>总计：<text style="color:#ff6060;font-size: 34rpx;">￥{{ordersinfo.totalprice}}</text></text>
+            </view>
+        </view>
+        <view class="statement cancel" catchtap="cancelOrder">取消订单</view>
+        <view class="statement pay" catchtap="paynow">立即付款</view>
+    </view>
+</block>
+<view class='new_group_optbtn' wx:if="{{ordersinfo.status==22}}" catchtap='goToEvaluate'>评价</view>
+<view class='new_group_optbtn' wx:if="{{ordersinfo.status==21}}" catchtap='confirmsh'>确认收货</view>

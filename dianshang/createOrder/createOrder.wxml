@@ -1,0 +1,535 @@
+<view class="app {{bindObj==5?'seck-order-bg':''}}" hidden="{{!loaded}}">
+    <view class="order-detail">
+        <block wx:if="{{bindObj==5 || bindObj == 0}}">
+            <block wx:if="{{new_sendway == 2}}">
+                <view class='group_sel_gettype'>
+                    <radio-group>
+                        <radio catchtap='sel_gettype' data-val="1" checked="{{selget==1}}" class='kd_btn' color="#F51516"></radio>快递配送
+                        <radio catchtap='sel_gettype' data-val="2" checked="{{selget==2}}" class='dd_btn' color="#F51516"></radio>到店自提
+                    </radio-group>
+                </view>
+            </block>
+            <block wx:if="{{needaddress && selget == 1}}">
+                <block wx:if="{{address!=null && address!=''}}">
+                    <view class="select-add seckselect-add clearfix" catchtap="selectAddress">
+                        <view class="select-add-left">
+                            <text class="ico-moon icon-dizhi2 seck-addricon"></text>
+                        </view>
+                        <view class="select-add-right">
+                            <view>
+                                <text class="seck-receiver">{{address.consignee}}</text>
+                                <text class="seck-phonenum">{{address.telphone}}</text>
+                                <text wx:if="{{address.isdefault == 1}}" class="seck-default">默认</text>
+                            </view>
+                            <view class="seck-address">{{address.province+address.city+address.county+address.street}}</view>
+                        </view>
+                        <view class="icon-rightarrow ico-moon seck-rightarrow"></view>
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="empty-address" catchtap="selectAddress">
+                        请填写地址
+                        <view class="icon-rightarrow ico-moon seck-rightarrow" style="line-height: 74rpx;"></view>
+                    </view>
+                </block>
+            </block>
+        </block>
+        <block wx:else>
+            <block wx:if="{{address!=null && address!=''}}">
+                <view class="select-add" catchtap="selectAddress">
+                    <text class="receiver">收货人：{{address.consignee}}</text>
+                    <text class="phonenum">{{address.telphone}}</text>
+                    <text wx:if="{{address.isdefault == 1}}" class="default">默认</text>
+                    <text class="ico-moon icon-adress" style="font-size: 28rpx;color: #888888;">收货地址：{{address.province+address.city+address.county+address.street}}</text>
+                    <text class="icon-rightarrow ico-moon right-arrow"></text>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="empty-address" catchtap="selectAddress">
+                    请填写地址
+                    <text class="ico-moon icon-rightarrow"></text>
+                </view>
+            </block>
+        </block>
+        <block wx:if="{{useintegral==1}}">
+            <view class="sel-integarl">
+                <view class="sel-integarl-box">
+                    <checkbox checked="{{user_inte}}" color="#ff7070" catchtap="sel_integarl" />
+                    <text>积分抵扣</text>
+                </view>
+                <view class="integarl-promit">
+                    <text class="questionMark" catchtap="integral_rule">？</text>使用
+                    <text>{{dedintegral}}</text>积分，可抵扣
+                    <text>{{exmoney}}</text>元</view>
+            </view>
+        </block>
+        <view class="addr_border {{bindObj==5?'seckaddr_border':''}}" style="{{bindObj==5?'background:url('+seckaddr_border_pic+') center no-repeat':''}}" wx:if="{{useintegral==1 || needaddress}}"></view>
+        <block wx:if="{{bindObj==5}}">
+            <block wx:for="{{orderList}}" wx:key="{{oitem}}" wx:for-item="oitem" wx:for-index="oindex">
+                <view class="order-item seck-order-item" style="{{index==0?'padding-top:0;':''}}">
+                    <view class="newsp_shop_name newsecksp_order_shop">
+                        <text>{{oitem[0].storename||'暂未设置店铺名称'}}</text>
+                    </view>
+                    <block wx:for="{{oitem}}" wx:key="{{item}}">
+                        <view class="order-item-info seckorder-item-info">
+                            <image lazy-load="true" src="{{item.picpath}}"></image>
+                            <view class="order-goods-info seckorder-goods-info">
+                                <view class="order-goods-name seckorder-goods-name clearfix">
+                                    <view class="goodname-left {{item.limits_num>0?'goodname-len':''}}">{{item.goodname}}</view>
+                                    <block wx:if="{{item.limits_num>0}}">
+                                        <view class="goodname-right">（限购{{item.limits_num}}件）</view>
+                                    </block>
+                                </view>
+                                <view class="seck-order-goods-spec clearfix">
+                                    <text style="float: left;">{{item.specstr}}</text>
+                                    <text class="order-goods-num">×{{item.nums}}</text>
+                                </view>
+                                <text class="order-goods-price" style="color:#000;font-size: 30rpx;margin-top: 30rpx;">￥{{item.price}}</text>
+                            </view>
+                        </view>
+                    </block>
+                    <view class="takeout-order-box" catchtap="goToRemark" style="display: block;line-height: 65rpx;" data-idx='0'>
+                        <text class="order-sp" style="float: left;font-size: 26rpx;color: #161616;">备注</text>
+                        <view style="text-align: right;float: right;max-width: 75%;">
+                            <text class="ico-moon icon-rightarrow takeout-right" style="margin-top:4rpx;"></text>
+                            <text wx:if="{{seckremark}}" style="display: block;max-width: 90%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;margin-right:50rpx;">{{seckremark}}</text>
+                            <text wx:else style='color: #A1A1A1;float: right;margin-right:50rpx;'>其他要求</text>
+                        </view>
+                    </view>
+                    <block wx:if="{{selget==2}}">
+                        <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 26rpx;color: #161616;">
+                            <text class="order-sp" style="float: left;">提货人姓名：</text>
+                            <input bindblur="getname" value='{{uname}}' placeholder='请输入姓名' class='get_userinfo'></input>
+                        </view>
+                        <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 26rpx;color: #161616;">
+                            <text class="order-sp" style="float: left;">提货人电话：</text>
+                            <input bindblur="getphone" value='{{uphone}}' placeholder='请输入电话' class='get_userinfo'></input>
+                        </view>
+                        <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 26rpx;color: #161616;">
+                            <text class="order-sp" style="float: left;">店铺地址：</text>
+                            <view style="text-align: left;float: left;width: 75%;">
+                                <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.address+storeinfo.detailaddress}}</text>
+                            </view>
+                        </view>
+                        <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 26rpx;color: #161616;">
+                            <text class="order-sp" style="float: left;">店铺电话：</text>
+                            <view style="text-align: left;float: left;width: 75%;">
+                                <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.telphone}}</text>
+                            </view>
+                        </view>
+                        <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 26rpx;color: #161616;">
+                            <text class="order-sp" style="float: left;">营业时间：</text>
+                            <view style="text-align: left;float: left;width: 75%;">
+                                <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.timetype==0?storeinfo.starttime+'-'+storeinfo.endtime:'24小时营业'}}</text>
+                            </view>
+                        </view>
+                    </block>
+                    <view class="order-item-subtotal">
+                        <text>小计：<text style="color:#ff6060;font-size: 36rpx;">￥{{allPrice}}</text></text>
+                    </view>
+                </view>
+            </block>
+        </block>
+        <block wx:else>
+            <view>
+                <block wx:for="{{orderList}}" wx:key="{{oitem}}" wx:for-item="oitem" wx:for-index="oindex" wx:if="{{bindObj==0||bindObj==4||bindObj==5||bindObj==6||bindObj==7}}">
+                    <view class="sp-order-box">
+                        <view class="newsp_shop_name newsp_order_shop">
+                            <text class="newsp_shop_title">商家名称：</text>
+                            <text>{{oitem[0].storename||'暂未设置店铺名称'}}</text>
+                        </view>
+                        <block wx:for="{{oitem}}" wx:key="{{item}}">
+                            <view class="order-item" style="{{index==0?'padding-top:0;':''}}">
+                                <view class="order-item-info">
+                                    <image lazy-load="true" src="{{item.picpath}}"></image>
+                                    <view class="order-goods-info">
+                                        <view class="order-goods-name">{{item.goodname}}</view>
+                                        <view class="order-goods-spec clearfix">
+                                            <text style="float: left;">{{item.specstr}}</text>
+                                            <text class="order-goods-num">×{{item.nums}}</text>
+                                        </view>
+                                        <text class="order-goods-price">￥{{item.price}}</text>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                        <block wx:if="{{bindObj==0 || bindObj==6 || bindObj==7}}">
+                            <view class="commodity-discount-box">
+                                <view class="commodity-discount-item clearfix" data-num="2" data-oindex="{{oindex}}" catchtap="{{couponlist[oindex].length>0?'openPicker':''}}">
+                                    <text class="commodity-discount-left">优惠券</text>
+                                    <view class="commodity-discount-right {{!orderList[oindex][0].couponText?'commodity-coupon-right':''}}">
+                                        <block wx:if="{{couponlist[oindex].length>0}}">
+                                            <text>{{orderList[oindex][0].couponText||'选择优惠券'}}</text>
+                                        </block>
+                                        <block wx:else>
+                                            <text>暂无优惠券可用</text>
+                                        </block>
+                                        <text wx:if="{{couponlist[oindex].length>0}}" class="ico-moon icon-rightarrow commodity-discount-arrow"></text>
+                                    </view>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="takeout-order-box" catchtap="goToRemark" style="display: block;line-height: 65rpx;" data-idx='{{oindex}}'>
+                            <text class="order-sp" style="float: left;">备注</text>
+                            <view style="text-align: right;float: right;max-width: 75%;">
+                                <text class="ico-moon icon-rightarrow takeout-right" style="margin-top:4rpx;"></text>
+                                <text wx:if="{{oitem[0].remark}}" style="display: block;max-width: 90%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;margin-right:50rpx;">{{oitem[0].remark}}</text>
+                                <text wx:else style='color: #A1A1A1;float: right;margin-right:40rpx;'>其他要求</text>
+                            </view>
+                        </view>
+                        <block wx:if="{{selget==2}}">
+                            <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 30rpx;color: #161616;">
+                                <text class="order-sp" style="float: left;">提货人姓名：</text>
+                                <input bindblur="getname" value='{{uname}}' placeholder='请输入姓名' class='get_userinfo'></input>
+                            </view>
+                            <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 30rpx;color: #161616;">
+                                <text class="order-sp" style="float: left;">提货人电话：</text>
+                                <input bindblur="getphone" value='{{uphone}}' placeholder='请输入电话' class='get_userinfo'></input>
+                            </view>
+                            <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 30rpx;color: #161616;">
+                                <text class="order-sp" style="float: left;">店铺地址：</text>
+                                <view style="text-align: left;float: left;width: 75%;">
+                                    <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.address+storeinfo.detailaddress}}</text>
+                                </view>
+                            </view>
+                            <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 30rpx;color: #161616;">
+                                <text class="order-sp" style="float: left;">店铺电话：</text>
+                                <view style="text-align: left;float: left;width: 75%;">
+                                    <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.telphone}}</text>
+                                </view>
+                            </view>
+                            <view class="takeout-order-box" style="display: block;line-height: 65rpx;font-size: 30rpx;color: #161616;">
+                                <text class="order-sp" style="float: left;">营业时间：</text>
+                                <view style="text-align: left;float: left;width: 75%;">
+                                    <text style="display: block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;float: right;">{{storeinfo.timetype==0?storeinfo.starttime+'-'+storeinfo.endtime:'24小时营业'}}</text>
+                                </view>
+                            </view>
+                        </block>
+                        <view class="card-picker-box" animation="{{oitem[0].coupon_cartanimate}}">
+                            <view class="picker-btn">
+                                <button class="btn-calcel" catchtap="cancelPicker">取消</button>
+                                <button class="btn-save" catchtap="sureItem">确定</button>
+                            </view>
+                            <view class="empty-view"></view>
+                            <scroll-view scroll-y="true" class="picker-body">
+                                <view class="card-item clearfix">
+                                    <view class="no-card-box">
+                                        <view class="card-left">暂不使用优惠券</view>
+                                        <view class="card-right nocard">
+                                            <view class="card-radio" data-oindex="{{oindex}}" data-index="-1" catchtap="selItem">
+                                                <block wx:if="{{orderList[oindex][0].couponIdx==-1}}">
+                                                    <icon type="success" size="24" color="#0FC147" />
+                                                </block>
+                                                <block wx:else>
+                                                    <icon class="pay-radio" type="success_no_circle" size="18" color="#DDDDDD" />
+                                                </block>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                                <block wx:for="{{couponlist[oindex]}}" wx:key="{{item}}">
+                                    <view class="card-item clearfix">
+                                        <view class="card-left">
+                                            <view class="cho-coupon-item clearfix">
+                                                <view class="cho-coupon-left">
+                                                    <text class="cho-reduce-icon">￥</text>
+                                                    <text class="cho-reduce-money">{{item.reduce}}</text>
+                                                </view>
+                                                <view class="cho-coupon-right">
+                                                    <view class="cho-reduce-top">
+                                                        <text>满{{item.full}}减{{item.reduce}}</text>
+                                                    </view>
+                                                    <view class="cho-reduce-bottom">
+                                                        <view class="cho-reduce-tip">{{item.storeName}}</view>
+                                                        <view class="cho-reduce-tip">有效期至{{item.endtime}}</view>
+                                                    </view>
+                                                    <view class="cho-reduce-type">
+                                                        <block wx:if="{{item.belong_type==1}}">
+                                                            <image src="{{coupontype_pic2}}" />
+                                                        </block>
+                                                        <block wx:elif="{{item.belong_type==2}}">
+                                                            <image src="{{coupontype_pic3}}" />
+                                                        </block>
+                                                        <block wx:else>
+                                                            <image src="{{coupontype_pic1}}" />
+                                                        </block>
+                                                    </view>
+                                                </view>
+                                            </view>
+                                        </view>
+                                        <view class="card-right coupon-right">
+                                            <view class="card-radio" data-oindex="{{oindex}}" data-index="{{index}}" catchtap="selItem" data-opencla="{{item.open_classify}}" data-goodsnid="{{item.goodsnid}}">
+                                                <block wx:if="{{index==orderList[oindex][0].couponIdx}}">
+                                                    <icon type="success" size="24" color="#0FC147" />
+                                                </block>
+                                                <block wx:else>
+                                                    <icon class="pay-radio" type="success_no_circle" size="18" color="#DDDDDD" />
+                                                </block>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </block>
+                            </scroll-view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+            <view class="commodity-discount-box" style="border-top: 2rpx solid #eee;">
+                <view class="commodity-discount-item clearfix">
+                    <text class="commodity-discount-left">商品金额</text>
+                    <view class="commodity-discount-right" style="color: #ff6060;">
+                        <text>￥{{allPrice}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{bindObj==0 || bindObj==6 || bindObj==7}}">
+            <view class="commodity-discount-box">
+                <view class="commodity-discount-item clearfix" data-num="1" catchtap="openPicker">
+                    <text class="commodity-discount-left">会员卡</text>
+                    <view class="commodity-discount-right {{!cardText?'commodity-coupon-right':''}}">
+                        <text>{{cardText||'无'}}</text>
+                        <text class="ico-moon icon-rightarrow commodity-discount-arrow"></text>
+                    </view>
+                </view>
+            </view>
+            <view class="commodity-discount-box">
+                <view class="commodity-discount-item clearfix">
+                    <text class="commodity-discount-left">优惠券</text>
+                    <view class="commodity-discount-right" style="color: #ff6060;">
+                        <text>-￥{{allreduce}}</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{bindObj == 0}}">
+            <block wx:if="{{payway == 0}}">
+                <view class="takeout-order-box" style="border-bottom:0;display: block;line-height: 65rpx;">
+                    <text class="order-sp" style="float: left;">支付方式</text>
+                    <view style="text-align: right;float: right;max-width: 75%;">
+                        <text style='margin-right:20rpx;'>在线支付</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:elif="{{payway == 1}}">
+                <view class="takeout-order-box" style="border-top:10rpx solid #efefef;border-bottom:0;display: block;line-height: 65rpx;">
+                    <text class="order-sp" style="float: left;">支付方式</text>
+                    <view style="text-align: right;float: right;max-width: 75%;">
+                        <text style='margin-right:20rpx;'>货到付款</text>
+                    </view>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="takeout-order-box" style="border-top:10rpx solid #efefef;border-bottom:0;display: block;line-height: 65rpx;" data-idx='{{index}}'>
+                    <text class="order-sp" style="float: left;">支付方式</text>
+                    <picker mode="selector" range="{{paywayArr}}" bindchange="paytypeSel">
+                        <view style="text-align: right;float: right;max-width: 75%;">
+                            <text class="ico-moon icon-rightarrow takeout-right" style="margin-top:4rpx;"></text>
+                            <text style='color: #A1A1A1;float: right;margin-right:50rpx;'>{{paywayArr[selpayway]}}</text>
+                        </view>
+                    </picker>
+                </view>
+            </block>
+        </block>
+        <block wx:for="{{orderList}}" wx:key="{{item}}" wx:if="{{bindObj==1}}">
+            <view class="order-item">
+                <view class="order-item-info">
+                    <image lazy-load="true" src="{{item.picpath}}"></image>
+                    <view class="order-goods-info">
+                        <text class="order-goods-name">{{item.goodname}}</text>
+                        <text class="order-goods-spec">预约时间：{{item.ordertime}}</text>
+                        <text class="order-goods-spec">预约时长：{{item.timelong}}</text>
+                        <text class="order-goods-price">￥{{item.price}}</text>
+                        <text class="order-goods-num" style="top: 136rpx;">×{{item.nums}}</text>
+                    </view>
+                </view>
+                <view class="order-item-subtotal">
+                    <text>小计：<text style="color:#ff6060;">￥{{item.totalmoney}}</text></text>
+                </view>
+            </view>
+        </block>
+        <view class='emptyheight'></view>
+    </view>
+    <view class="result-show" hidden="{{showBg}}">
+        <view class="cart-balance {{bindObj==5?'seck-cart-balance':''}}">
+            <view class="express {{bindObj==5?'seck-express':''}}" wx:if="{{selget==1}}">运费：{{allfreight}}</view>
+            <view class="order-total-fee {{bindObj==5?'seck-order-total-fee':''}} {{selget==2?'getself':''}}">
+                <text style="margin-right:15rpx;">共{{total}}件商品</text>
+                <text>总计：<text class="{{bindObj==5?'seck-price':''}}" style="color:#ff6060;">￥{{balance}}</text></text>
+            </view>
+        </view>
+        <block wx:if="{{(address!=null && address!='') || !needaddress}}">
+            <view class="statement {{bindObj==5?'seck-statement':''}}" catchtap="submitOrder">提交订单</view>
+        </block>
+        <block wx:else>
+            <view class="statement {{bindObj==5?'seck-price':''}}" style="background:#959595;" catchtap="noAddress">提交订单</view>
+        </block>
+    </view>
+    <view class="backhome" catchtap="backhome">
+        <view>回到</view>
+        <view>首页</view>
+    </view>
+    <view class="share-goods-bg" hidden="{{!showBg}}" catchtap="cancelPicker"></view>
+    <view class="rule_dialog" hidden="{{!showrulePage}}">
+        <view class="point_use">
+            <view style="float: left;">
+                积分使用：
+            </view>
+            <view class="exchange">
+                <text>{{rule.conintegral}}积分抵扣{{rule.exmoney}}元</text>
+            </view>
+        </view>
+        <view class="point_obtain">
+            <view>
+                获取积分：
+            </view>
+            <view style="margin-left: 20rpx;margin-top: 20rpx;">
+                <view class="obtain" style="margin-top: 0;">
+                    <view style="float: left;">
+                        消费获取：
+                    </view>
+                    <view class="exchange">
+                        <text>消费{{rule.conmoney}}元可获得{{rule.exintegral}}积分</text>
+                    </view>
+                </view>
+                <view class="obtain">
+                    <view style="float: left;">
+                        登录获取：
+                    </view>
+                    <view class="exchange">
+                        <text>每日首次登录赠送{{rule.loginintegral}}积分</text>
+                    </view>
+                </view>
+                <view class="obtain">
+                    <view style="float: left;">
+                        推荐获取：
+                    </view>
+                    <view class="exchange">
+                        <text>推荐给每个好友赠送{{rule.tjintegral}}积分;\n每日最多赠送{{rule.nums}}次</text>
+                    </view>
+                </view>
+                <view class="obtain">
+                    <view style="float: left;">
+                        评论获取：
+                    </view>
+                    <view class="exchange">
+                        <text>评价商品每笔赠送{{rule.comintegral}}积分</text>
+                    </view>
+                </view>
+                <view class="obtain">
+                    <text style="font-size:28rpx;color: #3c83da;">备注：消费获取积分只能为整，比如规则是消费1元可获得1积分，那么其消费1元-1.9元，获得的都是1积分。</text>
+                </view>
+            </view>
+        </view>
+        <view class="close_rule" catchtap="closeRule">
+            <image src="{{signclose_pic}}" style="width: 31rpx;height: 31rpx;"></image>
+        </view>
+    </view>
+</view>
+<view class="remapp" hidden='{{!showRemark}}'>
+    <view class="remark-box">
+        <textarea class="remark-textarea" maxlength="100" placeholder="输入你想要的备注，最多100字" placeholder-class="remark-place" bindinput="enterEval" value="{{premark}}" />
+        <view class="confirbtn" catchtap="confirmRemark">完成</view>
+    </view>
+</view>
+<view class="card-picker-box" animation="{{card_cartanimate}}">
+    <view class="picker-btn">
+        <button class="btn-calcel" catchtap="cancelPicker">取消</button>
+        <button class="btn-save" catchtap="sureItem">确定</button>
+    </view>
+    <view class="empty-view"></view>
+    <scroll-view scroll-y="true" class="picker-body">
+        <view class="card-item clearfix">
+            <view class="no-card-box">
+                <view class="card-left">暂不使用</view>
+                <view class="card-right nocard">
+                    <view class="card-radio" data-index="-1" catchtap="selItem">
+                        <block wx:if="{{cardIdx==-1}}">
+                            <icon type="success" size="24" color="#51C232" />
+                        </block>
+                        <block wx:else>
+                            <icon class="pay-radio" type="success_no_circle" size="18" color="#DDDDDD" />
+                        </block>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="card-item clearfix">
+            <view class="card-left">
+                <view class="card-box discount-card">
+                    <view class="card-name">折扣卡</view>
+                    <view class="card-line"></view>
+                    <block wx:if="{{discardinfo}}">
+                        <block wx:if="{{is_discount==1}}">
+                            <view class="card-discount discount-money">可优惠￥{{memreduce}}</view>
+                        </block>
+                        <block wx:else>
+                            <block wx:if="{{mycard}}">
+                                <view class="card-discount">
+                                    <view>开通折扣卡</view>
+                                    <view>可优惠￥{{memreduce}}</view>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view class="card-discount">暂未达到领取标准!</view>
+                            </block>
+                        </block>
+                    </block>
+                    <block wx:else>
+                        <view class="card-discount">暂未开放，敬请期待</view>
+                    </block>
+                    <view class="recharge_box" wx:if="{{is_discount==0 && discardinfo && mycard}}" data-type="0" catchtap="gotoMember">立即开通</view>
+                </view>
+            </view>
+            <view class="card-right" wx:if="{{discardinfo&&mycard&&is_discount==1}}">
+                <view class="card-radio" data-index="1" catchtap="selItem">
+                    <block wx:if="{{cardIdx==1}}">
+                        <icon type="success" size="24" color="#51C232" />
+                    </block>
+                    <block wx:else>
+                        <icon class="pay-radio" type="success_no_circle" size="18" color="#DDDDDD" />
+                    </block>
+                </view>
+            </view>
+        </view>
+        <view class="card-item clearfix">
+            <view class="card-left">
+                <view class="card-box stored-card">
+                    <view class="card-name">储值卡</view>
+                    <view class="card-line"></view>
+                    <block wx:if="{{storedcardinfo}}">
+                        <block wx:if="{{is_stored==1}}">
+                            <view class="card-discount discount-money">余额￥{{storebalance}}</view>
+                        </block>
+                        <block wx:else>
+                            <view class="card-discount">
+                                <view>充值送现金</view>
+                                <view>优惠送不停</view>
+                            </view>
+                        </block>
+                        <view class="recharge_box" wx:if="{{is_stored==0&&storedcardinfo}}" data-type="1" catchtap="gotoMember">立即充值</view>
+                    </block>
+                    <block wx:else>
+                        <view class="card-discount">暂未开放，敬请期待</view>
+                    </block>
+                </view>
+            </view>
+            <view class="card-right" wx:if="{{storedcardinfo&&is_stored==1}}">
+                <view class="card-radio" data-index="0" catchtap="selItem">
+                    <block wx:if="{{cardIdx==0}}">
+                        <icon type="success" size="24" color="#51C232" />
+                    </block>
+                    <block wx:else>
+                        <icon class="pay-radio" type="success_no_circle" size="18" color="#DDDDDD" />
+                    </block>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<view class="service-tip-box" hidden="{{!showTip}}">
+    <view class="service-tip-txt">{{tipText}}</view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>

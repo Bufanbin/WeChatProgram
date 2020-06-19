@@ -1,0 +1,51 @@
+<form report-submit="true" bindsubmit="sureApply" hidden='{{!loaded}}'>
+    <block wx:if="{{hasdata}}">
+        <block wx:if="{{is_free==0}}">
+            <view class='dis_apply_head'>申请条件{{full_money>0&&need_enter_money>0?'（二选一）':''}}</view>
+        </block>
+        <block wx:else>
+            <view class='dis_apply_head'>申请条件（免费）{{full_money>0&&need_enter_money>0?'（二选一）':''}}</view>
+        </block>
+        <block wx:if="{{is_free==0}}">
+            <view class='apply_condition'>
+                <view class='apply_cond_item' wx:if="{{isbuy>0}}">
+                    <view class='cond_tip'>{{full_money>0&&need_enter_money>0?'1.':''}}购买本商城分销商品满{{full_money}}元
+                        <block wx:if="{{needbuy>0}}">（还差{{needbuy}}元）</block>
+                        <block wx:else>（已完成）</block>
+                    </view>
+                    <view class='cond_btn' catchtap='goToBuy' v-if="{{needbuy>0}}">买买买</view>
+                </view>
+                <view class='apply_cond_item' wx:if="{{ispay>0}}">
+                    <view class='cond_tip'>{{full_money>0&&need_enter_money>0?'2.':''}}缴纳分销入驻金{{need_enter_money}}元（{{enter_money>0?'已':'未'}}缴纳）</view>
+                    <view class='cond_btn' catchtap='goToPay' wx:if="{{enter_money<=0&&need_enter_money>0}}">去缴费</view>
+                </view>
+                <view class='apply_cond_item cond_pro'>*{{full_money>0&&need_enter_money>0?'任一':''}}条件达成即可点击下方确认申请成为本商城分销商</view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class='apply_condition2'>您可以点击下方申请按钮，免费成为分销商</view>
+        </block>
+        <block wx:if="{{verify==1}}">
+            <button class="apply_btn cancel">正在审核...</button>
+        </block>
+        <block wx:elif="{{verify==2}}">
+            <view class='apply_cond_item fail-reason'>失败原因：{{remarks}}</view>
+            <button class="apply_btn" form-type="submit">重新申请</button>
+        </block>
+        <block wx:else>
+            <button class="apply_btn {{((needbuy<=0&&isbuy>0)||enter_money>0||(ispay>0&&need_enter_money==0)||is_free==1)?'':'cancel'}}" form-type="submit">确认申请</button>
+        </block>
+        <view class='apply_tip_box'>
+            <view class='apply_tip' wx:if="{{full_money>0}}">*确认申请后已购买的商品无法退货</view>
+            <view class='apply_tip' wx:if="{{need_enter_money>0&&is_free==0}}">*分销入驻金缴纳后无法退款</view>
+            <view class='apply_tip'>*了解更多可拨打客服热线：{{telphone}}</view>
+            <block wx:if="{{verify==1}}">
+                <view class='apply_tip'>*审核时间预计为1-3个工作日，请您耐心等候</view>
+                <view class='apply_tip'>*审核结果将以微信服务消息的形式通知到您</view>
+            </block>
+        </view>
+    </block>
+    <block wx:else>
+        <view class="dis_nodata">请先设置分销申请条件</view>
+    </block>
+</form>

@@ -1,0 +1,54 @@
+page {
+    background: #f0f0f0;
+}
+.app {
+    width: 100%;
+    height: 100%;
+}
+.withdrawal-head {
+    width: 100%;
+    height: 86rpx;
+    line-height: 86rpx;
+    padding-left: 30rpx;
+    font-size: 30rpx;
+    color: #000;
+    background: #f0f0f0;
+    box-sizing: border-box;
+}
+.withdrawal-left-line {
+    display: inline-block;
+    vertical-align: top;
+    width: 8rpx;
+    height: 36rpx;
+    background: #ef2437;
+    margin-right: 13rpx;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.withdrawal-account-box {
+    width: 100%;
+    background: #fff;
+}
+.withdrawal-account-item {
+    width: 100%;
+    padding: 29rpx;
+    background: #fff;
+    border-bottom: 2rpx solid #f0f0f0;
+    box-sizing: border-box;
+}
+.withdrawal-account-item:last-child {
+    border-bottom: 0;
+}
+.withdrawal-account-left {
+    float: left;
+    font-size: 30rpx;
+    color: #353535;
+}
+.icon-rightarrow {
+    float: right;
+    color: #c0c0c0;
+    font-size: 35rpx;
+    position: relative;
+    top: 4rpx;
+}

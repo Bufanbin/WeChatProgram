@@ -1,0 +1,71 @@
+.evaluate-head {
+    height: 80rpx;
+    line-height: 80rpx;
+    width: 100%;
+    text-align: center;
+    background: #898989;
+    font-size: 30rpx;
+    color: #fff;
+}
+.eval-grade {
+    height: 175rpx;
+}
+.eval-grade > image {
+    width: 175rpx;
+    height: 175rpx;
+}
+.eval-grade-level {
+    line-height: 175rpx;
+    font-size: 30rpx;
+}
+.eval-grade-level > text {
+    width: 168rpx;
+    margin-top: 64.5rpx;
+}
+.eval-grade-level > text:first-child {
+    width: 143rpx;
+}
+.eval-grade-level > text:last-child {
+    width: 143rpx;
+}
+.select {
+    color: #ff5656;
+}
+.eval-content > textarea {
+    height: 60rpx;
+}
+.uploadPic {
+    width: 159rpx;
+    height: 159rpx;
+}
+.icon-paizhao {
+    font-size: 50rpx;
+    margin-top: 31rpx;
+}
+.pic-one > image {
+    width: 115rpx;
+    height: 115rpx;
+}
+.picInfo {
+    overflow: hidden;
+}
+.submit-btn {
+    width: 462rpx;
+    height: 96rpx;
+    line-height: 96rpx;
+    font-size: 36rpx;
+    margin-top: 48rpx;
+}
+.pic-one {
+    position: relative;
+    margin-bottom: 10rpx;
+    margin-right: 10rpx;
+    float: left;
+}
+.pic-one > text {
+    position: absolute;
+    font-size: 30rpx;
+    color: #ff5656;
+    right: 0;
+    top: 0;
+}

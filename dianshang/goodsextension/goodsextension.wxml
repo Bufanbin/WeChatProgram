@@ -1,0 +1,38 @@
+<view class="app">
+    <block wx:if="{{goodslist.length>0}}">
+        <scroll-view scroll-y="true" class="goodsList" bindscrolltolower="loadmoreGoods">
+            <block wx:for="{{goodslist}}" wx:key="{{item}}">
+                <view class="goods-item">
+                    <view class="goods-top-info clearfix">
+                        <image class="goods-img" src="{{item.picpath}}"></image>
+                        <view class="goods-con clearfix">
+                            <view class="goods-con-left">
+                                <view class="goods-name">{{item.goodname}}</view>
+                                <view class="price-box">
+                                    <text class="goods-price">￥{{item.price}}</text>
+                                    <text class="goods-sale">销量：{{item.saleNums}}</text>
+                                </view>
+                            </view>
+                            <view class="goods-con-right">
+                                <view class="commission">
+                                    <view>佣金</view>
+                                    <view class="cash">{{item.rate}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <button class="goods-bottom-info" open-type="share" data-id="{{item.id}}">
+                        <image src="{{share_icon_pic}}"></image>
+                        <text>我要分享赚钱</text>
+                    </button>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:else>
+        <view class="nothing-order" hidden="{{!nothing}}">暂无相关内容，再找找吧！</view>
+    </block>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>

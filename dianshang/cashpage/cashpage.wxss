@@ -1,0 +1,20 @@
+.cash-box {
+    margin: 45rpx 30rpx 50rpx;
+    overflow: hidden;
+}
+.cash-box > text {
+    display: block;
+    float: left;
+    line-height: 87rpx;
+}
+.cash-box > input {
+    float: left;
+    border: 1px solid #bfbfbf;
+    width: 460rpx;
+    height: 85rpx;
+    text-align: right;
+    padding-right: 15rpx;
+    margin-left: 30rpx;
+    margin-right: 15rpx;
+    color: #a8a8a8;
+}

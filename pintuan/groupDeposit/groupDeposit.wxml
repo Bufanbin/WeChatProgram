@@ -1,0 +1,45 @@
+<view class="app" hidden="{{!loaded}}">
+    <block wx:if="{{status!=2}}">
+        <view class="dep-head-box">
+            <view class="dep-head-title">佣金总收入：</view>
+            <view class="dep-head-money">
+                <text class="dep-money-icon">￥</text>{{total_income}}
+            </view>
+            <view class="dep-head-bottom"></view>
+        </view>
+        <view class="dep-opt-box">
+            <view class="dep-comm-box">
+                <view class="dep-comm-item">
+                    <view class="dep-comm-money">
+                        <text style="font-size: 26rpx;">￥</text>{{already_cash}}</view>
+                    <view class="dep-comm-title">已提现佣金</view>
+                </view>
+                <view class="dep-comm-item">
+                    <view class="dep-comm-money">
+                        <text style="font-size: 26rpx;">￥</text>{{left_cash}}</view>
+                    <view class="dep-comm-title">可提现佣金</view>
+                </view>
+                <view class="dep-comm-item">
+                    <view class="dep-comm-money">
+                        <text style="font-size: 26rpx;">￥</text>{{poundage}}</view>
+                    <view class="dep-comm-title">提现手续费</view>
+                </view>
+            </view>
+        </view>
+        <view class="withdrawal-account-box">
+            <view class="withdrawal-account-item clearfix" catchtap="goToWithdrawal">
+                <text class="withdrawal-account-left">提现申请</text>
+                <text class="ico-moon icon-rightarrow"></text>
+            </view>
+            <view class="withdrawal-account-item clearfix" catchtap="goToCashRecord">
+                <text class="withdrawal-account-left">提现明细</text>
+                <text class="ico-moon icon-rightarrow"></text>
+            </view>
+        </view>
+    </block>
+</view>
+
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

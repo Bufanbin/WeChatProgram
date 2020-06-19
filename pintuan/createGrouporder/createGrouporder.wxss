@@ -1,0 +1,186 @@
+.app {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #ececec;
+}
+.select-add {
+    height: 135rpx;
+}
+.receiver {
+    left: 31rpx;
+    top: 25rpx;
+    max-width: 286rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.phonenum {
+    right: 203rpx;
+    top: 25rpx;
+}
+.icon-adress {
+    left: 25rpx;
+    top: 75rpx;
+    max-width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.empty-address {
+    font-size: 36rpx;
+}
+.icon-rightarrow {
+    position: absolute;
+    right: 10rpx;
+    font-size: 40rpx;
+}
+.order-item {
+    position: relative;
+    border-bottom: 2rpx solid #eee;
+    padding-top: 30rpx;
+}
+.order-item:last-child {
+    border-bottom: 0;
+    padding-bottom: 30rpx;
+}
+.order-item-info {
+    height: 185rpx;
+}
+.order-item-info > image {
+    width: 155rpx;
+    height: 155rpx;
+}
+.order-goods-name {
+    margin-top: 35rpx;
+    color: #545454;
+    font-size: 30rpx;
+}
+.order-item-subtotal {
+    background: #fff;
+    padding: 14rpx 0;
+}
+.order-item-subtotal > text {
+    position: absolute;
+    right: 20rpx;
+    font-size: 30rpx;
+}
+.cart-balance {
+    position: relative;
+}
+.select-add > .default {
+    display: inline-block;
+    float: left;
+    padding: 2rpx 12rpx;
+    font-size: 26rpx;
+    text-align: center;
+    border: 2rpx #3493ed solid;
+    box-sizing: border-box;
+    color: #63a8eb;
+    right: 103rpx;
+    top: 25rpx;
+}
+.select-add > .right-arrow {
+    position: absolute;
+    top: 43rpx;
+    color: #c1c1c1;
+    font-size: 52rpx;
+}
+.newsp_shop_name {
+    font-size: 30rpx;
+    color: #888;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background: #fff;
+}
+.newsp_shop_title {
+    color: #353535;
+}
+.newsp_shop_info {
+    margin-top: 30rpx;
+    height: 196rpx;
+}
+.newsp_order_shop {
+    padding: 30rpx;
+}
+.order-item-info {
+    height: auto;
+}
+.order-item-info > image {
+    width: 196rpx;
+    height: 196rpx;
+    margin-left: 30rpx;
+}
+.takeout-order-box, .commodity-discount-box {
+    padding-left: 30rpx;
+    padding-right: 30rpx;
+    font-size: 30rpx;
+}
+.select-add > text {
+    font-size: 30rpx;
+    color: #353535;
+}
+.order-goods-info > text {
+    max-width: 100%;
+}
+.order-goods-spec {
+    color: #888;
+}
+.commodity-discount-item {
+    font-size: 30rpx;
+}
+.order-goods-info {
+    margin-left: 30rpx;
+    width: calc(100% - 271rpx);
+}
+.order-goods-num {
+    position: static;
+    float: right;
+}
+.group_sel_gettype {
+    line-height: 80rpx;
+    border-bottom: 1px solid #ececec;
+    background: #fff;
+    overflow: hidden;
+}
+radio {
+    transform: scale(0.7);
+}
+.kd_btn {
+    margin-left: 30rpx;
+}
+.dd_btn {
+    margin-left: 185rpx;
+}
+.get_userinfo {
+    line-height: 64rpx;
+    height: 64rpx;
+}
+.order-total-fee.getself {
+    line-height: 95rpx;
+    top: 0;
+}
+.goodname-left {
+    float: left;
+    font-size: 26rpx;
+    color: #151515;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+}
+.goodname-right {
+    float: right;
+    font-size: 26rpx;
+    color: #666;
+}
+.goodname-len {
+    width: 62%;
+}
+.addr_border {
+    margin-bottom: 20rpx;
+}

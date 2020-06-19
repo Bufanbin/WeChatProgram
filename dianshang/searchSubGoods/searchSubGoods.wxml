@@ -1,0 +1,50 @@
+<view class="app">
+    <template name="goodsList">
+        <view class="element list" style="height:100%;position:fixed!important;{{data.style}}">
+            <view class="element search">
+                <view class="search-input" style="{{inputstype}}">
+                    <icon type="search" size="16"></icon>
+                    <input focus="true" type="text" placeholder="{{data.searchText}}" placeholder-style="color:#ccc;font-size:25rpx;" value="{{searchtext}}" bindinput="enterSearhText" />
+                    <view class="search-btn" catchtap="clickSearch">搜索</view>
+                </view>
+            </view>
+            <scroll-view class="good_list1" bindscrolltolower="searchMore" scroll-y="{{data.mode!=4}}">
+                <block wx:if="{{data.showLabel}}">
+                    <view class="quick-tags">
+                        <view class="quick-tags-title">热门搜索</view>
+                        <view class="tags">
+                            <block wx:for="{{data.labelContent}}" wx:key="{{item}}">
+                                <text catchtap="tagSearch" data-text="{{item}}">{{item}}</text>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+                <view class='list-container'>
+                    <block wx:if="{{data.content.length>0}}">
+                        <block wx:for="{{data.content}}" wx:key="{{item}}">
+                            <navigator url="/dianshang/goodsDetail/goodsDetail?id={{item.id}}&bindObj=0&childid={{item.child_id}}">
+                                <view class="list-item background-ele goodType{{data.mode}} sub-good-item" style="{{data.listStyle}}">
+                                    <image lazy-load="true" class="list-img" src="{{item.picpath}}" style="{{data.imgStyle}}"></image>
+                                    <view class="title-container" style="{{data.titleWidth}}">
+                                        <view class="title subgood-tit{{data.mode}} goodsName{{data.mode}}" style="{{data.titlefont}}">{{item.goodname}}</view>
+                                        <view style="{{data.pricestyle}}" class="subgood-price{{data.mode}}">￥{{item.price}}</view>
+                                        <view class='subgood-bot'>
+                                            <view class="text_over subgoods-sale{{data.mode}}" style="{{data.numstyle}}">销量:{{item.salsenums}}</view>
+                                            <view class="text_over subgoods-shop{{data.mode}}" style="{{data.shopstyle}}">{{item.storename}}</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </navigator>
+                        </block>
+                    </block>
+                    <block wx:else>
+                        <view class="search_nothing" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+                    </block>
+                </view>
+            </scroll-view>
+        </view>
+    </template>
+    <view class="ele-container">
+        <template is="goodsList" data="{{data:goodslist,searchtext:searchtext,searchNothing:searchNothing,inputstype:inputstype}}"></template>
+    </view>
+</view>

@@ -1,0 +1,4 @@
+.good_list1 {
+    height: calc(100% - 165rpx);
+    margin-top: 20rpx;
+}

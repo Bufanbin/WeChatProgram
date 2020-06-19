@@ -1,0 +1,204 @@
+page {
+    background: #ececec;
+}
+.app {
+    height: 100%;
+    width: 100%;
+}
+.groupgoods-box {
+    width: 100%;
+    background: #fff;
+}
+.groupgoods-head {
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+    padding: 0 30rpx;
+    font-size: 30rpx;
+    color: #040404;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-bottom: 2rpx solid #ececec;
+    box-sizing: border-box;
+}
+.groupgoods-con {
+    width: 100%;
+    padding: 20rpx 30rpx;
+    box-sizing: border-box;
+}
+.groupgoods-con image {
+    float: left;
+    width: 192rpx;
+    height: 192rpx;
+}
+.groupgoods-info {
+    float: left;
+    width: calc(100% - 222rpx);
+    margin-left: 30rpx;
+}
+.groupgoods-name {
+    font-size: 26rpx;
+    color: #151515;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+}
+.groupgoods-num {
+    font-size: 22rpx;
+    color: #666;
+    margin-top: 24rpx;
+}
+.groupgoods-price {
+    font-size: 30rpx;
+    color: #f52521;
+    margin-top: 35rpx;
+}
+.groupuser-detail {
+    width: 100%;
+    padding: 32rpx 30rpx;
+    margin-top: 20rpx;
+    background: #fff;
+    box-sizing: border-box;
+}
+.groupuser-left {
+    float: left;
+    font-size: 30rpx;
+    color: #151515;
+}
+.groupuser-right {
+    float: right;
+    font-size: 24rpx;
+    color: #555;
+    padding: 0 5rpx;
+    border-bottom: 2rpx solid #555;
+}
+.groupuser-box {
+    width: 100%;
+    padding: 34rpx 0 7rpx;
+    font-size: 0;
+    text-align: center;
+    box-sizing: border-box;
+}
+.groupuser-item {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: auto;
+    margin-right: 27rpx;
+    margin-bottom: 27rpx;
+}
+.groupuser-item image {
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 50%;
+}
+.grouphead {
+    width: 38rpx;
+    padding: 3rpx 0;
+    text-align: center;
+    font-size: 14rpx;
+    color: #fff;
+    background: #f42326;
+    border-radius: 5rpx;
+    position: absolute;
+    top: 6rpx;
+    right: -10rpx;
+}
+.groupuser-btn {
+    width: 100%;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+    background: #f62425;
+    border-radius: 35rpx;
+    padding: 0;
+    box-sizing: border-box;
+}
+.groupuser-left > text {
+    font-size: 26rpx;
+    color: #151515;
+    margin-left: 30rpx;
+}
+.leftgroupuser {
+    width: 90rpx;
+    height: 90rpx;
+    line-height: 90rpx;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 36rpx;
+    color: #666;
+    background: #f6f6f6;
+    box-sizing: border-box;
+}
+.add-goods-info {
+    height: 887rpx;
+}
+.surplus-num, .choose-spec {
+    font-size: 26rpx;
+    color: #666;
+}
+.surplus-num {
+    font-size: 30rpx;
+    margin-top: 25rpx;
+}
+.choose-spec {
+    margin-top: 20rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.choose-money {
+    font-size: 38rpx;
+    color: #f62423;
+}
+.goods-close {
+    top: 20rpx;
+    color: #000;
+}
+.goods-spec {
+    height: calc(100% - 350rpx);
+    overflow-y: auto;
+}
+.add-goods-btn {
+    height: 98rpx;
+    line-height: 98rpx;
+    background: #f62425;
+    font-size: 30rpx;
+}
+.goods-spec-list-detail > button {
+    min-width: 94rpx;
+    font-size: 26rpx;
+    color: #666;
+    border-color: #fff;
+    box-sizing: border-box;
+}
+.goods-spec-list-detail > button.select {
+    background: #f62425;
+    border-color: #f62425;
+}
+.goods-spec-list > text, .add-buy-num > text {
+    font-size: 26rpx;
+    color: #666;
+}
+.withdrawal-tip-box {
+    width: 562rpx;
+    height: 99rpx;
+    line-height: 99rpx;
+    text-align: center;
+    font-size: 30rpx;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 3rpx;
+    position: fixed;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}

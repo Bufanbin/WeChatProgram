@@ -1,0 +1,342 @@
+.goods-name {
+    float: left;
+    font-size: 34rpx;
+    color: #000;
+    width: 85%;
+    display: inline-block;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+}
+.goods-price {
+    display: inline-block;
+    text-decoration: line-through;
+}
+.goods-line {
+    padding: 0 28rpx;
+    box-sizing: border-box;
+}
+.right-arrow {
+    position: absolute;
+    right: 45rpx;
+    float: left;
+    color: #727171;
+}
+.evaluate-head {
+    background-color: #f4f4f4;
+    height: 65rpx;
+    line-height: 65rpx;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+}
+.evaluate-title {
+    position: relative;
+    top: 4rpx;
+}
+.wxParse {
+    padding: 30rpx 18rpx 140rpx;
+}
+.goods-bottom {
+    z-index: 5;
+}
+.goods-service-text {
+    height: 30rpx;
+    line-height: 40rpx;
+}
+.addShopCar {
+    width: 50%;
+}
+.paynow {
+    width: 50%;
+}
+.choose-spec {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.goods-spec {
+    height: 445rpx;
+}
+.evaluate-info {
+    line-height: 70rpx;
+}
+.icon-gouwuche {
+    position: absolute;
+    right: 30rpx;
+    top: 15rpx;
+    font-size: 30rpx;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 100%;
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #fff;
+    text-align: center;
+}
+.icon-09handbag {
+    background: #dbdbdb;
+    color: #fff;
+    font-size: 100rpx;
+    width: 230rpx;
+    height: 230rpx;
+    line-height: 230rpx;
+    border-radius: 100%;
+    text-align: center;
+    margin: 140rpx auto 0;
+}
+.nothing-page > button {
+    width: 419rpx;
+    height: 97rpx;
+    line-height: 97rpx;
+    font-size: 36rpx;
+}
+.business-time {
+    color: #727171;
+    font-size: 30rpx;
+}
+.gobespeak {
+    height: 70rpx;
+    line-height: 70rpx;
+    background: #ff6d6d;
+    border-radius: 8rpx;
+    width: 80%;
+    margin: 0 auto 40rpx;
+    text-align: center;
+    color: #fff;
+    font-size: 36rpx;
+}
+.sp_appointment_box {
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 90rpx);
+    height: -webkit-calc(100% - 90rpx);
+    overflow-y: auto;
+    padding-bottom: 90rpx;
+    background: #fff;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.appointment_time {
+    width: 93%;
+    margin: 20rpx auto;
+    font-size: 36rpx;
+    border-bottom: 2rpx #eee solid;
+}
+.time_long {
+    position: relative;
+    margin-bottom: 20rpx;
+}
+.time_select {
+    display: inline-block;
+    width: 100%;
+    height: 56rpx;
+    outline: none;
+}
+.time_slot {
+    position: relative;
+    margin-bottom: 20rpx;
+}
+.time_choose {
+    width: 93%;
+    margin: 20rpx auto 0;
+    font-size: 36rpx;
+    border-bottom: 2rpx #eee solid;
+    overflow: hidden;
+}
+.appointment_data {
+    width: 100%;
+}
+.appointment_data_list {
+    width: 100%;
+    padding-bottom: 10rpx;
+}
+.data_option {
+    display: inline-block;
+    text-align: center;
+    font-size: 30rpx;
+    background: #fff;
+    color: #5f5b5b;
+    padding: 14rpx 5%;
+    margin: 0 0 18rpx 34rpx;
+    border: 2rpx #dcdcdc solid;
+}
+.data_option:nth-of-type(3n+1) {
+    margin-left: 0;
+}
+.isopen {
+    height: 32rpx;
+}
+.today {
+    background: #ff6d6d;
+    color: #fff;
+}
+.notopen {
+    color: #acacac;
+    cursor: default;
+}
+.time_option {
+    display: inline-block;
+    width: 30%;
+    height: 70rpx;
+    margin: 0 0 18rpx 28rpx;
+    text-align: center;
+    line-height: 70rpx;
+    color: #787878;
+    font-size: 30rpx;
+    border: 2rpx #787878 solid;
+}
+.time_option:nth-of-type(3n+1) {
+    margin-left: 0;
+}
+.price_stock {
+    width: 93%;
+    margin: 20rpx auto 0;
+    color: #5e5e5e;
+    font-size: 36rpx;
+    overflow: hidden;
+}
+.goods_price {
+    float: left;
+}
+.price {
+    margin-left: 10rpx;
+    color: #fe5f5f;
+}
+.goods_stock {
+    float: right;
+    margin-right: 10rpx;
+}
+.goods_num {
+    width: 93%;
+    margin: 20rpx auto 0;
+    padding-bottom: 100rpx;
+    font-size: 36rpx;
+    color: #5e5e5e;
+    line-height: 60rpx;
+}
+.increase_decrease {
+    display: inline-block;
+    width: 10rpx;
+    height: 60rpx;
+    text-align: center;
+    border: 2rpx #bfbfbf solid;
+    position: relative;
+    top: 25rpx;
+    line-height: 60rpx;
+}
+.num_input {
+    display: inline-block;
+    width: 120rpx;
+    height: 60rpx;
+    text-align: center;
+    position: relative;
+    top: 25rpx;
+    border: 2rpx solid #c9c9c9;
+}
+.sp_bottom_qd {
+    width: 40%;
+    border-radius: 6rpx;
+}
+.solt_choose {
+    border-color: #ff6d6d;
+    color: #ff6d6e;
+}
+.sp_bottom_yy {
+    width: 78%;
+    height: 60rpx;
+    line-height: 60rpx;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    font-size: 36rpx;
+    background: #ff6d6d;
+    border-radius: 8rpx;
+}
+.noslot {
+    width: 50%;
+    height: 70rpx;
+    line-height: 70rpx;
+    text-align: center;
+    margin: auto;
+    color: #787878;
+    font-size: 30rpx;
+}
+.long_box {
+    display: inline-block;
+    width: 241rpx;
+    height: 60rpx;
+    padding-left: 10rpx;
+    line-height: 60rpx;
+    border: 2rpx solid #c9c9c9;
+}
+.triangle_arrow {
+    position: absolute;
+    top: 28rpx;
+    left: 286rpx;
+}
+.slot_arrow {
+    left: 396rpx;
+}
+.wxParse.hasrecommend {
+    padding-bottom: 20rpx;
+}
+.addShopCar.bind0 {
+    width: 315rpx !important;
+    float: right;
+}
+.paynow.bind0 {
+    width: 315rpx !important;
+    float: right;
+}
+.goods-share {
+    float: right;
+    text-align: center;
+    position: relative;
+}
+.share-img {
+    width: 42rpx;
+    height: 50rpx;
+}
+.share-text {
+    font-size: 22rpx;
+    color: #888;
+    margin-top: 4rpx;
+}
+.icon-fenxiang1 {
+    font-size: 46rpx;
+    color: #888;
+}
+.service-tip-box {
+    border-radius: 3rpx;
+}
+.goods-share-btn {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    padding: 0;
+    z-index: 2;
+}
+.mycanvas {
+    width: 640px;
+    height: 1008px;
+    background: #f00;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 1000000000000px;
+}
+.eval1, .eval3 {
+    background: #f55d2e;
+    opacity: 0.7;
+}

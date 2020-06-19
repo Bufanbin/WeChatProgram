@@ -1,0 +1,212 @@
+<view class="app" hidden="{{!pageshow}}">
+    <canvas class="mycanvas" canvas-id="myCanvas"></canvas>
+    <scroll-view scroll-y="true" class="distribute-box">
+        <view class="ico-moon icon-gouwuche" catchtap="goToShopCats"></view>
+        <block wx:if="{{carousel.length>0}}">
+            <view class="swiper_box">
+                <swiper indicator-dots="{{carousel.length>1}}" autoplay="true" interval="5000" duration="1000" circular="true" class="goodsCar">
+                    <block wx:for="{{carousel}}" wx:key="{{item}}">
+                        <swiper-item>
+                            <image lazy-load="true" class="swiper-item" src="{{item}}" data-img="{{item}}" catchtap="openImg" />
+                        </swiper-item>
+                    </block>
+                </swiper>
+                <block wx:if="{{is_show==1 && !isNew}}">
+                    <view class="dist_btn_box">
+                        <button class="dist_top_div" open-type="share" style="background: #fa3645;">转发</button>
+                        <button class="dist_top_div" style="background: #00479d;margin-top: 25rpx;" catchtap="forwardDis">我要分销</button>
+                    </view>
+                </block>
+            </view>
+        </block>
+        <view class="commodity_price_box" style="background:{{storeinfo.main_color}}">
+            <view class="goods-discount">{{goodsDiscount}}</view>
+            <view class="goods-price">{{goodsPrice}}</view>
+        </view>
+        <view class="goods-head">
+            <view class="goods-head-content">
+                <text class="goods-name">{{goodsName}}</text>
+            </view>
+            <view class="goods-line clearfix">
+                <view class="goods-line-text {{isNew?'newtype':''}}">快递：{{freight}}</view>
+                <view class="goods-line-text {{isNew?'newtype1':''}}" style="text-align: right;">月销量：{{salenum}}</view>
+                <block wx:if="{{isNew}}">
+                    <view class="dist-commission-btn newdis-btn" catchtap="openShare">{{style_type==3?'我要分享':style_type==1?'我要分销':distributor==1?'我要分享':'我要分销'}}</view>
+                </block>
+            </view>
+        </view>
+        <block wx:if="{{(isNew && (style_type==1||style_type==3))||!distributor}}">
+            <view class="newdist-commission-box clearfix">
+                <view class="dist-commission-left">
+                    <block wx:if="{{isSame<2}}">
+                        <view style='float:left;margin-right:45rpx;'>佣金比例：{{rate}}</view>
+                    </block>
+                    <view style='float:left;'>预估{{style_type==1?'佣金':'奖励'}}：{{commission}}</view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{childid > 0}}">
+            <view class='strore-box clearfix'>
+                <image src="{{storeinfo.logo}}" class='store-logo'></image>
+                <view class='store-right'>
+                    <view class='store-name'>{{storeinfo.storename}}</view>
+                    <view class='store-go'>
+                        <view catchtap='shopHomepage' class='store-toshop'>
+                            <text class="ico-moon icon-dianpu2"></text>进入店铺</view>
+                        <view class='store-all'>商品总数{{allgoodsnum}}件</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{isEvaluate!=1}}">
+            <view>
+                <view class="evaluate-head">
+                    <text class="horLine" style="left: 145rpx;"></text>
+                    <image lazy-load="true" class="evaluate-icon" mode="aspectFit" src="{{senior_icon4_pic}}"></image>
+                    <text class="evaluate-title">评 价</text>
+                    <text class="horLine" style="right:145rpx;"></text>
+                </view>
+                <view class="evaluate-brief">
+                    <view class="evaluate-total">宝贝评价（{{evaluate.total}}）</view>
+                    <view class="sp_comment_nav">
+                        <block wx:for="{{evaluateType}}" wx:key="{{item}}">
+                            <view class="eval{{index}}">{{item.name}}({{item.num||0}})</view>
+                        </block>
+                    </view>
+                    <view>
+                        <view class="evaluate-info">
+                            <image lazy-load="true" mode="aspectFit" class="evaluate-avatar" src="{{evaluate.list.avatar}}"></image>
+                            <text class="evaluate-nickname">{{evaluate.list.nickname}}</text>
+                        </view>
+                        <view class="evaluate-time">
+                            {{evaluate.list.commentSub}}
+                        </view>
+                        <view class="evaluate-detail">{{evaluate.list.content}}</view>
+                    </view>
+                    <button class="evaluate-more" catchtap="moreEvaluate" style="color:{{storeinfo.main_color}};border-color:{{storeinfo.main_color}};">查看全部评价</button>
+                </view>
+            </view>
+        </block>
+        <view class="detail_title_box">
+            <block wx:for="{{detailType}}" wx:key="{{item}}">
+                <view data-index="{{index}}" class="{{detailstatus==index?'detail_title_select':''}}" catchtap="chooseDetail" style="border-bottom-color:{{storeinfo.main_color}};color: {{storeinfo.main_color}};">{{item.name}}</view>
+            </block>
+        </view>
+        <view wx:if="{{detailstatus==0}}">
+            <view class="sp_comment_details" wx:if="{{details!=''}}">
+                <import src="../../components/wxParse/wxParse.wxml" />
+                <view class="wxParse">
+                    <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+                </view>
+            </view>
+            <view class="sp_comment_user" wx:else style="font-size: 30rpx;text-align: center;color: #898989;margin-top: 46rpx;">暂无商品介绍</view>
+        </view>
+        <view wx:if="{{detailstatus==1}}">
+            <view class="newsp_parameter_box">
+                <view class="newsp_parameter_ul">
+                    <view class="clearfix" wx:for="{{goodattr}}" wx:key="{{item}}">
+                        <view class="newsp_parameter_left">{{item.nameone}}</view>
+                        <view class="newsp_parameter_right">
+                            <block wx:for="{{item.two}}" wx:for-item="titem" wx:for-index="tidx" wx:key="{{titem}}">{{titem.nametwo}}
+                                <block wx:if="{{tidx!=item.two.length-1}}">/</block>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <block wx:if="{{recommendgoods.length>0}}">
+            <view class="goods-recommend">
+                <view class='recommend-title'>猜你喜欢</view>
+                <scroll-view scroll-x="true" class='rmd-scorll' bindscrolltolower="loadmoreRmd">
+                    <block wx:for="{{recommendgoods}}" wx:key="{{item}}">
+                        <view class='rmd-item' catchtap='gotoRecommend' data-rid="{{item.id}}" data-cid="{{item.child_id}}">
+                            <image lazy-load="true" src="{{item.picpath}}" class='rmd-pic'></image>
+                            <view class='rmd-name'>{{item.goodname}}</view>
+                            <view class='rmd-price'>￥{{item.price}}</view>
+                        </view>
+                    </block>
+                </scroll-view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class='empty-height'></view>
+        </block>
+    </scroll-view>
+    <view class="goods-bottom">
+        <view class="goods-suspension" style="border-right:0;">
+            <view class="ico-moon icon-service2 gooods-service"></view>
+            <text class="goods-service-text">客服</text>
+            <contact-button type="default-dark" size="20" session-from="suspension" class="goods-contact-button"></contact-button>
+        </view>
+        <block wx:if="{{childid>0}}">
+            <view class="goods-suspension" style="border-right:0;" catchtap="shopHomepage">
+                <view class="ico-moon icon-shop gooods-service"></view>
+                <text class="goods-service-text">进店</text>
+            </view>
+        </block>
+        <view class="{{childid>0?'sp_bottom_store1':'sp_bottom_store2'}} clearfix">
+            <view class="addShopCar" catchtap="{{userInfo.avatarUrl?'chooseSpec':'openAuthor'}}">加入购物车</view>
+            <view class="paynow" catchtap="{{userInfo.avatarUrl?'showbuy':'openAuthor'}}" style="background:{{storeinfo.main_color}}">立即购买</view>
+        </view>
+    </view>
+    <view class="add-goods-page" hidden="{{!showDescPage}}" wx:if="{{bindObj!=1}}">
+        <view class="add-goods-info">
+            <view class="add-goods-head">
+                <image class="goods-pic" src="{{picpath}}"></image>
+                <view class="choose-goods-info">
+                    <text class="choose-money">￥{{needMoney}}</text>
+                    <text class="surplus-num">库存{{surplus}}件</text>
+                    <text class="choose-spec">
+            <text>选择 </text> {{specstr}}
+                    </text>
+                </view>
+                <view class="ico-moon icon-cross goods-close" catchtap="closeSpec"></view>
+            </view>
+            <scroll-view class="goods-spec" scroll-y="true">
+                <view class="goods-spec-list">
+                    <block wx:for="{{goodspec}}" wx:key="{{item}}">
+                        <text>{{item.nameone}}</text>
+                        <view class="goods-spec-list-detail">
+                            <block wx:for="{{item.two}}" wx:for-item="titem" wx:for-index="tindex" wx:key="{{titem}}">
+                                <button class="{{titem.select?'select':''}}" data-idx="{{index}}" data-tidx="{{tindex}}" catchtap="selectSpec">{{titem.nametwo}}</button>
+                            </block>
+                        </view>
+                    </block>
+                </view>
+                <view class="add-buy-num">
+                    <text>购买数量</text>
+                    <view class="add-buy-operate">
+                        <button class="{{buynum<=1?'nottap':''}}" catchtap="reducenum">-</button>
+                        <input type="number" confirm-type="done" value="{{buynum}}" bindinput="editnum" />
+                        <button class="{{buynum>=1000?'nottap':''}}" catchtap="addnum">+</button>
+                    </view>
+                </view>
+            </scroll-view>
+            <block wx:if="{{!btnType}}">
+                <view class="add-goods-btn" catchtap="addShopCar">加入购物车</view>
+            </block>
+            <block wx:else>
+                <view class="add-goods-btn" catchtap="buynow" data-num="{{bindObj}}">立即购买</view>
+            </block>
+        </view>
+    </view>
+    <block wx:if="{{isNew && code==1}}">
+        <shareComp goodstype="dist" carpic="{{carpic}}" qrcodeurl="{{qrcodeurl}}" storelogo="{{storelogo}}" showShare="{{showShare}}" childid="{{childid}}" goodid="{{goodId}}" disgrade="{{disgrade}}" goodname="{{goodsName}}" goodsprice="{{newgoodsDiscount}}"
+            storename="{{storeinfo.storename}}" compic="{{compic}}" postset="{{postset}}" postpic="{{postpic}}" goodqrcode="{{goodqrcode}}"></shareComp>
+    </block>
+    <view class="backhome" catchtap="backhome">
+        <view>回到</view>
+        <view>首页</view>
+    </view>
+    <view class="expire_limit" hidden="{{vqdlevel!=1000}}">
+        <text>高级版即可体验，请到后台升级。</text>
+    </view>
+    <view class="expire_limit" hidden="{{vqdlevel!=2000}}">
+        <text>进阶版或高级版即可体验，请到后台升级。</text>
+    </view>
+</view>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>
+<template is="authorpage" data="{{userInfo:userInfo}}"></template>

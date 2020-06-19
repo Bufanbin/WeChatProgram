@@ -1,0 +1,28 @@
+.app {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.goods-line {
+    height: 60rpx;
+    line-height: 65rpx;
+    border-top: 1px solid #d2d2d2;
+}
+.groupgoods-now-num {
+    font-size: 22rpx;
+}
+.groupgoods-point-right {
+    font-size: 22rpx;
+}
+.groupgoods-man-ul > view .nickname {
+    font-size: 26rpx;
+}
+.groupgoods-man-ul > view .manNum {
+    font-size: 22rpx;
+}
+.groupgoods-man-ul > view .goGroup {
+    font-size: 22rpx;
+    height: 44rpx;
+    width: 110rpx;
+    line-height: 44rpx;
+}

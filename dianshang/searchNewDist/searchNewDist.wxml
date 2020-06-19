@@ -1,0 +1,79 @@
+<view class="app">
+    <template name="vqdnewdistribute">
+        <view class="element list" style="height:100%;position:fixed;{{data.style}}">
+            <view class="element search">
+                <view class="search-input" style="{{inputstype}}">
+                    <icon type="search" size="16"></icon>
+                    <input focus="true" placeholder="{{data.searchText}}" placeholder-style="color:#ccc;font-size:25rpx;" value="{{searchtext}}" bindinput="enterSearhText" />
+                    <view class="search-btn" catchtap="clickSearch">搜索</view>
+                </view>
+            </view>
+            <scroll-view scroll-y="true" class="good_list1" bindscrolltolower="searchMore">
+                <block wx:if="{{data.showLabel}}">
+                    <view class="quick-tags">
+                        <view class="quick-tags-title">热门搜索</view>
+                        <view class="tags">
+                            <block wx:for="{{data.labelContent}}" wx:key="{{item}}">
+                                <text catchtap="tagSearch" data-text="{{item}}">{{item}}</text>
+                            </block>
+                        </view>
+                    </view>
+                </block>
+                <block wx:if="{{data.searchContent.length>0}}">
+                    <block wx:for="{{data.searchContent}}" wx:key="{{item}}">
+                        <view class="seckill-gooditem newseckill-gooditem {{data.choosenum==0?'newseckill_gooditem_border':''}}" style="{{data.listyle}}" catchtap="goToDist" data-id="{{item.id}}" data-childid="{{item.childid}}">
+                            <block wx:if="{{data.choosenum!=2}}">
+                                <view class="seckill-center-box {{data.choosenum==1?'distribute-gooditem':''}} clearfix">
+                                    <image lazy-load="true" src="{{item.picpath}}" style="{{data.imgstyle}}"></image>
+                                    <view class="{{data.choosenum==0?'distribute-text-box':''}}" style="{{data.textwid}}">
+                                        <view class="{{data.choosenum==1?'disgoods-info-box':''}}">
+                                            <view class="distribute-goods-title {{data.choosenum==0?'distgoods0-title':''}}" style="{{data.titlestyle}}">{{item.goodname}}</view>
+                                            <view class="{{data.choosenum==0?'distsale-box':''}} {{data.choosenum==1?'distsale-box1':''}} clearfix">
+                                                <text class="dis-goods-price" style="{{data.pricestyle}}"><text style="font-size:28rpx;">￥</text>{{item.price}}</text>
+                                                <text class="dis-goods-sale" style="{{data.salesstyle}}">销量：{{item.salesnums}}</text>
+                                            </view>
+                                        </view>
+                                        <block wx:if="{{data.texttype==1}}">
+                                            <view class="{{data.choosenum==1?'discomm-info-box':''}}">
+                                                <view class="{{data.choosenum==0?'distcommision-box':''}}" style="{{data.commissionstyle}}">预估佣金：{{item.commision}}元</view>
+                                                <view class="distsale-btn {{data.choosenum==1?'distsale-btn1':''}}" style="{{data.salebtnstyle}}">我要分销</view>
+                                            </view>
+                                        </block>
+                                        <block wx:else>
+                                            <view wx:if="{{data.choosenum==0}}" style="min-height:54rpx;"></view>
+                                            <view wx:if="{{data.choosenum==0}}" class="distsale-btn {{data.choosenum==1?'distsale-btn1':''}}" style="{{data.salebtnstyle}}">立即购买</view>
+                                        </block>
+                                    </view>
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view class="seckill-center-box clearfix">
+                                    <image lazy-load="true" src="{{item.picpath}}" class="distribute-center" style="{{data.imgstyle}}"></image>
+                                    <view class="distribute-center" style="{{data.textwid}}">
+                                        <view class="clearfix" style="width:100%;margin-top:23rpx;">
+                                            <view class="distribute-goods-title distgoods2-title" style="{{data.titlestyle}}">{{item.goodname}}</view>
+                                            <text class="dis-goods-sale" style="{{data.salesstyle}}">销量：{{item.salesnums}}</text>
+                                        </view>
+                                        <view class="clearfix" style="margin-top:14rpx;">
+                                            <view class="dis-goods-price1">
+                                                <text style="{{data.pricestyle}}"><text style="font-size:28rpx;">￥</text>{{item.price}}</text>
+                                                <text wx:if="{{data.texttype==1}}" class="distcommision-box1" style="{{data.commissionstyle}}">预估佣金：{{item.commision}}元</text>
+                                            </view>
+                                            <view wx:if="{{data.texttype==1}}" class="distsale-btn distsale-btn2" style="{{data.salebtnstyle}}">我要分销</view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </block>
+                        </view>
+                    </block>
+                </block>
+                <block wx:else>
+                    <view class="search_nothing" hidden="{{!searchNothing}}">没有搜索到相关内容，再找找吧！</view>
+                </block>
+            </scroll-view>
+        </view>
+    </template>
+    <view class="ele-container">
+        <template is="vqdnewdistribute" data="{{data:distlist,searchtext:searchtext,searchNothing:searchNothing,inputstype:inputstype}}"></template>
+    </view>
+</view>

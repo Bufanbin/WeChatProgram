@@ -1,0 +1,50 @@
+.icon-rightarrow {
+    float: right !important;
+    font-size: 40rpx;
+}
+.address-list {
+    height: 210rpx;
+    background: #fff;
+}
+.address-list-info {
+    height: 135rpx;
+    border-bottom: 2px solid #eee;
+}
+.address-info {
+    margin-top: 35rpx;
+    overflow: hidden;
+    padding-top: 13rpx;
+}
+.address-info > text:first-child {
+    float: left;
+}
+.address-info > text:last-child {
+    float: right;
+}
+.address-detail {
+    margin-top: 35rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.icon-iconfont05 {
+    font-size: 48rpx;
+    margin-right: 5rpx;
+}
+.icon-iconfontedit {
+    font-size: 40rpx;
+    margin-right: 5rpx;
+}
+page {
+    width: 100%;
+    height: 100%;
+}
+.app {
+    width: 100%;
+    height: 100%;
+    background: #eee;
+}
+.newaddress_manage_ul {
+    height: calc(100% - 95rpx);
+    overflow: hidden;
+}

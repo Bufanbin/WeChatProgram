@@ -1,0 +1,86 @@
+<block wx:if="{{wifilen == 1 && !wifiArr[selIdx].iselect}}" hidden="{{linknow}}">
+    <view class='wifi_wrap'>
+        <view class='wifi_icon'>
+            <image style="width:123px;height:123px" src="{{logo}}" mode="{{item.mode}}"></image>
+        </view>
+        <view class='wifi_name'>
+            <text class='text'>微信连Wifi {{selWifi.wifi_name}}</text>
+            <text class='text1'>为您提供Wifi：{{selWifi.wifi_name}}</text>
+        </view>
+        <view>
+            <button class='link_now' catchtap='connect_wifi'>{{item.iselect?'查看小程序':'立即连接'}}</button>
+        </view>
+    </view>
+</block>
+<view class='wifi_fail' hidden='{{linkfail}}'>
+    <view class='wifi_fail_icon'>
+        <image style="width:123px;height:123px" src="{{logo}}" mode="{{item.mode}}"></image>
+    </view>
+    <view class='wifi_name'>
+        <text class='text2'>Wifi连接失败</text>
+    </view>
+    <view>
+        <button class='link_again' catchtap='connect_wifi'>重新连接</button>
+        <block wx:if="{{wifiArr.length>1}}">
+            <text class='back_list' catchtap='backTolist'>返回Wifi列表</text>
+        </block>
+    </view>
+</view>
+<block wx:if="{{wifiArr[selIdx].iselect && wifilen == 1}}">
+    <view class='wifi_success'>
+        <view class='wifi_fail_icon'>
+            <image style="width:123px;height:123px" src="{{logo}}" mode="{{item.mode}}"></image>
+        </view>
+        <view class='wifi_name'>
+            <text class='text2'>Wifi连接成功</text>
+        </view>
+        <view>
+            <button class='link_now' catchtap='backhome'>查看小程序</button>
+            <block wx:if="{{wifiArr.length>1}}">
+                <text class='back_list' catchtap='backTolist'>返回Wifi列表</text>
+            </block>
+        </view>
+    </view>
+</block>
+<view class='wifi_success' hidden="{{linksuccess}}">
+    <view class='wifi_fail_icon'>
+        <image style="width:123px;height:123px" src="{{logo}}" mode="{{item.mode}}"></image>
+    </view>
+    <view class='wifi_name'>
+        <text class='text2'>Wifi连接成功</text>
+    </view>
+    <view>
+        <button class='link_now' catchtap='backhome'>查看小程序</button>
+        <block wx:if="{{wifiArr.length>1}}">
+            <text class='back_list' catchtap='backTolist'>返回Wifi列表</text>
+        </block>
+    </view>
+</view>
+<block wx:if="{{wifilen>1}}">
+    <view class='chose_wifi'>
+        <block wx:if="{{isConnect}}">
+            <view class='linked'>
+                <view class='linked_title'>
+                    <text class='linked_name'>{{wifiname}}</text>
+                    <view class='oready_link'>
+                        <icon type="success" size="20" />
+                        <text class='lianjie'>已连接</text>
+                    </view>
+                </view>
+            </view>
+        </block>
+        <text class='text4'>选择要连接的WIFI</text>
+        <block wx:for="{{wifiArr}}" wx:key="{{item}}">
+            <view class='wifi_list' catchtap='goToLink' data-idx='{{index}}'>
+                <view class='wifi_single'>
+                    <image class='wifi_logo' src="{{wifi_single}}" mode="aspectFit"></image>
+                    <text class='wifi_name1'>{{item.wifi_name}}</text>
+                    <text class='link' style="{{item.iselect?'color:#666666':''}}">{{item.iselect?'已连接':'连接'}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+</block>
+<import src="../../components/authod.wxml" />
+<template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor}}"></template>
+<template is="newgift" data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template>

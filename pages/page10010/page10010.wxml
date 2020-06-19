@@ -1,0 +1,76 @@
+<view class="app"><view class="ele-container" style="z-index: 10;"><redpacketscomp userInfo="{{userInfo}}" showRed="{{showRed}}" redid="{{redid || 0}}" redcode="{{redcode || 0}}" bind:openAuthor="openAuthor"></redpacketscomp></view><import src="../../components/template.wxml"/><import src="../../components/authod.wxml"/><template is="vqd_author" data="{{userInfo:userInfo,chooseAuthor:chooseAuthor,isopenAuthor:isopenAuthor}}"></template><template is="newgift"  data="{{hasgift:hasgift,coureduce:coureduce,coufull:coufull}}"></template><template is="expire" data="{{data:expire}}"></template><template is="vqdaddxcx" data="{{showAddTip:showAddTip}}"></template><view class="ele-container" style="position:inherit!important;">
+						<template is="vqdmenu" data="{{data:menu2}}"></template>
+					 </view>
+					 <template name="freeVessel3"><view class="element freePanel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}"><view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[0],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[1],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 </view></template><view class="ele-container"><template is="freeVessel3" data="{{data:freeVessel3,item:item}}"></template></view><view class="ele-container">
+						<template is="vqdText" data="{{data:text4,real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <template name="freeVessel5"><view class="element freePanel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}"><view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[0],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[1],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 </view></template><view class="ele-container"><template is="freeVessel5" data="{{data:freeVessel5,item:item}}"></template></view><view class="ele-container">
+						<template is="vqdText" data="{{data:text6,real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <template name="freeVessel7"><view class="element freePanel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}"><view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[0],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[1],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdText" data="{{data:data.content[2],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 </view></template><view class="ele-container"><template is="freeVessel7" data="{{data:freeVessel7,item:item}}"></template></view><template name="freeVessel8"><view class="element freePanel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}"><view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[0],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[1],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdText" data="{{data:data.content[2],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 </view></template><view class="ele-container"><template is="freeVessel8" data="{{data:freeVessel8,item:item}}"></template></view><template name="freeVessel9"><view class="element freePanel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}"><view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[0],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[1],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdText" data="{{data:data.content[2],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 </view></template><view class="ele-container"><template is="freeVessel9" data="{{data:freeVessel9,item:item}}"></template></view><template name="freeVessel10"><view class="element freePanel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}"><view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[0],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[1],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdText" data="{{data:data.content[2],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 </view></template><view class="ele-container"><template is="freeVessel10" data="{{data:freeVessel10,item:item}}"></template></view><template name="freeVessel11"><view class="element freePanel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}"><view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[0],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[1],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdText" data="{{data:data.content[2],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 </view></template><view class="ele-container"><template is="freeVessel11" data="{{data:freeVessel11,item:item}}"></template></view><template name="freeVessel12"><view class="element freePanel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}"><view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[0],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdPicture" data="{{data:data.content[1],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 <view class="ele-container">
+						<template is="vqdText" data="{{data:data.content[2],real_value:rVal,phoneseg:pVal}}"></template>
+					 </view>
+					 </view></template><view class="ele-container"><template is="freeVessel12" data="{{data:freeVessel12,item:item}}"></template></view></view>

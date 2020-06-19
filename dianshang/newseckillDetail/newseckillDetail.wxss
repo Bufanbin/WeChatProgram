@@ -1,0 +1,215 @@
+page {
+    background: #eee;
+}
+.app {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+.icon-gouwuche {
+    position: absolute;
+    right: 30rpx;
+    top: 15rpx;
+    font-size: 30rpx;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 100%;
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #fff;
+    text-align: center;
+}
+.goods-name {
+    font-size: 30rpx;
+    color: #3b3b3b;
+    width: 100%;
+    display: inline-block;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+}
+.goods-price {
+    display: inline-block;
+    text-decoration: line-through;
+}
+.goods-line {
+    padding: 0 28rpx 40rpx;
+    box-sizing: border-box;
+    height: auto;
+    background: #fff;
+    display: block;
+}
+.right-arrow {
+    position: absolute;
+    right: 45rpx;
+    float: left;
+    color: #727171;
+}
+.goods-line-choose {
+    margin-left: 45rpx;
+}
+.evaluate-head {
+    background-color: #f4f4f4;
+    height: 65rpx;
+    line-height: 65rpx;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+}
+.evaluate-title {
+    position: relative;
+    top: 4rpx;
+}
+.wxParse {
+    padding: 30rpx 18rpx 140rpx;
+}
+.gooods-service {
+    line-height: 25rpx;
+}
+.goods-service-text {
+    height: 30rpx;
+    line-height: 40rpx;
+}
+.addShopCar {
+    width: 50%;
+    background: #ffa722;
+}
+.paynow {
+    width: 50%;
+    background: #f24a4a;
+}
+.goods-close {
+    top: 20rpx;
+}
+.goods-spec {
+    height: 445rpx;
+    overflow-y: auto;
+}
+.gooods-param-title {
+    font-size: 36rpx;
+}
+.goods-param-item {
+    font-size: 32rpx;
+}
+.evaluate-info {
+    height: 55rpx;
+    line-height: 55rpx;
+}
+.evaluate-avatar {
+    width: 70rpx;
+    height: 70rpx;
+}
+.addShopCar.cancel {
+    background: #b5b5b5;
+}
+.paynow.cancel {
+    background: #959595;
+}
+.goods-con {
+    width: 100%;
+    height: calc(100% - 98rpx);
+}
+.mycanvas {
+    width: 640px;
+    height: 1008px;
+    background: #f00;
+    opacity: 0;
+    position: fixed;
+    top: 0;
+    left: 1000000000000px;
+}
+.rob-btn {
+    width: 100%;
+    height: 100%;
+    line-height: 98rpx;
+    color: #fff;
+    text-align: center;
+    font-size: 28rpx;
+    background: #f24a4a;
+}
+.goods-discount {
+    font-size: 36rpx;
+}
+.goods-line-left {
+    float: left;
+}
+.goods-line-right {
+    float: right;
+    margin-top: 6rpx;
+}
+.goods-line-text {
+    width: auto;
+    float: none;
+    font-size: 30rpx;
+    color: #a2a2a2;
+    line-height: 46rpx;
+}
+.icon-fenxiang1 {
+    font-size: 46rpx;
+    color: #666;
+}
+.evaluate-total {
+    font-size: 30rpx;
+    color: #2b2b2b;
+}
+.evaluate-brief {
+    width: 100%;
+    padding: 0 28rpx;
+    margin-bottom: 20rpx;
+    box-sizing: border-box;
+}
+.eval0 {
+    background: #f24a4a;
+}
+.eval1 {
+    background: #ff7271;
+}
+.eval2 {
+    background: #bfbfbf;
+}
+.eval3 {
+    background: #ff7271;
+}
+.evaluate-nickname {
+    font-size: 30rpx;
+    color: #414141;
+}
+.evaluate-time {
+    font-size: 26rpx;
+    color: #9b9b9b;
+}
+.evaluate-detail {
+    font-size: 28rpx;
+    color: #494949;
+}
+.evaluate-more {
+    width: 324rpx;
+    font-size: 24rpx;
+    color: #fe6e6e;
+    border-color: #f24a4a;
+    border-radius: 10rpx;
+}
+.goods-head-content, .detail_title_box, .sp_comment_details,
+.newsp_parameter_box, .strore-box {
+    background: #fff;
+}
+.strore-box {
+    margin: 0;
+}
+.strore-height {
+    width: 100%;
+    height: 34rpx;
+    background: #fff;
+}
+.empty-hei{
+    height: 30rpx;
+}

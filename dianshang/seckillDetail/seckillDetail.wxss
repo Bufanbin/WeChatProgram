@@ -1,0 +1,157 @@
+.app {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+.icon-gouwuche {
+    position: absolute;
+    right: 30rpx;
+    top: 15rpx;
+    font-size: 30rpx;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 100%;
+    width: 60rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    color: #fff;
+    text-align: center;
+}
+.goods-head-content {
+    padding: 20rpx 15rpx;
+}
+.goods-name {
+    font-size: 40rpx;
+    color: #3c3b3b;
+    font-weight: bold;
+    width: 100%;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.goods-money {
+    margin-top: 10rpx;
+    font-size: 26rpx;
+}
+.goods-discount {
+    color: #f76161;
+    font-size: 44rpx;
+}
+.goods-price {
+    color: #c4c4c4;
+    text-decoration: line-through;
+    margin-left: 30rpx;
+}
+.goods-line {
+    height: 100rpx;
+    line-height: 100rpx;
+    border-top: 1px solid #d2d2d2;
+    width: 100%;
+}
+.goods-line-text {
+    width: 338rpx;
+    font-size: 28rpx;
+    color: #9c9c9c;
+    padding-left: 35rpx;
+}
+.right-arrow {
+    position: absolute;
+    right: 45rpx;
+    float: left;
+    color: #727171;
+}
+.goods-line-choose {
+    margin-left: 45rpx;
+}
+.evaluate-head {
+    background-color: #f4f4f4;
+    height: 65rpx;
+    line-height: 65rpx;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    display: inline-block;
+}
+.evaluate-title {
+    position: relative;
+    top: 4rpx;
+}
+.wxParse {
+    padding: 30rpx 18rpx 140rpx;
+}
+.gooods-service {
+    line-height: 25rpx;
+}
+.goods-service-text {
+    font-size: 22rpx;
+    height: 30rpx;
+    line-height: 30rpx;
+}
+.addShopCar {
+    width: 315rpx;
+    background: #ffbc46;
+}
+.paynow {
+    width: 315rpx;
+    background: #ff7e58;
+}
+.goods-close {
+    top: 20rpx;
+}
+.choose-spec {
+    font-size: 28rpx;
+}
+.goods-spec {
+    height: 445rpx;
+    overflow-y: auto;
+}
+.gooods-param-title {
+    font-size: 36rpx;
+}
+.goods-param-item {
+    font-size: 32rpx;
+}
+.evaluate-info {
+    height: 55rpx;
+    line-height: 55rpx;
+}
+.evaluate-avatar {
+    width: 55rpx;
+    height: 55rpx;
+}
+.remain-time {
+    font-size: 28rpx;
+    color: #fd5757;
+    border: 1px solid #fd5757;
+    float: right;
+    padding: 8rpx 10rpx;
+}
+.over-time {
+    width: 290rpx;
+    text-align: center;
+    color: #fff;
+    background: #aaa;
+    font-size: 24rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    float: right;
+    display: block;
+}
+.come-time {
+    width: 290rpx;
+    text-align: center;
+    color: #fff;
+    background: #ee7c7c;
+    font-size: 24rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    float: right;
+    display: block;
+}
+.addShopCar.cancel {
+    background: #b5b5b5;
+}
+.paynow.cancel {
+    background: #959595;
+}

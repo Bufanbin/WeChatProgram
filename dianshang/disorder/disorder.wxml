@@ -1,0 +1,68 @@
+<view class="app">
+    <view class='dis-order-top'>
+        <block wx:for="{{typeArr}}" wx:key="{{item}}">
+            <view class='dis-sel-item {{index==selIdx?"select":""}}' catchtap='selType' data-idx='{{index}}' style='{{index==selIdx?"color:"+color+";border-bottom:4rpx solid "+color:""}}'>{{item}}</view>
+        </block>
+    </view>
+    <block wx:if="{{list.length>0}}">
+        <scroll-view scroll-y="true" class='scroll-box' bindscrolltolower="loadmoreOrder">
+            <block wx:for="{{list}}" wx:key="{{item}}">
+                <view class='dis-order-item'>
+                    <view style='padding-left: 26rpx;line-height: 72rpx;height:72rpx;border-bottom:1rpx solid #DCDCDC;color:#828282;'>
+                        订单号：{{item.order_id}}
+                        <block wx:if="{{item.status==0}}">
+                            <view class='dis-type'>已付款</view>
+                        </block>
+                        <block wx:if="{{item.status==1}}">
+                            <view class='dis-type orange'>已收货</view>
+                        </block>
+                        <block wx:if="{{item.status==2}}">
+                            <view class='dis-type finish'>已结算</view>
+                        </block>
+                        <block wx:if="{{item.status==3}}">
+                            <view class='dis-type blown'>已退款</view>
+                        </block>
+                    </view>
+                    <block wx:for="{{item.goodinfo}}" wx:for-item="oitem" wx:key="{{oitem}}">
+                        <view class='dis-item-top'>
+                            <view class='clearfix'>
+                                <image src="{{oitem.picpath}}" class="dis-pic"></image>
+                                <view class='dis-order-info'>
+                                    <view class='dis-name ellipsis'>{{oitem.goodName}}</view>
+                                    <view class='dis-classify ellipsis'>{{oitem.specstr}}</view>
+                                </view>
+                            </view>
+                            <view class='set-ratio-box'>
+                                <view class='set-ratio-item'>
+                                    <view class='set-title'>付款金额</view>
+                                    <view class='set-num'>￥{{oitem.total_money}}</view>
+                                </view>
+                                <view class='set-ratio-item' wx:if="{{item.status==2}}">
+                                    <view class='set-title'>结算佣金</view>
+                                    <view class='set-num'>￥{{oitem.rate_money}}</view>
+                                </view>
+                                <view class='set-ratio-item' wx:if="{{item.status!=2}}">
+                                    <view class='set-title'>预估佣金</view>
+                                    <view class='set-num'>￥{{oitem.rate_money}}</view>
+                                </view>
+                                <view class='set-ratio-item'>
+                                    <view class='set-title'>佣金比例</view>
+                                    <view class='set-num'>{{oitem.rate}}</view>
+                                </view>
+                            </view>
+                        </view>
+                    </block>
+                    <view>
+                        <view class='pay-time' wx:if="{{item.status==0}}">付款时间：{{item.successtime}}</view>
+                        <view class='pay-time' wx:if="{{item.status==1}}">收货时间：{{item.successtime}}</view>
+                        <view class='pay-time' wx:if="{{item.status==2}}">结算时间：{{item.successtime}}</view>
+                        <view class='pay-time' wx:if="{{item.status==3}}">退款时间：{{item.successtime}}</view>
+                    </view>
+                </view>
+            </block>
+        </scroll-view>
+    </block>
+    <block wx:else>
+        <view class="nothing-order" hidden="{{!nothing}}">暂无相关内容，再找找吧！</view>
+    </block>
+</view>

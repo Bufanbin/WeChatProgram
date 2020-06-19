@@ -1,0 +1,51 @@
+.app {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.dis-cash-top {
+    height: 90rpx;
+    border-bottom: 2rpx solid #e5e5e5;
+    box-sizing: border-box;
+}
+.dis-sel-item {
+    margin-left: 38rpx;
+}
+.dis-sel-item:first-child {
+    margin-left: 30rpx;
+}
+.cash-item {
+    border-bottom: 2rpx solid #eee;
+    overflow: hidden;
+}
+.cash-info {
+    margin-top: 45rpx;
+    line-height: 30rpx;
+    margin-left: 20rpx;
+    margin-right: 30rpx;
+}
+.cash-money {
+    color: #363636;
+}
+.cash-type {
+    float: right;
+}
+.cash-type1 {
+    color: #367de8;
+}
+.cash-type2 {
+    color: #56a646;
+}
+.cash-type3 {
+    color: #ff4e4e;
+}
+.cashtime {
+    color: #999;
+    font-size: 28rpx;
+    line-height: 28rpx;
+    margin-left: 20rpx;
+    margin-top: 40rpx;
+    margin-bottom: 50rpx;
+}

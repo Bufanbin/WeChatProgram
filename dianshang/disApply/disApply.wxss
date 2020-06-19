@@ -1,0 +1,91 @@
+page {
+    background: #f0f0f0;
+    overflow: hidden;
+}
+.dis_apply_head {
+    height: 37rpx;
+    line-height: 37rpx;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 37rpx 0 25rpx 30rpx;
+    border-left: 10rpx solid #f02437;
+    text-indent: 13rpx;
+    color: #353535;
+    font-size: 28rpx;
+}
+.apply_condition {
+    overflow: hidden;
+    width: 100%;
+    background: #fff;
+    padding-bottom: 30rpx;
+    font-size: 26rpx;
+    color: #888;
+}
+.apply_cond_item {
+    margin-top: 30rpx;
+    overflow: hidden;
+}
+.cond_tip {
+    text-indent: 28rpx;
+    float: left;
+    line-height: 60rpx;
+}
+.cond_btn {
+    width: 130rpx;
+    height: 58rpx;
+    border: 1rpx solid #f02437;
+    float: right;
+    line-height: 58rpx;
+    border-radius: 10rpx;
+    color: #f02437;
+    text-align: center;
+    margin-right: 30rpx;
+}
+.cond_pro {
+    text-indent: 28rpx;
+    color: #f02437;
+    line-height: 50rpx;
+}
+.apply_btn {
+    width: 690rpx;
+    height: 95rpx;
+    line-height: 95rpx;
+    color: #fff;
+    font-size: 30rpx;
+    margin: 45rpx auto 10rpx;
+    text-align: center;
+    background: #f02437;
+    border-radius: 15rpx;
+    padding: 0;
+}
+.apply_btn.cancel {
+    background: #959595;
+}
+.apply_tip_box {
+    overflow: hidden;
+}
+.apply_tip {
+    font-size: 26rpx;
+    line-height: 26rpx;
+    color: #888;
+    text-indent: 28rpx;
+    margin-top: 25rpx;
+}
+.dis_nodata {
+    text-align: center;
+    margin-top: 300rpx;
+}
+.apply_condition2 {
+    width: 100%;
+    height: 150rpx;
+    color: #888;
+    background-color: #fff;
+    font-size: 26rpx;
+    text-align: center;
+    line-height: 150rpx;
+}
+.fail-reason {
+    padding: 0 28rpx;
+    color: #f02437;
+    line-height: 50rpx;
+}

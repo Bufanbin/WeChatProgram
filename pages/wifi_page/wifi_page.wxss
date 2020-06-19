@@ -1,0 +1,142 @@
+.wifi_icon {
+    width: 246rpx;
+    height: 246rpx;
+    margin: 140rpx auto 100rpx;
+}
+.wifi_fail_icon {
+    width: 246rpx;
+    height: 246rpx;
+    margin: 140rpx auto 50rpx;
+}
+.wifi_name {
+    width: 500rpx;
+    height: 106rpx;
+    margin: auto;
+    text-align: center;
+}
+.text {
+    display: block;
+    max-width: 500rpx;
+    height: 60rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 50rpx;
+}
+.text1 {
+    max-width: 500rpx;
+    height: 70rpx;
+    display: block;
+    font-size: 32rpx;
+    color: #666;
+    margin-top: 32rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.text2 {
+    font-size: 50rpx;
+}
+.link_now {
+    max-width: 350rpx;
+    height: 90rpx;
+    margin-top: 120rpx;
+    font-size: 40rpx;
+    line-height: 90rpx;
+    color: #fdfdfd;
+    background-color: #259b24;
+}
+.back_list {
+    display: block;
+    width: 200rpx;
+    text-align: center;
+    margin: 20rpx auto;
+    color: #333;
+}
+.linked_name {
+    max-width: 350rpx;
+    display: block;
+    height: 60rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.link_again {
+    width: 280rpx;
+    height: 90rpx;
+    margin-top: 100rpx;
+    font-size: 34rpx;
+    color: #fdfdfd;
+    background-color: #e53c42;
+}
+.text4 {
+    position: relative;
+    display: block;
+    top: 30rpx;
+    left: 10rpx;
+    font-size: 26rpx;
+    color: #626166;
+    margin-bottom: 50rpx;
+}
+.chose_wifi {
+    width: 100%;
+    height: 1200rpx;
+    background-color: rgb(240, 239, 245);
+}
+.wifi_list {
+    width: 100%;
+    height: 90rpx;
+    background-color: #fff;
+    border-top: 2rpx solid #ccc;
+    position: relative;
+    line-height: 90rpx;
+}
+.wifi_logo {
+    padding: 30rpx 0 30rpx 20rpx;
+    width: 40rpx;
+    height: 30rpx;
+}
+.wifi_name1 {
+    max-width: 350rpx;
+    height: 90rpx;
+    font-size: 36rpx;
+    position: absolute;
+    left: 80rpx;
+    line-height: 90rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.link {
+    cursor: pointer;
+    position: absolute;
+    right: 20rpx;
+    color: #259b24;
+}
+.linked {
+    width: 100%;
+    height: 190rpx;
+    position: relative;
+}
+.linked_title {
+    width: 180rpx;
+    height: 80rpx;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.oready_link {
+    line-height: 40rpx;
+    width: 150rpx;
+    height: 40rpx;
+    margin: 10rpx auto;
+    color: #259b24;
+}
+.lianjie {
+    display: block;
+    float: right;
+}

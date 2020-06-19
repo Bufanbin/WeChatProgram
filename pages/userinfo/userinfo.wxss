@@ -1,0 +1,110 @@
+.personal_info_box {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #eee;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.info_box_save {
+    width: 100%;
+    height: 200rpx;
+    line-height: 200rpx;
+    background-color: #fff;
+    font-size: 24rpx;
+    text-align: center;
+}
+.info_box_save text {
+    float: right;
+    padding-right: 5%;
+    padding-left: 5%;
+    font-size: 34rpx;
+    color: #000;
+}
+.info_box {
+    padding-left: 20rpx;
+    padding-right: 20rpx;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+    margin-top: 15px;
+    list-style: none;
+    line-height: 40px;
+    text-indent: 10rpx;
+    background-color: #fff;
+    width: 750rpx;
+    box-sizing: border-box;
+}
+.info_input_box {
+    position: relative;
+    border-bottom: 1px solid #ededed;
+    font-size: 30rpx;
+    color: #626262;
+}
+.info_input {
+    float: right;
+    top: 5px;
+    line-height: 30px;
+    padding: 0px 5px;
+    right: 25px;
+    text-align: right;
+    color: #626262;
+    font-size: 14px;
+    position: relative;
+    border-radius: 2px;
+    height: 30px;
+    width: 450rpx;
+}
+.inputfocus {
+    outline: 1px solid #0da3f9;
+}
+.right_icon {
+    position: absolute;
+    right: 4%;
+    top: 50%;
+    margin-top: -8px;
+    height: 14px;
+    width: 7px;
+    line-height: 20px;
+    font-size: 14px;
+    color: #999;
+}
+.detail_name_box {
+    float: left;
+    margin-left: 5%;
+}
+.detail_name_box image {
+    vertical-align: middle;
+    margin-top: -6rpx;
+    margin-right: 20rpx;
+    width: 130rpx;
+    height: 130rpx;
+}
+.newcenterPage_user_info {
+    padding: 0;
+    text-indent: 0;
+    border: 0;
+}
+.user_info_label {
+    display: inline-block;
+    width: 150rpx;
+    margin-left: 5%;
+    color: #000;
+    text-align: left;
+}
+.user_info_span {
+    font-size: 30rpx;
+    color: #353535;
+}
+.no_info {
+    color: #c2c2c2;
+}
+.userCenter_li {
+    position: relative;
+    height: 100rpx;
+    line-height: 100rpx;
+    border-bottom: 2rpx solid #eee;
+}
+.userCenter_li:last-child {
+    border-bottom: 0;
+}
