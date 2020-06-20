@@ -1,0 +1,27 @@
+命名规则
+目录命名：采用小写方式，以下划线分隔。例：directory_name
+文件名 ： 采用小写方式，以下划线分隔。例：file_name
+事件处理方法 ：on+Action
+样式 ： 采用小写方式，以下划线分隔。例：page_content
+变量命名 ：采用驼峰命名。例如：variationName
+方法名：采用驼峰命名。例如：doSomething()
+
+目录结构
+|–images
+|----arrow.png
+|----banner.png
+|–pages
+|----order_list
+|------order_list.js
+|------order_list.json
+|------order_list.wxml
+|------order_list.wxss
+|–styles
+|----base.less
+|–utils
+|----util.js
+
+images: 存放项目图片
+pages: 存放项目页面相关文件
+styles: 存放独立 wxss 样式文件，可 import 引入
+utils: 存放 util 文件，可 require 引入
